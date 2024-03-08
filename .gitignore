@@ -1,0 +1,56 @@
+# Ignore PHPUnit cache
+.phpunit.cache
+
+# Ignore node_modules directory
+/node_modules
+
+# Ignore built assets
+/public/build
+
+# Ignore public directory (assuming it's generated or contains user-uploaded files)
+/public
+
+# Ignore Laravel Mix hot module replacement files
+/public/hot
+
+# Ignore public storage (generated or user-uploaded files)
+/public/storage
+
+# Ignore Laravel storage directory (often contains logs, cache, and user uploads)
+/storage/*.key
+/storage
+
+# Ignore vendor directory (where Composer dependencies are installed)
+/vendor
+
+# Ignore environment files (may contain sensitive information)
+.env
+.env.backup
+.env.production
+
+# Ignore PHPUnit result cache
+.phpunit.result.cache
+
+# Ignore Homestead configuration files
+Homestead.json
+Homestead.yaml
+
+# Ignore composer authentication file
+auth.json
+
+# Ignore NPM debug log
+npm-debug.log
+
+# Ignore Yarn error log
+yarn-error.log
+
+# Ignore Fleet configuration (if applicable)
+/.fleet
+
+# Ignore IDE-specific files
+/.idea
+/.vscode
+
+# Ignore Laravel storage symlink
+storage/
+bootstrap/cache/packages.php

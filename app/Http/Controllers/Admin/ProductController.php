@@ -1,0 +1,212 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Attribute;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
+class ProductController extends Controller
+{
+    public function index(Request $request)
+    {
+        $products = Product::join('categories', 'products.category', '=', 'categories.id')
+                    ->select('products.id','products.name','categories.name as category','products.featured_img','products.is_featured','products.is_flash_sale','products.is_active','products.created_at','products.created_by')
+                    ->latest()
+                    ->paginate(10);
+                    // dd($products);
+        return view('admin.product.index', compact('products'));
+    }
+    public function create(Request $request)
+    {
+        $attributes = Attribute::where('status', 'active')->get();
+        $categories = Category::get();
+        return view('admin.product.create',compact('categories','attributes'));
+    }
+    public function store(Request $request)
+    {
+        $product = new Product();
+        try {
+            $proposedSlug = Str::slug($request->productName);
+            if (Product::where('slug', $proposedSlug)->exists()) {
+                $count = 1;
+                while (Product::where('slug', $proposedSlug . '-' . $count)->exists()) {
+                    $count++;
+                }
+                $slug = $proposedSlug . '-' . $count;
+            } else {
+                $slug = $proposedSlug;
+            }
+            // Set attributes
+            $product->name = $request->input('productName');
+            $product->slug = $slug;
+            $product->short_Desc = $request->input('shortDesc');
+            $product->desc = $request->input('desc');
+            $product->category = $request->input('categoryName');
+            $product->meta_title = $request->input('metaTitle');
+            $product->meta_desc = $request->input('metaDesc');
+            $product->is_featured = $request->has('is_featured');
+            $product->is_flash_sale = $request->has('is_flash_sale');
+            $product->is_active = $request->has('is_active');
+            $product->sizeArray = $request->input('sizeArray');
+            $product->colorArray = $request->input('colorArray');
+            $product->unitArray = $request->input('unitArray');
+            $product->weightArray = $request->input('weightArray');
+            $product->created_by = Auth::user()->name;
+            
+            // Handle file upload (featured image)
+            if ($request->hasFile('featured_image')) {
+                $file = $request->file('featured_image');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images/products'), $fileName);
+                $product->featured_img = $fileName;
+            }
+            // dd($product);
+            // Save the product
+            $product->save();
+
+            return response()->json(['message' => 'Form submitted successfully','status' => true]);
+
+        }catch (\Exception $e) {
+            // An exception occurred while sending the mail
+            // Log the exception or handle it as needed
+            // For example, you might log the error and show a user-friendly message
+        
+            \Log::error('Error while saving the category: ' . $e->getMessage());
+        
+            // You can customize the response based on your requirements
+            return response()->json(['error' => 'Error while saving the category.','status' => false,'message' => $e->getMessage()], 500);
+        }
+    }
+    public function edit($id){
+        $product = Product::findOrFail($id);
+        $attributes = Attribute::where('status', 'active')->get();
+        $categories = Category::get();
+        return view('admin.product.edit',compact('categories','attributes','product'));
+    }
+
+    public function update(Request $request){
+        $product = Product::findOrFail($request->productId);                
+
+        try {
+            // Set attributes 
+            $product->name = $request->input('productName');
+            $product->slug = $request->input('productSlug');
+            $product->short_Desc = $request->input('shortDesc');
+            $product->desc = $request->input('desc');
+            $product->category = $request->input('categoryName');
+            $product->meta_title = $request->input('metaTitle');
+            $product->meta_desc = $request->input('metaDesc');
+            $product->is_featured = $request->has('is_featured');
+            $product->is_flash_sale = $request->has('is_flash_sale');
+            $product->is_active = $request->has('is_active');
+            $product->sizeArray = $request->input('sizeArray');
+            $product->colorArray = $request->input('colorArray');
+            $product->unitArray = $request->input('unitArray');
+            $product->weightArray = $request->input('weightArray');
+            $product->created_by = Auth::user()->name;
+            
+            // Handle file upload (featured image)
+            if ($request->hasFile('featured_image')) {
+                $file = $request->file('featured_image');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images/products'), $fileName);
+                $product->featured_img = $fileName;
+            }
+            // dd($product);
+            // Save the product
+            $product->save();
+
+            return response()->json(['message' => 'Form submitted successfully','status' => true]);
+
+        }catch (\Exception $e) {
+            // An exception occurred while sending the mail
+            // Log the exception or handle it as needed
+            // For example, you might log the error and show a user-friendly message
+        
+            \Log::error('Error while saving the category: ' . $e->getMessage());
+        
+            // You can customize the response based on your requirements
+            return response()->json(['error' => 'Error while saving the category.','status' => false,'message' => $e->getMessage()], 500);
+        }
+    
+        // Redirect back or return a response as needed
+        // For example, redirect back to the previous page
+        return response()->json(['message' => 'Category Updated Successfully','status' => true]);
+    }
+
+
+    public function status(Request $request, $id)
+    {
+        // Find the category by ID
+        $product = Product::findOrFail($id);
+        
+        // Check if the current status is "active"
+        if ($product->is_active) {
+            // Update the status to "inactive"
+            $product->is_active = 0;
+        } else {
+            // Update the status to "active"
+            $product->is_active = 1;
+        }
+    
+        // Save the changes to the product
+        $product->save();
+    
+        // Redirect back or return a response as needed
+        // For example, redirect back to the previous page
+        return response()->json(['message' => 'Form submitted successfully','status' => true]);
+    }
+    public function flashSaleStatus(Request $request, $id)
+    {
+        // Find the category by ID
+        $product = Product::findOrFail($id);
+        
+        // Check if the current status is "active"
+        if ($product->is_flash_sale) {
+            // Update the status to "inactive"
+            $product->is_flash_sale = 0;
+        } else {
+            // Update the status to "active"
+            $product->is_flash_sale = 1;
+        }
+    
+        // Save the changes to the product
+        $product->save();
+    
+        // Redirect back or return a response as needed
+        // For example, redirect back to the previous page
+        return response()->json(['message' => 'Form submitted successfully','status' => true]);
+    }
+    public function featuredStatus(Request $request, $id)
+    {
+        // Find the category by ID
+        $product = Product::findOrFail($id);
+        
+        // Check if the current status is "active"
+        if ($product->is_featured) {
+            // Update the status to "inactive"
+            $product->is_featured = 0;
+        } else {
+            // Update the status to "active"
+            $product->is_featured = 1;
+        }
+    
+        // Save the changes to the product
+        $product->save();
+    
+        // Redirect back or return a response as needed
+        // For example, redirect back to the previous page
+        return response()->json(['message' => 'Form submitted successfully','status' => true]);
+    }
+    public function destroy($id){
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return response()->json(['message' => 'Form submitted successfully','status' => true]);
+    }
+}
