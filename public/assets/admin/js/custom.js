@@ -217,6 +217,17 @@ function addMoreColorButton(attributes){
   `;
   cardContainer.appendChild(sellingFormGroup);
 
+
+
+  var imageFormGroup = document.createElement('div');
+  imageFormGroup.classList.add('form-group');
+  imageFormGroup.innerHTML = `
+      <label for="selling">Image</label>
+      <input type="file" class="form-control" id="colorImage_${colorDivCount}" name="colorImage_${colorDivCount}" placeholder="">
+      <img src="" id="colorPreviewImage_${colorDivCount}" style="width:100px;">
+  `;
+  cardContainer.appendChild(imageFormGroup);
+
  
 
   var closeButton = document.createElement('div');

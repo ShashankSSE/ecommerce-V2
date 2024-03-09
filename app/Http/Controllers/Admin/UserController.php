@@ -4,38 +4,30 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = Category::latest()->paginate(10);
-        return view('admin.category.index', compact('categories'));
+        $users = User::latest()->paginate(10);
+        return view('admin.users.index', compact('users'));
     }
     public function create(Request $request)
     {
-        return view('admin.category.create');
+        return view('admin.users.create');
     }
     public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'categoryname' => 'required|string|max:255',
-        ]);
-    
-        // Check if the validation fails
-        if ($validator->fails()) {
-            return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-        
+    {        
+        // dd($request->is_admin? 1 : 0);
         try {
-            Category::create([
-                'name' => $request->categoryname,
-                'created_by' => Auth::user()->name,
+            User::create([
+                'name' => $request->username,
+                'email' => $request->email,
+                'is_admin' => $request->is_admin ? 1 : 0,
+                'password' => Hash::make($request->password),
             ]);
 
             return response()->json(['message' => 'Form submitted successfully','status' => true]);
@@ -52,19 +44,21 @@ class CategoryController extends Controller
         }
     }
     public function edit($id){
-        $category = Category::findOrFail($id);
-        return view('admin.category.edit',compact('category'));
+        $user = User::findOrFail($id);
+        return view('admin.users.edit',compact('user'));
     }
     public function update(Request $request){
-        $category = Category::findOrFail($request->categoryId);                
-        $category->name = $request->categoryname;
-    
+        $user = User::findOrFail($request->userId);  
+        $user->name = $request->username;
+        $user->is_admin = $request->is_admin ? 1 : 0;
+        $user->name = $request->username;
+        $user->password = Hash::make($request->password);
         // Save the changes to the category
-        $category->save();
+        $user->save();
     
         // Redirect back or return a response as needed
         // For example, redirect back to the previous page
-        return response()->json(['message' => 'Category Updated Successfully','status' => true]);
+        return response()->json(['message' => 'User Updated Successfully','status' => true]);
     }
     public function status(Request $request, $id)
     {
@@ -88,11 +82,9 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Form submitted successfully','status' => true]);
     }
     public function destroy($id){
-        $category = Category::findOrFail($id);
-        $category->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
 
         return response()->json(['message' => 'Form submitted successfully','status' => true]);
     }
-
-    
 }

@@ -97,4 +97,10 @@ class SubCategoryController extends Controller
 
         return response()->json(['message' => 'Form submitted successfully','status' => true]);
     }
+
+    public function getSubCategory($categoryId){
+        $subCategory = SubCategory::where('category_id','=',$categoryId)->get()->toArray();
+
+        return response()->json(['status' => true,'message' => 'Form submitted successfully','subCategory'=>$subCategory]);
+    }
 }
