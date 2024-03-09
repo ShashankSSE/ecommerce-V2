@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -33,8 +34,21 @@ class CategoryController extends Controller
         }
         
         try {
+            $proposedSlug = Str::slug($request->categoryname);
+            
+            if (Category::where('slug', $proposedSlug)->exists()) {
+                $count = 1;
+                while (Category::where('slug', $proposedSlug . '-' . $count)->exists()) {
+                    $count++;
+                }
+                $slug = $proposedSlug . '-' . $count;
+            } else {
+                $slug = $proposedSlug;
+            }
+
             Category::create([
                 'name' => $request->categoryname,
+                'slug' => $slug,
                 'created_by' => Auth::user()->name,
             ]);
 
@@ -58,13 +72,13 @@ class CategoryController extends Controller
     public function update(Request $request){
         $category = Category::findOrFail($request->categoryId);                
         $category->name = $request->categoryname;
+        $category->slug = $request->categorySlug;
     
         // Save the changes to the category
-        $category->save();
-    
-        // Redirect back or return a response as needed
-        // For example, redirect back to the previous page
-        return response()->json(['message' => 'Category Updated Successfully','status' => true]);
+        if($category->save()){
+            return response()->json(['message' => 'Category Updated Successfully','status' => true]);
+        }
+        return response()->json(['message' => 'Category Updated Successfully','status' => false]);
     }
     public function status(Request $request, $id)
     {

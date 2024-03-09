@@ -13,6 +13,10 @@
                         <input type="text" class="form-control" id="categoryname" name="categoryname" value="{{$category->name}}" placeholder="Enter Category Name ...">
                         <input type="hidden" class="form-control" id="categoryId" name="categoryId" value="{{$category->id}}">
                     </div>
+                    <div class="form-group">
+                        <label for="pageTitle">Slug</label>
+                        <input type="text" class="form-control" id="categorySlug" name="categorySlug" value="{{$category->slug}}" oninput="validateSlug(this)" placeholder="Enter Page Title ...">
+                    </div>                                        
                     <div style="color:red; padding-bottom:10px;" id="error"></div>
                     <button type="submit" class="btn btn-primary me-2">Update</button>
                 </form>
@@ -41,7 +45,7 @@
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function (response) {
-                    console.log(response); // You can replace this with any other action
+                    
                     if(response.status){
                         // $("#success").html(response.message);                                
                         $('#updateCategoryForm')[0].reset();
@@ -60,6 +64,8 @@
                 },
                 error: function (error) {
                     console.log(error);
+                    $("#error").show();
+                    $("#error").html("Slug is already exists.");
                 },
             });
         });

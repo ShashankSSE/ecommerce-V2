@@ -8,12 +8,15 @@ use App\Models\SubCategory;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class SubCategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $subCategories = SubCategory::latest()->paginate(10);
+        // $subCategories = SubCategory::latest()->paginate(10);
+        $subCategories = SubCategory::latest()->get();
+
         return view('admin.sub-category.index', compact('subCategories'));
     }
     public function create(Request $request)
@@ -33,10 +36,24 @@ class SubCategoryController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-        
+
+
         try {
+            $proposedSlug = Str::slug($request->subCategoryName);
+            
+            if (SubCategory::where('slug', $proposedSlug)->exists()) {
+                $count = 1;
+                while (SubCategory::where('slug', $proposedSlug . '-' . $count)->exists()) {
+                    $count++;
+                }
+                $slug = $proposedSlug . '-' . $count;
+            } else {
+                $slug = $proposedSlug;
+            }
+
             SubCategory::create([
                 'title' => $request->subCategoryName,
+                'slug' => $slug,
                 'category_id' => $request->categoryId,
                 'created_by' => Auth::user()->name,
             ]);
@@ -62,13 +79,17 @@ class SubCategoryController extends Controller
     public function update(Request $request){
         $subCategory = SubCategory::findOrFail($request->subCategoryId);                
         $subCategory->title = $request->subCategoryName;
+        $subCategory->slug = $request->subCategorySlug;
         $subCategory->category_id = $request->categoryId;
         // Save the changes to the sub-category
-        $subCategory->save();
+        if($subCategory->save()){
+            return response()->json(['message' => 'SubCategory Updated Successfully','status' => true]);
+        }else{
+            return response()->json(['message' => 'SubCategory Updated Successfully','status' => false]);
+        }
     
         // Redirect back or return a response as needed
         // For example, redirect back to the previous page
-        return response()->json(['message' => 'SubCategory Updated Successfully','status' => true]);
     }
     public function status(Request $request, $id)
     {

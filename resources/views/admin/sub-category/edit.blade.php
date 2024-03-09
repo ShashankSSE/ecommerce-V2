@@ -10,9 +10,13 @@
                     @csrf
                     <div class="form-group">
                         <label for="subCategoryName">Name</label>
-                        <input type="text" class="form-control" id="subCategoryName" name="subCategoryName" value="{{$subCategory->title}}" placeholder="Enter Sub Category Name ...">
+                        <input type="text" class="form-control" id="subCategoryName" name="subCategoryName" value="{{$subCategory->title}}" placeholder="Enter Sub Category Name ..." required>
                         <input type="hidden" class="form-control" id="subCategoryId" name="subCategoryId" value="{{$subCategory->id}}">
                     </div>
+                    <div class="form-group">
+                        <label for="pageTitle">Slug</label>
+                        <input type="text" class="form-control" id="subCategorySlug" name="subCategorySlug" value="{{$subCategory->slug}}" oninput="validateSlug(this)" placeholder="Enter slug ..." required>
+                    </div>            
                     <div class="form-group">
                         <label for="categoryId">Name</label>
                         <select type="text" class="form-control js-example-basic-single" id="categoryId" name="categoryId" required>
@@ -68,6 +72,8 @@
                 },
                 error: function (error) {
                     console.log(error);
+                    $("#error").show();
+                    $("#error").html("Slug is already exists.");
                 },
             });
         });

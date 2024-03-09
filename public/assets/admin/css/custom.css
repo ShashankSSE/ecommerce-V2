@@ -1,0 +1,9 @@
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    justify-content: end!important;
+}
+/* .dataTables_paginate, .dataTables_length{
+    display: none!important;
+} */

@@ -27,7 +27,7 @@
     transform: translateY(-5px);
   }
   .statistics-details .card-view{
-    background: #f95f5324 !important;
+    background: #e8f0ff !important;
     width: 100%;
     display: flex;
     flex-direction: column;
