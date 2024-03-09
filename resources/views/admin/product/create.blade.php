@@ -99,6 +99,12 @@
                                 <select class="form-control js-example-basic-single" name="categoryName" id="categoryName" required>
                                     <option selected disabled>Select Category</option>
                                 </select>
+                            </div>   
+                            <div class="form-group">
+                                <label for="categoryname">Product Sub Category</label>
+                                <select class="form-control js-example-basic-single" name="subCategoryName" id="subCategoryName" required>
+                                    <option selected disabled>Select Sub Category</option>
+                                </select>
                             </div>       
                             <div class="form-group">
                                 <label for="metaTitle">Meta Title</label>
@@ -160,6 +166,17 @@ $(document).ready(function(){
         option.textContent = category.name; // Assuming 'name' is the property name for category name
         selectElement.appendChild(option);
     });
+    // Add an additional option with disabled and selected attributes
+    var defaultOption = document.createElement('option');
+    defaultOption.value = ""; // Set value as per your requirement
+    defaultOption.textContent = "Select an option"; // Set text as per your requirement
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    selectElement.insertBefore(defaultOption, selectElement.firstChild);
+    selectElement.onchange = function() {
+        var selectedOption = this.options[this.selectedIndex];
+        getSubCategory(selectedOption.value);
+    };
     console.log(categories,'categorycategorycategorycategory');
     $('.js-example-basic-single').select2(); 
     var editor1cfg = {}
@@ -177,57 +194,57 @@ $(document).ready(function(){
             // Display an error message or perform any other action
             alert('Description field cannot be empty');
         }
-            var sizeArray = [];
-            var weightArray= [];
-            var colorArray= [];
-            var unitArray= [];
-            var totalSize = parseInt($("#totalSize").text());
-            if (totalSize >= 1) {
-                for (var i = 1; i <= totalSize; i++) {
-                    var sizeSelling = $(`#selling_${i}`).val();
-                    var sizeMrp = $(`#mrp_${i}`).val();
-                    var sizeAttribute = $(`#attributeUnit_${i}`).val(); 
-                    sizeArray.push({ size: sizeAttribute, selling: sizeSelling, mrp: sizeMrp });
-                }
-                formData.append('sizeArray',JSON.stringify(sizeArray));
+        var sizeArray = [];
+        var weightArray= [];
+        var colorArray= [];
+        var unitArray= [];
+        var totalSize = parseInt($("#totalSize").text());
+        if (totalSize >= 1) {
+            for (var i = 1; i <= totalSize; i++) {
+                var sizeSelling = $(`#selling_${i}`).val();
+                var sizeMrp = $(`#mrp_${i}`).val();
+                var sizeAttribute = $(`#attributeUnit_${i}`).val(); 
+                sizeArray.push({ size: sizeAttribute, selling: sizeSelling, mrp: sizeMrp });
             }
-            var totalWeight = parseInt($("#totalWeight").text());
-            if (totalWeight >= 1) {
-                for (var i = 1; i <= totalWeight; i++) {
-                    var weightSelling = $(`#weightSelling_${i}`).val();
-                    var weightMrp = $(`#weightMrp_${i}`).val();
-                    var weightAttribute = $(`#weightAttributeUnit_${i}`).val(); 
-                    weightArray.push({ weight: weightAttribute, selling: weightSelling, mrp: weightMrp });
-                }
-                formData.append('weightArray',JSON.stringify(weightArray));
+            formData.append('sizeArray',JSON.stringify(sizeArray));
+        }
+        var totalWeight = parseInt($("#totalWeight").text());
+        if (totalWeight >= 1) {
+            for (var i = 1; i <= totalWeight; i++) {
+                var weightSelling = $(`#weightSelling_${i}`).val();
+                var weightMrp = $(`#weightMrp_${i}`).val();
+                var weightAttribute = $(`#weightAttributeUnit_${i}`).val(); 
+                weightArray.push({ weight: weightAttribute, selling: weightSelling, mrp: weightMrp });
             }
-            var totalColor = parseInt($("#totalColor").text());
-            if (totalColor >= 1) {
-                for (var i = 1; i <= totalColor; i++) {
-                    var colorSelling = $(`#colorSelling_${i}`).val();
-                    var colorMrp = $(`#colorMrp_${i}`).val();
-                    var colorAttribute = $(`#colorAttributeUnit_${i}`).val(); 
-                    colorArray.push({ color: colorAttribute, selling: colorSelling, mrp: colorMrp });
-                }
-                formData.append('colorArray',JSON.stringify(colorArray));
+            formData.append('weightArray',JSON.stringify(weightArray));
+        }
+        var totalColor = parseInt($("#totalColor").text());
+        if (totalColor >= 1) {
+            for (var i = 1; i <= totalColor; i++) {
+                var colorSelling = $(`#colorSelling_${i}`).val();
+                var colorMrp = $(`#colorMrp_${i}`).val();
+                var colorAttribute = $(`#colorAttributeUnit_${i}`).val(); 
+                colorArray.push({ color: colorAttribute, selling: colorSelling, mrp: colorMrp });
             }
-            var totalUnit = parseInt($("#totalUnit").text());
-            if (totalUnit >= 1) {
-                for (var i = 1; i <= totalUnit; i++) {
-                    var unitSelling = $(`#unitSelling_${i}`).val();
-                    var unitMrp = $(`#unitMrp_${i}`).val();
-                    var unitAttribute = $(`#unitAttributeUnit_${i}`).val(); 
-                    unitArray.push({ unit: unitAttribute, selling: unitSelling, mrp: unitMrp });
-                }
-                formData.append('unitArray',JSON.stringify(unitArray));
+            formData.append('colorArray',JSON.stringify(colorArray));
+        }
+        var totalUnit = parseInt($("#totalUnit").text());
+        if (totalUnit >= 1) {
+            for (var i = 1; i <= totalUnit; i++) {
+                var unitSelling = $(`#unitSelling_${i}`).val();
+                var unitMrp = $(`#unitMrp_${i}`).val();
+                var unitAttribute = $(`#unitAttributeUnit_${i}`).val(); 
+                unitArray.push({ unit: unitAttribute, selling: unitSelling, mrp: unitMrp });
             }
-            console.log(colorArray,"weightArrayweightArrayweightArrayweightArrayweightArrayweightArray"); // Display the populated sizeArray in the console
+            formData.append('unitArray',JSON.stringify(unitArray));
+        }
+        console.log(colorArray,"weightArrayweightArrayweightArrayweightArrayweightArrayweightArray"); // Display the populated sizeArray in the console
 
-            var featuredImageInput = document.getElementById('featured_image');
-            var featuredImageFile = featuredImageInput.files[0];
-            formData.append('featured_image', featuredImageFile);
+        var featuredImageInput = document.getElementById('featured_image');
+        var featuredImageFile = featuredImageInput.files[0];
+        formData.append('featured_image', featuredImageFile);
 
-            formData.append('_token', csrfToken);
+        formData.append('_token', csrfToken);
         $("#error").hide();
         $.ajax({
             url: '{{route("product.store")}}',
@@ -260,6 +277,7 @@ $(document).ready(function(){
             },
         });
     });        
+
     document.getElementById('addMoreSizeButton').addEventListener('click', function() {
         addMoreSizeButton(attributes);
     });
@@ -272,22 +290,52 @@ $(document).ready(function(){
     document.getElementById('addMoreUnitButton').addEventListener('click', function() {
         addMoreUnitButton(attributes);
     });
-  document.getElementById('featured_image').addEventListener('change', function(event) {
-      var input = event.target;
-      var reader = new FileReader();
-      reader.onload = function() {
-          var imgPreview = document.getElementById('imagePreview');
-          imgPreview.src = reader.result;
-          imgPreview.style.display = 'block'; // Show the image preview
-      };
+    document.getElementById('featured_image').addEventListener('change', function(event) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function() {
+            var imgPreview = document.getElementById('imagePreview');
+            imgPreview.src = reader.result;
+            imgPreview.style.display = 'block'; // Show the image preview
+        };
 
-      // Read the selected file as a data URL
-      if (input.files && input.files[0]) {
-          reader.readAsDataURL(input.files[0]);
-      }
-  });
+        // Read the selected file as a data URL
+        if (input.files && input.files[0]) {
+            reader.readAsDataURL(input.files[0]);
+        }
+    });
+    
+
+    function getSubCategory(id) {
+        $.ajax({
+            url: '{{route("sub-category.get", ":id") }}'.replace(':id', id),
+            type: 'GET',
+            // contentType: false,
+            // processData: false,
+            success: function(response) {
+                console.log(response); // You can replace this with any other action
+                if (response.status) {
+                    // $("#success").html(response.message);                                
+                    console.log(response.subCategory,"responseresponseresponseresponse");
+                    var subcategories = response.subCategory;
+                    var selectSubElement = document.getElementById('subCategoryName');
+                    selectSubElement.innerHTML = '';
+                    subcategories.forEach(function(subcategory) {
+                        var option = document.createElement('option');
+                        option.value = subcategory.id; // Assuming 'id' is the property name for category ID
+                        option.textContent = subcategory.title; // Assuming 'name' is the property name for category name
+                        selectSubElement.appendChild(option);
+                    });
+                } else {
+                    alert("Something went wrong!");
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            },
+        });
+    }
 });
-
 
 </script>
 @endpush

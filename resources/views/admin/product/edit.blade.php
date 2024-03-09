@@ -109,6 +109,12 @@
                                 </select>
                             </div>       
                             <div class="form-group">
+                                <label for="categoryname">Product Sub Category</label>
+                                <select class="form-control js-example-basic-single" name="subCategoryName" id="subCategoryName" required>
+                                    <option selected disabled>Select Sub Category</option>
+                                </select>
+                            </div>       
+                            <div class="form-group">
                                 <label for="metaTitle">Meta Title</label>
                                 <input type="text" class="form-control" id="metaTitle" value="{{$product->meta_title}}" name="metaTitle" placeholder="Enter Category Name ...">
                             </div>
@@ -202,6 +208,8 @@ $(document).ready(function(){
             mrp.val(colorArray[i-1].mrp);
             var selling = $(`#colorSelling_${i}`);
             selling.val(colorArray[i-1].selling);
+            var image = $(`#colorPreviewImage_${i}`);
+            image.attr('src', colorArray[i - 1].image);
 
         }        
     }
@@ -232,6 +240,7 @@ $(document).ready(function(){
         option.textContent = category.name; // Assuming 'name' is the property name for category name
         if (products.category == category.id) {
             option.selected = true;
+            getSubCategory(category.id);
         }
         selectElement.appendChild(option);
     });
@@ -276,8 +285,15 @@ $(document).ready(function(){
                     var colorSelling = $(`#colorSelling_${i}`).val();
                     var colorMrp = $(`#colorMrp_${i}`).val();
                     var colorAttribute = $(`#colorAttributeUnit_${i}`).val(); 
-                    colorArray.push({ color: colorAttribute, selling: colorSelling, mrp: colorMrp });
+                    var image = document.getElementById(`colorImage_${i}`);
+                    var colorImage = image.files[0];
+                    colorArray.push({ color: colorAttribute, selling: colorSelling, mrp: colorMrp, image: colorImage ? colorImage : null});
+                    // formData.append(`colorArray[${i}][color]`, colorAttribute);
+                    // formData.append(`colorArray[${i}][selling]`, colorSelling);
+                    // formData.append(`colorArray[${i}][mrp]`, colorMrp);
+                    // formData.append(`colorArray[${i}][image]`, colorImage ? colorImage : null);
                 }
+                console.log(colorArray,"ccccccccccccccccccccccccc");
                 formData.append('colorArray',JSON.stringify(colorArray));
             }
             var totalUnit = parseInt($("#totalUnit").text());
@@ -297,6 +313,8 @@ $(document).ready(function(){
             formData.append('featured_image', featuredImageFile);
 
             formData.append('_token', csrfToken);
+
+            console.log(formData,"ffffffffffffffffffffffff");
         $("#error").hide();
         $.ajax({
             url: '{{route("product.update")}}',
@@ -355,6 +373,39 @@ $(document).ready(function(){
           reader.readAsDataURL(input.files[0]);
       }
   });
+
+  function getSubCategory(id) {
+    $.ajax({
+        url: '{{route("sub-category.get", ":id") }}'.replace(':id', id),
+        type: 'GET',
+        // contentType: false,
+        // processData: false,
+        success: function(response) {
+            console.log(response); // You can replace this with any other action
+            if (response.status) {
+                // $("#success").html(response.message);                                
+                console.log(response.subCategory,"responseresponseresponseresponse");
+                var subcategories = response.subCategory;
+                var selectSubElement = document.getElementById('subCategoryName');
+                selectSubElement.innerHTML = '';
+                subcategories.forEach(function(subcategory) {
+                    var option = document.createElement('option');
+                    option.value = subcategory.id; // Assuming 'id' is the property name for category ID
+                    option.textContent = subcategory.title; // Assuming 'name' is the property name for category name
+                    if (products.sub_category == subcategory.id) {
+                        option.selected = true;
+                    }
+                    selectSubElement.appendChild(option);
+                });
+            } else {
+                alert("Something went wrong!");
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        },
+    });
+    }
 });
 
 

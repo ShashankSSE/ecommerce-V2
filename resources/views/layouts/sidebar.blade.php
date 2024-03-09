@@ -75,7 +75,7 @@
             </a>
             <div class="collapse" id="user">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="">Users</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('user.index')}}">Users</a></li>
                 <li class="nav-item"><a class="nav-link" href="">Contact Us</a></li>
                 <li class="nav-item"><a class="nav-link" href="">News Letters</a></li>
               </ul>

@@ -75,7 +75,7 @@
                 <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->name }}</p>
                 <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p>
               </div>
-              <a href="{{route('profile.edit')}}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
+              <a href="{{ route('user.edit',['id' => auth()->user()->id]) }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf 
                     <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>

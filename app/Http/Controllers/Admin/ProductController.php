@@ -15,7 +15,8 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::join('categories', 'products.category', '=', 'categories.id')
-                    ->select('products.id','products.name','categories.name as category','products.featured_img','products.is_featured','products.is_flash_sale','products.is_active','products.created_at','products.created_by')
+                    ->join('sub_category', 'products.sub_category', '=', 'sub_category.id')
+                    ->select('products.id','products.name','categories.name as category','products.featured_img','products.is_featured','products.is_flash_sale','products.is_active','products.created_at','products.created_by','sub_category.title as subcategory')
                     ->latest()
                     ->paginate(10);
                     // dd($products);
@@ -41,19 +42,29 @@ class ProductController extends Controller
             } else {
                 $slug = $proposedSlug;
             }
+            $jsonColorArray = json_decode($request->input('colorArray'));
+            foreach($jsonColorArray as $key=>$item){
+                if ($request->file('colorImage_'.($key+1))) {
+                    $file = $request->file('colorImage_'.($key+1));
+                    $fileName = time() . '_' . $file->getClientOriginalName();
+                    $file->move(public_path('images/products'), $fileName);
+                    $item->image = asset('images/products') .'/'. $fileName;
+                }
+            }
             // Set attributes
             $product->name = $request->input('productName');
             $product->slug = $slug;
             $product->short_Desc = $request->input('shortDesc');
             $product->desc = $request->input('desc');
             $product->category = $request->input('categoryName');
+            $product->sub_category = $request->input('subCategoryName');
             $product->meta_title = $request->input('metaTitle');
             $product->meta_desc = $request->input('metaDesc');
             $product->is_featured = $request->has('is_featured');
             $product->is_flash_sale = $request->has('is_flash_sale');
             $product->is_active = $request->has('is_active');
             $product->sizeArray = $request->input('sizeArray');
-            $product->colorArray = $request->input('colorArray');
+            $product->colorArray = json_encode($jsonColorArray);
             $product->unitArray = $request->input('unitArray');
             $product->weightArray = $request->input('weightArray');
             $product->created_by = Auth::user()->name;
@@ -82,6 +93,7 @@ class ProductController extends Controller
             return response()->json(['error' => 'Error while saving the category.','status' => false,'message' => $e->getMessage()], 500);
         }
     }
+
     public function edit($id){
         $product = Product::findOrFail($id);
         $attributes = Attribute::where('status', 'active')->get();
@@ -90,8 +102,19 @@ class ProductController extends Controller
     }
 
     public function update(Request $request){
-        $product = Product::findOrFail($request->productId);                
-
+        $product = Product::findOrFail($request->productId);        
+        $jsonColorArray = json_decode($request->input('colorArray'));
+        foreach($jsonColorArray as $key=>$item){
+            if ($request->file('colorImage_'.($key+1))) {
+                $file = $request->file('colorImage_'.($key+1));
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images/products'), $fileName);
+                $item->image = asset('images/products') .'/'. $fileName;
+            }elseif($item->image == null){
+                $item->image = json_decode($product->colorArray)[$key]->image;
+            }
+        }
+        
         try {
             // Set attributes 
             $product->name = $request->input('productName');
@@ -99,13 +122,14 @@ class ProductController extends Controller
             $product->short_Desc = $request->input('shortDesc');
             $product->desc = $request->input('desc');
             $product->category = $request->input('categoryName');
+            $product->sub_category = $request->input('subCategoryName');
             $product->meta_title = $request->input('metaTitle');
             $product->meta_desc = $request->input('metaDesc');
             $product->is_featured = $request->has('is_featured');
             $product->is_flash_sale = $request->has('is_flash_sale');
             $product->is_active = $request->has('is_active');
             $product->sizeArray = $request->input('sizeArray');
-            $product->colorArray = $request->input('colorArray');
+            $product->colorArray = json_encode($jsonColorArray);
             $product->unitArray = $request->input('unitArray');
             $product->weightArray = $request->input('weightArray');
             $product->created_by = Auth::user()->name;
@@ -138,7 +162,6 @@ class ProductController extends Controller
         // For example, redirect back to the previous page
         return response()->json(['message' => 'Category Updated Successfully','status' => true]);
     }
-
 
     public function status(Request $request, $id)
     {
