@@ -12,7 +12,9 @@ $(document).ready(function(){
     }else{
       document.getElementById('welcomeText').textContent = 'Dashboard';
     }
-    
+    $('#dataTable').dataTable( {
+        "pageLength": 25
+    });
 });
 
 var sizeDivCount = 1;

@@ -20,7 +20,7 @@ class DashboardController extends Controller
         if(auth()->user()->is_admin){
             return view('admin.dashboard',compact('categories','subCategories','products','users'));
         }else{
-            return view('pages.index');
+            return redirect('/');
         }
     }
 }

@@ -3,7 +3,7 @@
 @if(session('success'))
     
 @endif
-<table id="example"  class="mdl-data-table" style="width:100%">
+<table id="dataTable"  class="mdl-data-table display wrap" style="width:100%">
         <thead>
             <tr>
                 <th>S.No</th>

@@ -3,11 +3,12 @@
 @if(session('success'))
     
 @endif
-<table id="example"  class="mdl-data-table" style="width:100%">
+<table id="dataTable"  class="mdl-data-table display wrap" style="width:100%">
         <thead>
             <tr>
                 <th>S.No</th>
                 <th>Name</th>
+                <th>Slug</th>
                 <th>Status</th>
                 <th>Created On</th>
                 <th>Created By</th>
@@ -19,6 +20,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td> 
                     <td>{{ $category->name }}</td>
+                    <td>{{ $category->slug }}</td>
                     <td >
                         @if($category->status == 'active')
                         <a href="#" onclick="categoryStatusUpdate({{$category->id}})">

@@ -21,7 +21,7 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         // return view('auth.register');
-        return view('pages.index');
+        return view('pages.register');
     }
 
     /**
@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_admin' => 0,
         ]);
 
         event(new Registered($user));

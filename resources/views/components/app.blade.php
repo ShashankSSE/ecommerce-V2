@@ -1,196 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
+    <title>@yield('title', 'succu')</title>
     <meta charset="utf-8">
-    <title>@yield('title', '99mentor')</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta name="description" content="@yield('meta_description', '')">
-        <meta name="keywords" content="@yield('meta_keywords', '')">
-
-    <!-- Favicon -->
-    <link href="{{asset('assets/img/logo.png')}}" rel="icon">
-
-    <!-- Google Web Fonts -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="">
+    <meta name="description" content="@yield('meta_description', '')">
+    <meta name="keywords" content="@yield('meta_keywords', '')">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/normalize.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/icomoon/icomoon.css')}}">
+    <link rel="stylesheet" type="text/css" media="all" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/vendor.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/style.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- script
+    ================================================== -->
+    <script src="{{asset('assets/frontend/js/modernizr.js')}}"></script>
+    <style>
+      a svg{
+        width: 20px;
+      }
+      a i{
+        font-size: 20px!important;
+      }
+      li form {
+        margin-bottom: 0rem!important;
+      }
+    </style>
+  </head>
+  <body>
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="{{asset('assets/lib/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-    
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!-- Template Stylesheet -->
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-</head>
-
-<body class="bg-white">
-
-@include('components.header')
-
-@include('components.items.book-demo')
-@include('components.items.get-broucher')
-<div class=" py-5  bg-primary hero-header mb-5" id="hero-header">
-    <div class=" my-5  px-lg-5">
-        <div class="row my-5 ">
-            <div class="col-lg-6 text-center text-lg-start">
-                <h1 class="text-white mb-4 animated zoomIn">All in one LMS Software to grow your business rapidly</h1>
-                <p class="text-white pb-3 animated zoomIn">Empower learning with our LMS software offering Unlimited Live lectures, Unlimited VOD (recorded) sessions, and comprehensive Mock Test/Assessment features for a holistic educational experience.</p>
-                <a href="#" data-toggle="modal" data-target="#getBroucher" class="btn btn-light my-5  px-sm-5 rounded-pill me-3 animated slideInLeft">Get Broucher</a>
-                <a href="/contact" class="btn btn-outline-light my-5  px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
-            </div>
-            <div class="col-lg-6 text-center text-lg-start">
-                <img class="img-fluid" src="{{asset('assets/img/hero-bg.jpg')}}" alt="">
-            </div>
-        </div>
+    <div class="preloader-wrapper">
+      <div class="preloader">
+      </div>
     </div>
-</div>
-<div class=" py-5 bg-primary hero-header mb-5" id="services-hero" style="display:none;">
-    <div class="my-5  px-lg-5">
-        <div class="row g-5 py-5">
-            <div class="col-12 text-center">
-                <h1 class="text-white animated zoomIn">Product & Services</h1>
-                <hr class="bg-white mx-auto mt-0" style="width: 90px;">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a class="text-gray" href="/">Home</a></li>
-                        <li class="breadcrumb-item text-gray">Pages</li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">Service</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<div class=" py-5 bg-primary hero-header mb-5" id="about-hero" style="display:none;">
-    <div class="my-5 py-5 px-lg-5">
-        <div class="row g-5 py-5">
-            <div class="col-12 text-center">
-                <h1 class="text-white animated zoomIn">About</h1>
-                <hr class="bg-white mx-auto mt-0" style="width: 90px;">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a class="text-gray" href="/">Home</a></li>
-                        <li class="breadcrumb-item text-gray">Pages</li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">About</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<div class=" py-5 bg-primary hero-header mb-5" id="contact-hero" style="display:none;">
-    <div class="my-5 py-5 px-lg-5">
-        <div class="row g-5 py-5">
-            <div class="col-12 text-center">
-                <h1 class="text-white animated zoomIn">Contact</h1>
-                <hr class="bg-white mx-auto mt-0" style="width: 90px;">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a class="text-gray" href="/">Home</a></li>
-                        <li class="breadcrumb-item text-gray">Pages</li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">Contact Us</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<div class=" py-5 bg-primary hero-header mb-5" id="privacy-hero" style="display:none;">
-    <div class="my-5 ">
-        <div class="row g-5 my-5">
-            <div class="col-12 text-center">
-                <h1 class="text-white animated zoomIn">Privacy Policy</h1>
-                <hr class="bg-white mx-auto mt-0" style="width: 90px;">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a class="text-gray" href="/">Home</a></li>
-                        <li class="breadcrumb-item text-gray">Pages</li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">Privacy Policy</li>
-                    </ol>
-                </nav>
-                <div style="display:flex;    justify-content: center;"><p style="color:white; width:70%;"> Accessing this website, by participating in our data collection outreach initiatives, and/or by availing any of the services, you agree to the terms of this Data Privacy and Protection Policy.</p></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class=" py-5 bg-primary hero-header mb-5" id="terms-hero" style="display:none;">
-    <div class="my-5 ">
-        <div class="row g-5 my-5">
-            <div class="col-12 text-center">
-                <h1 class="text-white animated zoomIn">Terms & Conditions</h1>
-                <hr class="bg-white mx-auto mt-0" style="width: 90px;">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a class="text-gray" href="/">Home</a></li>
-                        <li class="breadcrumb-item text-gray">Pages</li>
-                        <li class="breadcrumb-item text-white active" aria-current="page">Terms & Conditions</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="container p-0">
-        <!-- Spinner Start -->
-        <div id="spinner" class="show position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
 
-        <!-- Spinner End -->
-        @yield('content')
+    <div class="search-popup">
+      <div class="search-popup-container">
 
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up"></i></a>
+        <form role="search" method="get" class="search-form" action="">
+          <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value="" name="s" />
+          <button type="submit" class="search-submit"><a href="#"><i class="icon icon-search"></i></a></button>
+        </form>
+
+        <h5 class="cat-list-title">Browse Categories</h5>
+        
+        <ul class="cat-list">
+          <li class="cat-list-item">
+            <a href="shop.html" title="Men Jackets">Men Jackets</a>
+          </li>
+          <li class="cat-list-item">
+            <a href="shop.html" title="Fashion">Fashion</a>
+          </li>
+          <li class="cat-list-item">
+            <a href="shop.html" title="Casual Wears">Casual Wears</a>
+          </li>
+          <li class="cat-list-item">
+            <a href="shop.html" title="Women">Women</a>
+          </li>
+          <li class="cat-list-item">
+            <a href="shop.html" title="Trending">Trending</a>
+          </li>
+          <li class="cat-list-item">
+            <a href="shop.html" title="Hoodie">Hoodie</a>
+          </li>
+          <li class="cat-list-item">
+            <a href="shop.html" title="Kids">Kids</a>
+          </li>
+        </ul>
+      </div>
     </div>
-        <!-- Service End -->
-        <!-- Newsletter Start -->
-        <div class="bg-primary newsletter py-5 wow fadeInUp" id="newsletter" data-wow-delay="0.1s">
-            <div class=" px-lg-5">
-                <div class="row align-items-center" style="height: 250px;">
-                    <div class="col-12 col-md-6">
-                        <h3 class="text-white">Ready to get started</h3>
-                        <small class="text-white">Interested ? Shere your email to get in touch with us.</small>
-                        <div class="position-relative w-100 mt-3">
-                            <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="Enter Your Email" style="height: 48px;">
-                            <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center mb-n5 d-none d-md-block">
-                        <img class="img-fluid" style="height: 250px;" src="{{asset('assets/img/newsletter.png')}}">
-                    </div>
+    <header id="header">
+      <div id="header-wrap">
+        <nav class="secondary-nav border-bottom">
+          <div class="container">
+            <div class="row d-flex align-items-center">
+              <div class="col-md-4 header-contact">
+                <p>Let's talk! <strong>+57 444 11 00 35</strong>
+                </p>
+              </div>
+              <div class="col-md-4 shipping-purchase text-center">
+                <p>Free shipping on a purchase value of $200</p>
+              </div>
+              <div class="col-md-4 col-sm-12 user-items">
+                <ul class="d-flex justify-content-end list-unstyled align-items-center">
+                  <li>
+                    @if(auth()->user()) 
+                      <form method="POST" action="{{ route('logout') }}">
+                          @csrf 
+                          <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.35 6.35" id="Logout"><path fill-rule="evenodd" d="M7.953.998a3.024 3.024 0 0 0-3.006 3.004V20a3.024 3.024 0 0 0 3.006 3.004h3.994A3.022 3.022 0 0 0 14.951 20v-4.002c0-1.334-2-1.334-2 0V20a.983.983 0 0 1-1.004 1.004H7.953A.983.983 0 0 1 6.95 20V4.002a.983.983 0 0 1 1.004-1.004h3.994a.983.983 0 0 1 1.004 1.004v4.002c0 1.334 2 1.334 2 0V4.002A3.022 3.022 0 0 0 11.947.998H7.953zM1.957 4.984a1 1 0 0 0-1.01 1.02v11.994a1 1 0 0 0 2 0V6.004a1 1 0 0 0-.982-1.02 1 1 0 0 0-.008 0zm16.037 2.004a1 1 0 0 0-.096.004 1 1 0 0 0-.6 1.713L19.595 11h-9.588a1.006 1.006 0 0 0-.104 0c-1.333.07-1.23 2.071.104 2.002h9.582l-2.29 2.287a1 1 0 1 0 1.411 1.418l4.002-4.002a1 1 0 0 0 0-1.41l-4.002-4a1 1 0 0 0-.715-.307z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" paint-order="stroke fill markers" transform="scale(.26458)" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;shape-padding:0;isolation:auto;mix-blend-mode:normal" fill="#8d8d8d" class="color000000 svgShape"></path></svg>
+                          </a>
+                      </form>              
+                    @else
+                  </li>
+                  <li>
+                    <a href="{{route('login')}}" >
+                      <i class="icon icon-user"></i>
+                    </a>
+                  </li>
+                  @endif
+                  <li>
+                    <a href="cart.html">
+                      <i class="icon icon-shopping-cart"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="wishlist.html">
+                      <i class="icon icon-heart"></i>
+                    </a>
+                  </li>
+                  <li class="user-items search-item pe-3">
+                    <a href="#" class="search-button">
+                      <i class="icon icon-search"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <nav class="primary-nav padding-small">
+          <div class="container">
+            <div class="row d-flex align-items-center">
+              <div class="col-lg-2 col-md-2">
+                <div class="main-logo">
+                  <a href="/">
+                    <img src="{{asset('assets/frontend/images/main-logo.png')}}" alt="logo">
+                  </a>
                 </div>
+              </div>
+              <div class="col-lg-10 col-md-10">
+                <div class="navbar">
+
+                  <div id="main-nav" class="stellarnav d-flex justify-content-end right">
+                    <ul class="menu-list">
+
+                      <li class="menu-item has-sub">
+                        <a href="/" class="item-anchor active d-flex align-item-center" data-effect="Home">Home<i class="icon icon-chevron-down"></i></a>
+                        <ul class="submenu">
+                          <li><a href="/" class="item-anchor active">Home</a></li>
+                        </ul>
+                      </li>
+
+                      <li><a href="about.html" class="item-anchor" data-effect="About">About</a></li>
+
+                      <li class="menu-item has-sub">
+                        <a href="shop.html" class="item-anchor d-flex align-item-center" data-effect="Shop">Shop<i class="icon icon-chevron-down"></i></a>
+                        <ul class="submenu">
+                          <li><a href="shop.html" class="item-anchor">Shop</a></li>
+                          <li><a href="shop-slider.html" class="item-anchor">Shop slider<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="shop-grid.html" class="item-anchor">Shop grid<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="shop-list.html" class="item-anchor">Shop list<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="single-product.html" class="item-anchor">Single product<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="cart.html" class="item-anchor">Cart<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="wishlist.html" class="item-anchor">Wishlist<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="checkout.html" class="item-anchor">Checkout<span class="text-primary"> (PRO)</span></a></li>
+                        </ul>
+                      </li>
+
+                      <li class="menu-item has-sub">
+                        <a href="#" class="item-anchor d-flex align-item-center" data-effect="Pages">Pages<i class="icon icon-chevron-down"></i></a>
+                        <ul class="submenu">
+                          <li><a href="coming-soon.html" class="item-anchor">Coming soon<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="login.html" class="item-anchor">Login<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="faqs.html" class="item-anchor">FAQs<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="styles.html" class="item-anchor">Styles</a></li>
+                          <li><a href="thank-you.html" class="item-anchor">Thankyou</a></li>
+                          <li><a href="error.html" class="item-anchor">Error page<span class="text-primary"> (PRO)</span></a></li>
+                        </ul>
+                      </li>
+
+                      <li class="menu-item has-sub">
+                        <a href="blog.html" class="item-anchor d-flex align-item-center" data-effect="Blog">Blog<i class="icon icon-chevron-down"></i></a>
+                        <ul class="submenu">
+                          <li><a href="blog.html" class="item-anchor">Blog</a></li>
+                          <li><a href="blog-sidebar.html" class="item-anchor">Blog with sidebar<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="blog-masonry.html" class="item-anchor">Blog masonry<span class="text-primary"> (PRO)</span></a></li>
+                          <li><a href="single-post.html" class="item-anchor">Single post</a></li>
+                        </ul>
+                      </li>
+
+                      <li><a href="contact.html" class="item-anchor" data-effect="Contact">Contact</a></li>
+
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
             </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    @yield('content')
+    
+
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-menu-list">
+          <div class="row d-flex flex-wrap justify-content-between">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="footer-menu">
+                <h5 class="widget-title">Ultras</h5>
+                <ul class="menu-list list-unstyled">
+                  <li class="menu-item">
+                    <a href="about.html">About us</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Conditions </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="blog.html">Our Journals</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Careers</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Affiliate Programme</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Ultras Press</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="footer-menu">
+                <h5 class="widget-title">Customer Service</h5>
+                <ul class="menu-list list-unstyled">
+                  <li class="menu-item">
+                    <a href="faqs.html">FAQ</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="contact.html">Contact</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Privacy Policy</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Returns & Refunds</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Cookie Guidelines</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">Delivery Information</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="footer-menu">
+                <h5 class="widget-title">Contact Us</h5>
+                <p>Do you have any questions or suggestions? <a href="#" class="email">ourservices@ultras.com</a>
+                </p>
+                <p>Do you need assistance? Give us a call. <br>
+                  <strong>+57 444 11 00 35</strong>
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="footer-menu">
+                <h5 class="widget-title">Forever 2018</h5>
+                <p>Cras mattis sit ornare in metus eu amet adipiscing enim. Ullamcorper in orci, ultrices integer eget arcu. Consectetur leo dignissim lacus, lacus sagittis dictumst.</p>
+                <div class="social-links">
+                  <ul class="d-flex list-unstyled">
+                    <li>
+                      <a href="#">
+                        <i class="icon icon-facebook"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="icon icon-twitter"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="icon icon-youtube-play"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="icon icon-behance-square"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- Newsletter End -->
-    @include('components.footer')
+      </div>
+      <hr>
+    </footer>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('assets/lib/wow/wow.min.js')}}"></script>
-    <script src="{{asset('assets/lib/easing/easing.min.js')}}"></script>
-    <script src="{{asset('assets/lib/waypoints/waypoints.min.js')}}"></script>
-    <script src="{{asset('assets/lib/owlcarousel/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('assets/lib/isotope/isotope.pkgd.min.js')}}"></script>
-    <script src="{{asset('assets/lib/lightbox/js/lightbox.min.js')}}"></script>  
+    <div id="footer-bottom">
+      <div class="container">
+        <div class="d-flex align-items-center flex-wrap justify-content-between">
+          <div class="copyright">
+            <p>Freebies by <a href="https://templatesjungle.com/">Templates Jungle</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+            </p>
+          </div>
+          <div class="payment-method">
+            <p>Payment options :</p>
+            <div class="card-wrap">
+              <img src="{{asset('assets/frontend/images/visa-icon.jpg')}}" alt="visa">
+              <img src="{{asset('assets/frontend/images/mastercard.png')}}" alt="mastercard">
+              <img src="{{asset('assets/frontend/images/american-express.jpg')}}" alt="american-express">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Template Javascript -->
-    <script src="{{asset('assets/js/main.js')}}"></script>
-</body>
-
+    <script src="{{asset('assets/frontend/js/jquery-1.11.0.min.js')}}"></script>
+    <script src="{{asset('assets/frontend/js/plugins.js')}}"></script>
+    <script src="{{asset('assets/frontend/js/script.js')}}"></script>
+  </body>
 </html>

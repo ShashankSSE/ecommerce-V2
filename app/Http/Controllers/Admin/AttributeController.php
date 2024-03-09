@@ -12,7 +12,7 @@ class AttributeController extends Controller
 {
     public function index(Request $request)
     {
-        $attributes = Attribute::latest()->paginate(10);
+        $attributes = Attribute::latest()->get();
         return view('admin.attribute.index', compact('attributes'));
     }
     public function create(Request $request)

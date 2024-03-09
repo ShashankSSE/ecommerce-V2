@@ -8,7 +8,7 @@
 /public/build
 
 # Ignore public directory (assuming it's generated or contains user-uploaded files)
-/public
+/public/images
 
 # Ignore Laravel Mix hot module replacement files
 /public/hot
