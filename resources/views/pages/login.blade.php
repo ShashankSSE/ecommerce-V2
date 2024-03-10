@@ -14,6 +14,10 @@
         margin: 50px;
         margin-bottom: 100px;
     }
+    .text-red{
+        color: red;
+        font-weight: 600;
+    }
 </style>
 <div class="container">
     <div class="row">
@@ -25,11 +29,21 @@
                 <h2>Login</h2>
                 <p><a href="{{ route('register') }}">Create new account</a></p>
                 <div class="input-group">
-                    <input type="email" id="email" name="email" placeholder="Username" value="{{old('email')}}" required autofocus autocomplete="username">
+                    <input type="email" id="email" name="email" placeholder="Username" value="{{old('email')}}" required autofocus autocomplete="username">                    
                 </div>
                 <div class="input-group">
                     <input type="password" id="password" name="password" placeholder="password" required autocomplete="current-password" >
                 </div>
+                @if($errors->has('email'))
+                    <div class="mt-2 text-red">
+                        {{ $errors->first('email') }}
+                    </div>
+                @endif
+                @if($errors->has('password'))
+                    <div class="mt-2 text-red">
+                        {{ $errors->first('password') }}
+                    </div>
+                @endif
                 <button type="submit" >{{ __('Log in') }}</button>
                 @if (Route::has('password.request'))
                     <div class="bottom-text">
