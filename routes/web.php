@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\SiteController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ShipRocketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +122,12 @@ Route::middleware(['auth'])->prefix('user-management')->group(function () {
     Route::get('/update-user-status/{id}', [UserController::class, 'status'])->name('user.status.update');
     Route::get('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/shiprocket-authentication', [ShipRocketController::class, 'index'])->name('shiprocked.index');
+    
+});
+
 
 Route::get('/product-and-services', function () { 
     return view('pages.services');
