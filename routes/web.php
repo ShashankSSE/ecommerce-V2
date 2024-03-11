@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SiteController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ShipRocketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,19 +28,19 @@ Route::get('/', function () {
     return view('pages.index');
 });
 
-Route::get('/dashboard', function () {
-    if(auth()->user()->is_admin){
-        return view('admin.dashboard');
-    }else{
-        return view('pages.index');
-    }
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     if(auth()->user()->is_admin){
+//         return view('admin.dashboard');
+//     }else{
+//         return view('pages.index');
+//     }
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
 });
 
 Route::middleware(['auth'])->prefix('category')->group(function () {
@@ -55,6 +58,7 @@ Route::middleware(['auth'])->prefix('sub-category')->group(function () {
     Route::get('/create-sub-category', [SubCategoryController::class, 'create'])->name('sub-category.create');
     Route::post('/store-sub-category', [SubCategoryController::class, 'store'])->name('sub-category.store');
     Route::get('/edit-sub-category/{id}', [SubCategoryController::class, 'edit'])->name('sub-category.edit');
+    Route::get('/get-sub-category/{id}', [SubCategoryController::class, 'getSubCategory'])->name('sub-category.get');
     Route::post('/update-sub-category', [SubCategoryController::class, 'update'])->name('sub-category.update');
     Route::get('/update-sub-category-status/{id}', [SubCategoryController::class, 'status'])->name('sub-category.status.update');
     Route::get('/delete-sub-category/{id}', [SubCategoryController::class, 'destroy'])->name('sub-category.destroy');
@@ -107,6 +111,23 @@ Route::middleware(['auth'])->prefix('site-management')->group(function () {
 
 
 });
+
+
+Route::middleware(['auth'])->prefix('user-management')->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('user.index');
+    Route::get('/create-user', [UserController::class, 'create'])->name('user.create');
+    Route::post('/store-user', [UserController::class, 'store'])->name('user.store');
+    Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::post('/update-user', [UserController::class, 'update'])->name('user.update');
+    Route::get('/update-user-status/{id}', [UserController::class, 'status'])->name('user.status.update');
+    Route::get('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/shiprocket-authentication', [ShipRocketController::class, 'index'])->name('shiprocked.index');
+    
+});
+
 
 Route::get('/product-and-services', function () { 
     return view('pages.services');

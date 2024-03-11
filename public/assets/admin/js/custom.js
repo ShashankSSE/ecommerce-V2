@@ -12,7 +12,9 @@ $(document).ready(function(){
     }else{
       document.getElementById('welcomeText').textContent = 'Dashboard';
     }
-    
+    $('#dataTable').dataTable( {
+        "pageLength": 25
+    });
 });
 
 var sizeDivCount = 1;
@@ -216,6 +218,17 @@ function addMoreColorButton(attributes){
       <input type="number" class="form-control" id="colorSelling_${colorDivCount}" name="colorSelling_${colorDivCount}" placeholder="" required>
   `;
   cardContainer.appendChild(sellingFormGroup);
+
+
+
+  var imageFormGroup = document.createElement('div');
+  imageFormGroup.classList.add('form-group');
+  imageFormGroup.innerHTML = `
+      <label for="selling">Image</label>
+      <input type="file" class="form-control" id="colorImage_${colorDivCount}" name="colorImage_${colorDivCount}" placeholder="">
+      <img src="" id="colorPreviewImage_${colorDivCount}" style="width:100px;">
+  `;
+  cardContainer.appendChild(imageFormGroup);
 
  
 

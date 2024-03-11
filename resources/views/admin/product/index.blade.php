@@ -3,13 +3,14 @@
 @if(session('success'))
     
 @endif
-<table id="example"  class="mdl-data-table" style="width:100%">
+<table id="dataTable"  class="mdl-data-table display wrap" style="width:100%">
         <thead>
             <tr>
                 <th>S.No</th>
                 <th>Name</th>
                 <th>Image</th>
                 <th>Category</th>
+                <th>sub Category</th>
                 <th>Is Featured?</th>
                 <th>Is Flash Sale?</th>
                 <th>Is Active?</th>
@@ -25,6 +26,7 @@
                     <td>{{ $product->name }}</td>
                     <td><img src="{{asset('images/products/' . $product->featured_img)}}" style="    width: 100px;"></td>
                     <td>{{ $product->category }}</td>
+                    <td>{{ $product->subcategory }}</td>
                     <td >
                         @if($product->is_featured)
                         <a href="#" onclick="productFeaturedStatusUpdate({{$product->id}})">

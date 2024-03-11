@@ -33,6 +33,7 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="{{asset('assets/img/logo.png')}}"/> 
   <link rel="stylesheet" href="{{asset('assets/admin/richtexteditor/rte_theme_default.css')}}" />
+  <link rel="stylesheet" href="{{asset('assets/admin/css/custom.css')}}" />
   <script type="text/javascript" src="{{asset('assets/admin/richtexteditor/rte.js')}}"></script>
   <script type="text/javascript" src="{{asset('assets/admin/richtexteditor/plugins/all_plugins.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

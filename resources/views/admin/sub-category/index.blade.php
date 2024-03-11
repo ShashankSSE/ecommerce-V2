@@ -3,12 +3,13 @@
 @if(session('success'))
     
 @endif
-<table id="example"  class="mdl-data-table" style="width:100%">
+    <table id="dataTable"  class="mdl-data-table display wrap" style="width:100%">
         <thead>
             <tr>
                 <th>S.No</th>
-                <th>Category</th>
                 <th>Sub-Category</th>
+                <th>Category</th>
+                <th>Slug</th>
                 <th>Status</th>
                 <th>Created On</th>
                 <th>Created By</th>
@@ -19,9 +20,10 @@
             @foreach ($subCategories as $subCategory)
                 <tr>
                     <td>{{ $loop->iteration }}</td> 
-                    <td>{{ $subCategory->category->name }}</td>
                     <td>{{ $subCategory->title }}</td>
-                    <td >
+                    <td>{{ $subCategory->category->name }}</td>
+                    <td>{{ $subCategory->slug }}</td>
+                    <td>
                         @if($subCategory->is_active)
                         <a href="#" onclick="subCategoryStatusUpdate({{$subCategory->id}})">
                             <div id="active"><i class="mdi mdi-check"></i></div>
@@ -48,10 +50,12 @@
             @endforeach
         </tbody>
     </table>
-    {{ $subCategories->links() }}
+    {{--<center>{{ $subCategories->links() }}</center>--}}
 @endsection
 @push('scripts')
 <script>
+
+
     function showDeleteConfirmation(categoryId) {
         Swal.fire({
             html: "<div class='title'><h2>Are you sure you wanted to delete<br>this subCategory?</h2></div>",
