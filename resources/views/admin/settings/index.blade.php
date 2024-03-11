@@ -117,51 +117,78 @@
     var socialCount = 0;
     $(document).ready(function(){
         var socials = @json($settings);
-        socials =JSON.parse(socials.social_media)
-        console.log(Object.keys(socials).length,"socialssocialssocialssocials");
-        $("#totalSocial").html(Object.keys(socials).length);
         var socialContainer = document.getElementById('social');
-        for (var index = 0; index < Object.keys(socials).length; index++) {
-            var platform = Object.keys(socials)[index];
-            var url = socials[platform];
+        if(socials){
+            socials =JSON.parse(socials.social_media)
+            console.log(Object.keys(socials).length,"socialssocialssocialssocials");
+            $("#totalSocial").html(Object.keys(socials).length);
+            for (var index = 0; index < Object.keys(socials).length; index++) {
+                var platform = Object.keys(socials)[index];
+                var url = socials[platform];
+                var newSocialInput = document.createElement('div');
+                newSocialInput.id = "media";
+                newSocialInput.innerHTML = `
+                    <select class="form-control" style="width: 15%; line-height: 20px;" id="social_${index}">
+                    <option value="Facebook" ${platform == 'Facebook' ? 'selected' : ''}>Facebook</option>
+                    <option value="Youtube" ${platform == 'Youtube' ? 'selected' : ''}>Youtube</option>
+                    <option value="Instagram" ${platform == 'Instagram' ? 'selected' : ''}>Instagram</option>
+                    <option value="Whatsapp" ${platform == 'Whatsapp' ? 'selected' : ''}>Whatsapp</option>
+                    <option value="Snapchat" ${platform == 'Snapchat' ? 'selected' : ''}>Snapchat</option>
+                    <option value="Twitter" ${platform == 'Twitter' ? 'selected' : ''}>Twitter</option>
+                    </select>
+                    <input type="text" class="form-control" id="url_${index}" value="${url}" placeholder="Enter Url ...">
+                `;
+                if (index === 0) {
+                    // Add the "+" button only for the first social media input
+                    var addBtn = document.createElement('a');
+                    addBtn.id = "addSocialBtn";
+                    addBtn.classList.add('btn', 'btn-sm', 'btn-primary');
+                    addBtn.href = 'javascript:void(0);';
+                    addBtn.style = "font-size: 30px; border-radius: 5px; padding: 2px 10px 1px 10px;";
+                    addBtn.innerHTML = '+';
+                    newSocialInput.appendChild(addBtn);
+                } else if (index === Object.keys(socials).length - 1) {
+                    // Add remove button only for the last social media input
+                    var removeBtn = document.createElement('a');
+                    removeBtn.classList.add('btn', 'btn-sm', 'btn-danger', 'remove-btn');
+                    removeBtn.id = "removeSocialBtn";
+                    removeBtn.innerHTML = 'x';
+                    removeBtn.href = 'javascript:void(0);';
+                    removeBtn.onclick = function() {
+                        removeSocial(this);
+                    };
+                    newSocialInput.appendChild(removeBtn);
+                }
+                // Append the new social media input to the container
+                socialContainer.appendChild(newSocialInput);
+                socialCount++;
+                console.log(socialCount,"socialCountsocialCountsocialCountsocialCountsocialCount")
+            }
+        }else{
             var newSocialInput = document.createElement('div');
             newSocialInput.id = "media";
             newSocialInput.innerHTML = `
-                <select class="form-control" style="width: 15%; line-height: 20px;" id="social_${index}">
-                <option value="Facebook" ${platform == 'Facebook' ? 'selected' : ''}>Facebook</option>
-                <option value="Youtube" ${platform == 'Youtube' ? 'selected' : ''}>Youtube</option>
-                <option value="Instagram" ${platform == 'Instagram' ? 'selected' : ''}>Instagram</option>
-                <option value="Whatsapp" ${platform == 'Whatsapp' ? 'selected' : ''}>Whatsapp</option>
-                <option value="Snapchat" ${platform == 'Snapchat' ? 'selected' : ''}>Snapchat</option>
-                <option value="Twitter" ${platform == 'Twitter' ? 'selected' : ''}>Twitter</option>
+                <select class="form-control" style="width: 15%; line-height: 20px;" id="social_0">
+                <option value="Facebook" >Facebook</option>
+                <option value="Youtube"  >Youtube</option>
+                <option value="Instagram"  >Instagram</option>
+                <option value="Whatsapp"  >Whatsapp</option>
+                <option value="Snapchat"  >Snapchat</option>
+                <option value="Twitter"  >Twitter</option>
                 </select>
-                <input type="text" class="form-control" id="url_${index}" value="${url}" placeholder="Enter Url ...">
+                <input type="text" class="form-control" id="url_0" value="" placeholder="Enter Url ...">
             `;
-            if (index === 0) {
-                // Add the "+" button only for the first social media input
-                var addBtn = document.createElement('a');
-                addBtn.id = "addSocialBtn";
-                addBtn.classList.add('btn', 'btn-sm', 'btn-primary');
-                addBtn.href = 'javascript:void(0);';
-                addBtn.style = "font-size: 30px; border-radius: 5px; padding: 2px 10px 1px 10px;";
-                addBtn.innerHTML = '+';
-                newSocialInput.appendChild(addBtn);
-            } else if (index === Object.keys(socials).length - 1) {
-                // Add remove button only for the last social media input
-                var removeBtn = document.createElement('a');
-                removeBtn.classList.add('btn', 'btn-sm', 'btn-danger', 'remove-btn');
-                removeBtn.id = "removeSocialBtn";
-                removeBtn.innerHTML = 'x';
-                removeBtn.href = 'javascript:void(0);';
-                removeBtn.onclick = function() {
-                    removeSocial(this);
-                };
-                newSocialInput.appendChild(removeBtn);
-            }
-            // Append the new social media input to the container
+
+            var addBtn = document.createElement('a');
+            addBtn.id = "addSocialBtn";
+            addBtn.classList.add('btn', 'btn-sm', 'btn-primary');
+            addBtn.href = 'javascript:void(0);';
+            addBtn.style = "font-size: 30px; border-radius: 5px; padding: 2px 10px 1px 10px;";
+            addBtn.innerHTML = '+';
+            newSocialInput.appendChild(addBtn);
+
             socialContainer.appendChild(newSocialInput);
-            socialCount++;
-            console.log(socialCount,"socialCountsocialCountsocialCountsocialCountsocialCount")
+                socialCount++;
         }
 
         $('#updateSettingsForm').submit(function (e) { 
