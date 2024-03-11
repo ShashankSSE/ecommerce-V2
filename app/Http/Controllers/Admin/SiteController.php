@@ -100,7 +100,8 @@ class SiteController extends Controller
     }
 
     public function settings(Request $request){
-        $settings = Settings::findOrFail(1);
+        $settings = Settings::where('id','=',1)->first();
+        // dd($settings);
         return view('admin.settings.index',compact('settings'));
     }
     public function settingsUpdate(Request $request){
