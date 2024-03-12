@@ -45,6 +45,12 @@
 
                     </div>
                 <?php endif; ?>
+                <?php if($errors->has('not_login')): ?>
+                    <div class="mt-2 text-red">
+                        <?php echo e($errors->first('not_login')); ?>
+
+                    </div>
+                <?php endif; ?>
                 <button type="submit" ><?php echo e(__('Log in')); ?></button>
                 <?php if(Route::has('password.request')): ?>
                     <div class="bottom-text">

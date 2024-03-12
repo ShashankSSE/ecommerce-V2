@@ -107,112 +107,130 @@
         <div class="col-sm-12">
             <div class="pt-4 pb-4 container">
                 <h2 class="text-center">Shopping Cart</h2>
-                <div class="mt-5 gap-3 gap-md-0 gap-lg-0 row">
-                    <div class="col-lg-8 col-md-7">
-                        <div class="card">
-                            <h4><span>Cart (</span><span>{{count($cartItems)}}</span><span> items)</span> </h4>
-                            @foreach($cartItems as $item)
-                                <div class="mt-2 store-item bottom-line pb-3">
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            <img class="image-store"
-                                                src="https://images.unsplash.com/photo-1617171594202-100a53bdfe04?crop=entropy&amp;cs=srgb&amp;fm=jpg&amp;ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTA4NjE0MjN8&amp;ixlib=rb-4.0.3&amp;q=85"
-                                                alt="Blue Hoodie">
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <div class="mt-3 mt-lg-0 d-flex align-items-center justify-content-between">
-                                                <h4>Blue Hoodie</h4>
-                                                <div>
-                                                    <div class="btn-quantity-container d-flex align-items-center justify-content-center" style="gap:.5rem;">
-                                                        <button type="button" class="btn-quantity btn btn-default">−</button>
-                                                        <span class="p-quantiry">1</span>
-                                                        <button type="button" class="btn-quantity btn btn-default">+</button>
+                @if($cartItems)
+                    <div class="mt-5 gap-3 gap-md-0 gap-lg-0 row">
+                        <div class="col-lg-8 col-md-7">
+                            <div class="card">
+                                <h4><span>Cart (</span><span>{{count($cartItems)}}</span><span> items)</span> </h4>
+                                @foreach($cartItems as $item)
+                                    <div class="mt-2 store-item bottom-line pb-3">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <img class="image-store"
+                                                    src="https://images.unsplash.com/photo-1617171594202-100a53bdfe04?crop=entropy&amp;cs=srgb&amp;fm=jpg&amp;ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTA4NjE0MjN8&amp;ixlib=rb-4.0.3&amp;q=85"
+                                                    alt="Blue Hoodie">
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="mt-3 mt-lg-0 d-flex align-items-center justify-content-between">
+                                                    <h4>Blue Hoodie</h4>
+                                                    <div>
+                                                        <div class="btn-quantity-container d-flex align-items-center justify-content-center" style="gap:.5rem;">
+                                                            <button type="button" class="btn-quantity btn btn-default">−</button>
+                                                            <span class="p-quantiry">1</span>
+                                                            <button type="button" class="btn-quantity btn btn-default">+</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="list-store d-flex align-items-center justify-content-between">
+                                                    <p>Hodie-B</p>
+                                                    <p class="p-note"></span></p>
+                                                </div>
+                                                <div class="list-store d-flex align-items-center justify-content-between">
+                                                    <p><span>Color : </span><span>Blue</span></p>
+                                                </div>
+                                                <div class="list-store d-flex align-items-center justify-content-between">
+                                                    <p><span>Size : </span><span>M</span></p>
+                                                </div>
+                                                <div class="list-store d-flex align-items-center justify-content-between">
+                                                    <div class="d-flex gap-2">
+                                                        <button type="button" class="btn-list btn btn-xs btn-default">
+                                                            <i class="fa fa-trash"></i>
+                                                            <span> Remove Item</span>
+                                                        </button> 
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <h5>$17.99</h5>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="list-store d-flex align-items-center justify-content-between">
-                                                <p>Hodie-B</p>
-                                                <p class="p-note"></span></p>
-                                            </div>
-                                            <div class="list-store d-flex align-items-center justify-content-between">
-                                                <p><span>Color : </span><span>Blue</span></p>
-                                            </div>
-                                            <div class="list-store d-flex align-items-center justify-content-between">
-                                                <p><span>Size : </span><span>M</span></p>
-                                            </div>
-                                            <div class="list-store d-flex align-items-center justify-content-between">
-                                                <div class="d-flex gap-2">
-                                                    <button type="button" class="btn-list btn btn-xs btn-default">
-                                                        <i class="fa fa-trash"></i>
-                                                        <span> Remove Item</span>
-                                                    </button> 
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-5">
+                            <div class="gap-3 row">
+                                <div class="">
+                                    <div class="card">
+                                        <h4>The total amount of</h4>
+                                        <div class="store-item mt-2">
+                                            <div class="row">
+                                                <div class="">
+                                                    <div class="list-store d-flex align-items-center justify-content-between">
+                                                        <p>Temporary amount</p>
+                                                        <p>$0.00</p>
+                                                    </div>
+                                                    <div class="list-store d-flex align-items-center justify-content-between">
+                                                        <p>Shipping</p>
+                                                        <p>Gratis</p>
+                                                    </div>
+                                                    <div class="bottom-line"></div>
                                                 </div>
-                                                <div class="d-flex">
-                                                    <h5>$17.99</h5>
+                                            </div>
+                                            <div class="mt-2 row">
+                                                <div class="col-6">
+                                                    <p class="p-total-label">The total amount of (Including VAT)</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <p class="p-total">$0.00</p>
+                                                </div>
+                                            </div>
+                                            <div class="mt-1 row">
+                                                <div class="">
+                                                    <button type="button" class="w-100 btn btn-md btn-primary btn-block">
+                                                        Go To Checkout
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-
+                                <div class="" >
+                                    <div class="card" >
+                                        <div class="d-flex align-items-center justify-content-between" >
+                                            <p >Add a discount code (optional)</p>
+                                            <p ><i class="fa fa-chevron-down"></i></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-5">
-                        <div class="gap-3 row">
-                            <div class="">
-                                <div class="card">
-                                    <h4>The total amount of</h4>
-                                    <div class="store-item mt-2">
-                                        <div class="row">
-                                            <div class="">
-                                                <div class="list-store d-flex align-items-center justify-content-between">
-                                                    <p>Temporary amount</p>
-                                                    <p>$0.00</p>
-                                                </div>
-                                                <div class="list-store d-flex align-items-center justify-content-between">
-                                                    <p>Shipping</p>
-                                                    <p>Gratis</p>
-                                                </div>
-                                                <div class="bottom-line"></div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-2 row">
-                                            <div class="col-6">
-                                                <p class="p-total-label">The total amount of (Including VAT)</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <p class="p-total">$0.00</p>
-                                            </div>
-                                        </div>
-                                        <div class="mt-1 row">
-                                            <div class="">
-                                                <button type="button" class="w-100 btn btn-md btn-primary btn-block">
-                                                    Go To Checkout
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                @else
+                <div class="col-lg-8 col-md-7">
+                    <div class="card">
+                        <h4><span>Cart (</span><span>0</span><span> items)</span> </h4>
+                        <div class="mt-2 store-item bottom-line pb-3">
+                            <div class="row">
+                                <div class="col-lg-3"> 
                                 </div>
-                            </div>
-                            <div class="" >
-                                <div class="card" >
-                                    <div class="d-flex align-items-center justify-content-between" >
-                                        <p >Add a discount code (optional)</p>
-                                        <p ><i class="fa fa-chevron-down"></i></p>
-                                    </div>
+                                <div class="col-lg-9">
+                                    
+                                    Your Cart is Empty.
+                                
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+                @endif
+
             </div>
         </div>
     </div>
-
-    <h5 class="widget-title">
-        <center>There are no products available related to this category.</center>
-    </h5>
+ 
 </div>
 
 @endsection

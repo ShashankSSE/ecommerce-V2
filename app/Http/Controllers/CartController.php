@@ -12,10 +12,12 @@ use Illuminate\Validation\Rule;
 class CartController extends Controller
 {
     public function index(Request $request){
-
-        $cartItems = Cart::with('product')->where('user_id', auth()->user()->id)
-                    ->where('is_purchased', '=',0)
-                    ->get();
+        $cartItems = null;
+        if(auth()->user()){
+            $cartItems = Cart::with('product')->where('user_id', auth()->user()->id)
+                        ->where('is_purchased', '=',0)
+                        ->get();
+        }
         
         return view('pages.cart.index',compact('cartItems'));
     }
