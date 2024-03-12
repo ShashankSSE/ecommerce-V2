@@ -55,6 +55,9 @@
 .icon-arrow-io:before {
   content: "\e90a";
 }
+.icon-whatsapp:before {
+  content: "\ea93";
+}
 .icon-chevron-left:before {
   content: "\e90d";
 }

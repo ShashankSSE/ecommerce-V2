@@ -105,7 +105,15 @@
                                 <select class="form-control js-example-basic-single" name="subCategoryName" id="subCategoryName" required>
                                     <option selected disabled>Select Sub Category</option>
                                 </select>
-                            </div>       
+                            </div>         
+                            <div class="form-group">
+                                <label for="productMrp">Mrp</label>
+                                <input type="number" class="form-control" id="productMrp" name="productMrp" placeholder="Enter Mrp..." required>
+                            </div>   
+                            <div class="form-group">
+                                <label for="productSelling">Selling Price</label>
+                                <input type="number" class="form-control" id="productSelling" name="productSelling" placeholder="Enter Selling Price ..." required>
+                            </div> 
                             <div class="form-group">
                                 <label for="metaTitle">Meta Title</label>
                                 <input type="text" class="form-control" id="metaTitle" name="metaTitle" placeholder="Enter Category Name ...">

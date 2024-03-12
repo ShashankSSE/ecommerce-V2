@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ShipRocketController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,17 @@ use App\Http\Controllers\Admin\ShipRocketController;
 |
 */
 
-Route::get('/', function () { 
-    return view('pages.index');
-});
+// Route::get('/', function () { 
+//     return view('pages.index');
+// });
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
+Route::prefix('store/category')->group(function () {
+    Route::get('/{slug}', [HomeController::class, 'category'])->name('frontend.category.index');    
+});
+Route::prefix('store/sub-category')->group(function () {
+    Route::get('/{slug}', [HomeController::class, 'subcategory'])->name('frontend.subcategory.index');    
+});
 // Route::get('/dashboard', function () {
 //     if(auth()->user()->is_admin){
 //         return view('admin.dashboard');
@@ -127,7 +135,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/shiprocket-authentication', [ShipRocketController::class, 'index'])->name('shiprocked.index');
     
 });
-
 
 Route::get('/product-and-services', function () { 
     return view('pages.services');
