@@ -44,6 +44,11 @@
                         {{ $errors->first('password') }}
                     </div>
                 @endif
+                @if($errors->has('not_login'))
+                    <div class="mt-2 text-red">
+                        {{ $errors->first('not_login') }}
+                    </div>
+                @endif
                 <button type="submit" >{{ __('Log in') }}</button>
                 @if (Route::has('password.request'))
                     <div class="bottom-text">

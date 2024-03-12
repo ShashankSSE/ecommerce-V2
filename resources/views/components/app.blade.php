@@ -23,6 +23,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- script
     ================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="{{asset('assets/frontend/js/modernizr.js')}}"></script>
     <style>
       a svg{
@@ -117,7 +119,7 @@
                       @endif
                   </li>
                   <li>
-                    <a href="cart.html">
+                    <a href="{{route('cart.index')}}">
                       <i class="icon icon-shopping-cart"></i>
                     </a>
                   </li>
@@ -326,6 +328,44 @@
         </div>
       </div>
     </div>
+    <script>
+      function addToCart(id){
+        $.ajax({
+            url: "{{route('cart.addToCart', ['id' => ':id'])}}".replace(':id', id),
+            type: 'GET', // HTTP method
+            success: function(response) {
+                // Handle the success response
+                Swal.fire({
+                      icon: 'success',
+                      title: 'Congratulations...',
+                      text: 'You have successfully added the product to your cart.'
+                  });
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                console.error('Error:', error);
+                // Check if the error is due to not being logged in (status code 401)
+                if (xhr.status == 401) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: xhr.responseJSON.error
+                  }).then(() => {
+                      // Redirect to the login page if necessary
+                      window.location.href = "{{ route('login') }}";
+                  });
+                }
+                if (xhr.status == 409) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: xhr.responseJSON.error
+                  });
+                }
+            }
+        });
+      }
+ </script>
     <script src="{{asset('assets/frontend/js/jquery-1.11.0.min.js')}}"></script>
     <script src="{{asset('assets/frontend/js/plugins.js')}}"></script>
     <script src="{{asset('assets/frontend/js/script.js')}}"></script>

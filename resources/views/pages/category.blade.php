@@ -44,12 +44,12 @@
                             <div class="cart-button d-flex justify-content-center align-items-center">
                             <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
                             </button>
-                            <!-- <button type="button" class="view-btn tooltip
+                            <button type="button" class="view-btn tooltip
                                 d-flex">
                                 <i class="icon icon-screen-full"></i>
                                 <span class="tooltip-text">Quick view</span>
                             </button>
-                            <button type="button" class="wishlist-btn">
+                            <!-- <button type="button" class="wishlist-btn">
                                 <i class="icon icon-heart"></i>
                             </button> -->
                             </div>

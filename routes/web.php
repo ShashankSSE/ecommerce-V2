@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ShipRocketController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,10 @@ Route::prefix('store/category')->group(function () {
 });
 Route::prefix('store/sub-category')->group(function () {
     Route::get('/{slug}', [HomeController::class, 'subcategory'])->name('frontend.subcategory.index');    
+});
+Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');    
+    Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.addToCart');    
 });
 // Route::get('/dashboard', function () {
 //     if(auth()->user()->is_admin){
