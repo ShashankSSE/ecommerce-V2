@@ -19,7 +19,6 @@ class ProductController extends Controller
                     ->select('products.id','products.name','categories.name as category','products.featured_img','products.is_featured','products.is_flash_sale','products.is_active','products.created_at','products.created_by','sub_category.title as subcategory')
                     ->latest()
                     ->paginate(10);
-                    // dd($products);
         return view('admin.product.index', compact('products'));
     }
     public function create(Request $request)
@@ -55,6 +54,8 @@ class ProductController extends Controller
             $product->name = $request->input('productName');
             $product->slug = $slug;
             $product->short_Desc = $request->input('shortDesc');
+            $product->mrp = $request->input('productMrp');
+            $product->selling = $request->input('productSelling');
             $product->desc = $request->input('desc');
             $product->category = $request->input('categoryName');
             $product->sub_category = $request->input('subCategoryName');
@@ -104,14 +105,16 @@ class ProductController extends Controller
     public function update(Request $request){
         $product = Product::findOrFail($request->productId);        
         $jsonColorArray = json_decode($request->input('colorArray'));
-        foreach($jsonColorArray as $key=>$item){
-            if ($request->file('colorImage_'.($key+1))) {
-                $file = $request->file('colorImage_'.($key+1));
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('images/products'), $fileName);
-                $item->image = asset('images/products') .'/'. $fileName;
-            }elseif($item->image == null){
-                $item->image = json_decode($product->colorArray)[$key]->image;
+        if($jsonColorArray){
+            foreach($jsonColorArray as $key=>$item){
+                if ($request->file('colorImage_'.($key+1))) {
+                    $file = $request->file('colorImage_'.($key+1));
+                    $fileName = time() . '_' . $file->getClientOriginalName();
+                    $file->move(public_path('images/products'), $fileName);
+                    $item->image = asset('images/products') .'/'. $fileName;
+                }elseif($item->image == null){
+                    $item->image = json_decode($product->colorArray)[$key]->image;
+                }
             }
         }
         
@@ -120,6 +123,8 @@ class ProductController extends Controller
             $product->name = $request->input('productName');
             $product->slug = $request->input('productSlug');
             $product->short_Desc = $request->input('shortDesc');
+            $product->mrp = $request->input('productMrp');
+            $product->selling = $request->input('productSelling');
             $product->desc = $request->input('desc');
             $product->category = $request->input('categoryName');
             $product->sub_category = $request->input('subCategoryName');

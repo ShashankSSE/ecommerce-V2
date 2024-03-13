@@ -23,6 +23,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- script
     ================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="{{asset('assets/frontend/js/modernizr.js')}}"></script>
     <style>
       a svg{
@@ -84,11 +86,13 @@
           <div class="container">
             <div class="row d-flex align-items-center">
               <div class="col-md-4 header-contact">
-                <p>Let's talk! <strong>+57 444 11 00 35</strong>
+                @if($settings->mobile)
+                  <p>Let's talk! <strong>+57 444 11 00 35</strong>
+                @endif
                 </p>
               </div>
               <div class="col-md-4 shipping-purchase text-center">
-                <p>Free shipping on a purchase value of $200</p>
+                <!-- <p>Free shipping on a purchase value of $200</p> -->
               </div>
               <div class="col-md-4 col-sm-12 user-items">
                 <ul class="d-flex justify-content-end list-unstyled align-items-center">
@@ -115,7 +119,7 @@
                       @endif
                   </li>
                   <li>
-                    <a href="cart.html">
+                    <a href="{{route('cart.index')}}">
                       <i class="icon icon-shopping-cart"></i>
                     </a>
                   </li>
@@ -140,7 +144,11 @@
               <div class="col-lg-2 col-md-2">
                 <div class="main-logo">
                   <a href="/">
-                    <img src="{{asset('assets/frontend/images/main-logo.png')}}" alt="logo">
+                    @if($settings->header_logo)
+                      <img src="{{asset('images/site/' . $settings->header_logo)}}" alt="logo">
+                    @else
+                      <h2>Succu</h2>
+                    @endif
                   </a>
                 </div>
               </div>
@@ -150,51 +158,34 @@
                   <div id="main-nav" class="stellarnav d-flex justify-content-end right">
                     <ul class="menu-list">
 
-                      <li class="menu-item has-sub">
-                        <a href="/" class="item-anchor active d-flex align-item-center" data-effect="Home">Home<i class="icon icon-chevron-down"></i></a>
-                        <ul class="submenu">
-                          <li><a href="/" class="item-anchor active">Home</a></li>
-                        </ul>
-                      </li>
-
-                      <li><a href="about.html" class="item-anchor" data-effect="About">About</a></li>
+                      <li><a href="/" class="item-anchor active">Home</a></li>
 
                       <li class="menu-item has-sub">
-                        <a href="shop.html" class="item-anchor d-flex align-item-center" data-effect="Shop">Shop<i class="icon icon-chevron-down"></i></a>
+                        <a href="" class="item-anchor d-flex align-item-center" data-effect="Shop">Shop<i class="icon icon-chevron-down"></i></a>
                         <ul class="submenu">
-                          <li><a href="shop.html" class="item-anchor">Shop</a></li>
-                          <li><a href="shop-slider.html" class="item-anchor">Shop slider<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="shop-grid.html" class="item-anchor">Shop grid<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="shop-list.html" class="item-anchor">Shop list<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="single-product.html" class="item-anchor">Single product<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="cart.html" class="item-anchor">Cart<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="wishlist.html" class="item-anchor">Wishlist<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="checkout.html" class="item-anchor">Checkout<span class="text-primary"> (PRO)</span></a></li>
+                          <!-- <li><a href="shop.html" class="item-anchor">Shop</a></li> -->
+                          @foreach($categories as $category)
+                          <li class="menu-item has-sub">
+                            <a href="{{ route('frontend.category.index', ['slug' => $category->slug]) }}" class="item-anchor d-flex align-item-center justify-content-between">{{$category->name}} {!!count($category->subcategories) > 0 ? '<i class="icon icon-chevron-right"></i>' : ''!!}</a>
+                            @if(count($category->subcategories) > 0)
+                            <ul class="submenu">
+                              @foreach($category->subcategories as $subcategory)
+                              @if($subcategory->slug)
+                              <li>
+                                  <a href="{{ route('frontend.subcategory.index', ['slug' => $subcategory->slug]) }}" class="item-anchor">
+                                      {{ $subcategory->title }} 
+                                  </a>
+                                </li>
+                              @endif
+                              @endforeach
+                            </ul>
+                            @endif
+                          </li>                            
+                          @endforeach
+                          
+
                         </ul>
                       </li>
-
-                      <li class="menu-item has-sub">
-                        <a href="#" class="item-anchor d-flex align-item-center" data-effect="Pages">Pages<i class="icon icon-chevron-down"></i></a>
-                        <ul class="submenu">
-                          <li><a href="coming-soon.html" class="item-anchor">Coming soon<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="login.html" class="item-anchor">Login<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="faqs.html" class="item-anchor">FAQs<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="styles.html" class="item-anchor">Styles</a></li>
-                          <li><a href="thank-you.html" class="item-anchor">Thankyou</a></li>
-                          <li><a href="error.html" class="item-anchor">Error page<span class="text-primary"> (PRO)</span></a></li>
-                        </ul>
-                      </li>
-
-                      <li class="menu-item has-sub">
-                        <a href="blog.html" class="item-anchor d-flex align-item-center" data-effect="Blog">Blog<i class="icon icon-chevron-down"></i></a>
-                        <ul class="submenu">
-                          <li><a href="blog.html" class="item-anchor">Blog</a></li>
-                          <li><a href="blog-sidebar.html" class="item-anchor">Blog with sidebar<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="blog-masonry.html" class="item-anchor">Blog masonry<span class="text-primary"> (PRO)</span></a></li>
-                          <li><a href="single-post.html" class="item-anchor">Single post</a></li>
-                        </ul>
-                      </li>
-
                       <li><a href="contact.html" class="item-anchor" data-effect="Contact">Contact</a></li>
 
                     </ul>
@@ -216,26 +207,14 @@
           <div class="row d-flex flex-wrap justify-content-between">
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="footer-menu">
-                <h5 class="widget-title">Ultras</h5>
+                <h5 class="widget-title">Succu</h5>
                 <ul class="menu-list list-unstyled">
                   <li class="menu-item">
-                    <a href="about.html">About us</a>
+                    <a href="">About us</a>
                   </li>
                   <li class="menu-item">
                     <a href="#">Conditions </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="blog.html">Our Journals</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Careers</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Affiliate Programme</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Ultras Press</a>
-                  </li>
+                  </li>    
                 </ul>
               </div>
             </div>
@@ -244,10 +223,10 @@
                 <h5 class="widget-title">Customer Service</h5>
                 <ul class="menu-list list-unstyled">
                   <li class="menu-item">
-                    <a href="faqs.html">FAQ</a>
+                    <a href="">FAQ</a>
                   </li>
                   <li class="menu-item">
-                    <a href="contact.html">Contact</a>
+                    <a href="">Contact</a>
                   </li>
                   <li class="menu-item">
                     <a href="#">Privacy Policy</a>
@@ -267,39 +246,61 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="footer-menu">
                 <h5 class="widget-title">Contact Us</h5>
-                <p>Do you have any questions or suggestions? <a href="#" class="email">ourservices@ultras.com</a>
+                <p>Do you have any questions or suggestions? {!! $settings->email ? '<a href="mailto:' . $settings->email . '" class="email">' . $settings->email . '</a>' : '' !!}
                 </p>
                 <p>Do you need assistance? Give us a call. <br>
-                  <strong>+57 444 11 00 35</strong>
+                {!! $settings->mobile ? '<a href="tel:' . $settings->mobile . '" class="email">+91-' . $settings->mobile . '</a>' : '' !!}
                 </p>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="footer-menu">
-                <h5 class="widget-title">Forever 2018</h5>
-                <p>Cras mattis sit ornare in metus eu amet adipiscing enim. Ullamcorper in orci, ultrices integer eget arcu. Consectetur leo dignissim lacus, lacus sagittis dictumst.</p>
+                <h5 class="widget-title">About Us</h5>
+                <p>{{$settings->short_description}}</p>
                 <div class="social-links">
                   <ul class="d-flex list-unstyled">
-                    <li>
-                      <a href="#">
-                        <i class="icon icon-facebook"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon icon-twitter"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon icon-youtube-play"></i>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="icon icon-behance-square"></i>
-                      </a>
-                    </li>
+                  @foreach(json_decode($settings->social_media) as $social=>$url)
+                    @if($social == 'Facebook')
+                      <li>
+                        <a href="{{$url}}">
+                          <i class="icon icon-facebook"></i>
+                        </a>
+                      </li>
+                      @elseif($social == 'Youtube')
+                        <li>
+                          <a href="{{$url}}">
+                            <i class="icon icon-youtube-play"></i>
+                          </a>
+                        </li>
+                      @elseif($social == 'Instagram')
+                        <li>
+                          <a href="{{$url}}">
+                            <i class="icon icon-instagram"></i>
+                          </a>
+                        </li>
+                      @elseif($social == 'Whatsapp')                        
+                        <li>
+                          <a href="{{$url}}">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="512"viewBox="0 0 512 512"><g id="icomoon-ignore"></g><path d="M436.5 74.4c-47.9-48-111.6-74.4-179.5-74.4-139.8 0-253.6 113.8-253.6 253.7 0 44.7 11.7 88.4 33.9 126.8l-36 131.5 134.5-35.3c37.1 20.2 78.8 30.9 121.2 30.9h0.1c0 0 0 0 0 0 139.8 0 253.7-113.8 253.7-253.7 0-67.8-26.4-131.5-74.3-179.5zM257.1 464.8v0c-37.9 0-75-10.2-107.4-29.4l-7.7-4.6-79.8 20.9 21.3-77.8-5-8c-21.2-33.5-32.3-72.3-32.3-112.2 0-116.3 94.6-210.9 211-210.9 56.3 0 109.3 22 149.1 61.8 39.8 39.9 61.7 92.8 61.7 149.2-0.1 116.4-94.7 211-210.9 211zM372.7 306.8c-6.3-3.2-37.5-18.5-43.3-20.6s-10-3.2-14.3 3.2c-4.2 6.3-16.4 20.6-20.1 24.9-3.7 4.2-7.4 4.8-13.7 1.6s-26.8-9.9-51-31.5c-18.8-16.8-31.6-37.6-35.3-43.9s-0.4-9.8 2.8-12.9c2.9-2.8 6.3-7.4 9.5-11.1s4.2-6.3 6.3-10.6c2.1-4.2 1.1-7.9-0.5-11.1s-14.3-34.4-19.5-47.1c-5.1-12.4-10.4-10.7-14.3-10.9-3.7-0.2-7.9-0.2-12.1-0.2s-11.1 1.6-16.9 7.9c-5.8 6.3-22.2 21.7-22.2 52.9s22.7 61.3 25.9 65.6c3.2 4.2 44.7 68.3 108.3 95.7 15.1 6.5 26.9 10.4 36.1 13.4 15.2 4.8 29 4.1 39.9 2.5 12.2-1.8 37.5-15.3 42.8-30.1s5.3-27.5 3.7-30.1c-1.5-2.8-5.7-4.4-12.1-7.6z"></path></svg>
+                          </a>
+                        </li>
+                      @elseif($social == 'Snapchat')     
+                        <li>
+                          <a href="{{$url}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.829 4.533c-.6 1.344-.363 3.752-.267 5.436-.648.359-1.48-.271-1.951-.271-.49 0-1.075.322-1.167.802-.066.346.089.85 1.201 1.289.43.17 1.453.37 1.69.928.333.784-1.71 4.403-4.918 4.931-.251.041-.43.265-.416.519.056.975 2.242 1.357 3.211 1.507.099.134.179.7.306 1.131.057.193.204.424.582.424.493 0 1.312-.38 2.738-.144 1.398.233 2.712 2.215 5.235 2.215 2.345 0 3.744-1.991 5.09-2.215.779-.129 1.448-.088 2.196.058.515.101.977.157 1.124-.349.129-.437.208-.992.305-1.123.96-.149 3.156-.53 3.211-1.505.014-.254-.165-.477-.416-.519-3.154-.52-5.259-4.128-4.918-4.931.236-.557 1.252-.755 1.69-.928.814-.321 1.222-.716 1.213-1.173-.011-.585-.715-.934-1.233-.934-.527 0-1.284.624-1.897.286.096-1.698.332-4.095-.267-5.438-1.135-2.543-3.66-3.829-6.184-3.829-2.508 0-5.014 1.268-6.158 3.833z" fill="#020202"/></svg>
+                          </a>
+                        </li>
+                      @elseif($social == 'Twitter')     
+                        <li>
+                          <a href="{{$url}}">
+                            <i class="icon icon-twitter"></i>
+                          </a>
+                        </li>
+                      @else
+                    @endif
+        
+                  @endforeach
+                        
                   </ul>
                 </div>
               </div>
@@ -309,7 +310,6 @@
       </div>
       <hr>
     </footer>
-
     <div id="footer-bottom">
       <div class="container">
         <div class="d-flex align-items-center flex-wrap justify-content-between">
@@ -328,7 +328,44 @@
         </div>
       </div>
     </div>
-
+    <script>
+      function addToCart(id){
+        $.ajax({
+            url: "{{route('cart.addToCart', ['id' => ':id'])}}".replace(':id', id),
+            type: 'GET', // HTTP method
+            success: function(response) {
+                // Handle the success response
+                Swal.fire({
+                      icon: 'success',
+                      title: 'Congratulations...',
+                      text: 'You have successfully added the product to your cart.'
+                  });
+            },
+            error: function(xhr, status, error) {
+                // Handle errors
+                console.error('Error:', error);
+                // Check if the error is due to not being logged in (status code 401)
+                if (xhr.status == 401) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: xhr.responseJSON.error
+                  }).then(() => {
+                      // Redirect to the login page if necessary
+                      window.location.href = "{{ route('login') }}";
+                  });
+                }
+                if (xhr.status == 409) {
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: xhr.responseJSON.error
+                  });
+                }
+            }
+        });
+      }
+ </script>
     <script src="{{asset('assets/frontend/js/jquery-1.11.0.min.js')}}"></script>
     <script src="{{asset('assets/frontend/js/plugins.js')}}"></script>
     <script src="{{asset('assets/frontend/js/script.js')}}"></script>

@@ -100,48 +100,89 @@ class SiteController extends Controller
     }
 
     public function settings(Request $request){
-        $settings = Settings::findOrFail(1);
+        $settings = Settings::where('id','=',1)->first();
+        // dd($settings);
         return view('admin.settings.index',compact('settings'));
     }
     public function settingsUpdate(Request $request){
-        $settings = Settings::findOrFail(1); 
+        $settingsCheck = Settings::where('id','=',1)->first();
         try {
             // Set attributes 
-            $settings->social_media = $request->input('socialArray');
-            $settings->mobile = $request->input('mobile');
-            $settings->email = $request->input('email');
-            $settings->address = $request->input('address');
-            $settings->meta_title = $request->input('metaTitle');
-            $settings->meta_keyword = $request->input('metaKey');
-            $settings->meta_description = $request->input('metaDesc');
-            $settings->short_description = $request->input('desc');
-            $settings->credits = $request->input('creadits'); 
-            if ($request->hasFile('headerLogo')) {
-                $file = $request->file('headerLogo');
-                $extension = $request->file('headerLogo')->extension();
-                $fileName = 'header_logo'.'.'.$extension;
-                $file->move(public_path('images/site'), $fileName);
-                $settings->header_logo = $fileName;
-            }
-            if ($request->hasFile('footerLogo')) {
-                $file = $request->file('footerLogo');
-                $extension = $request->file('footerLogo')->extension();
-                $fileName = 'footer_logo'.'.'.$extension;
-                $file->move(public_path('images/site'), $fileName);
-                $settings->footer_logo = $fileName;
-            }
-            if ($request->hasFile('favicon')) {
-                $file = $request->file('favicon');
-                $extension = $request->file('favicon')->extension();
-                $fileName = 'favicon'.'.'.$extension;
-                $file->move(public_path('images/site'), $fileName);
-                $settings->favicon = $fileName;
-            }
-            // dd($product);
-            // Save the product
-            $settings->save();
+            if($settingsCheck){
+                $settings = Settings::findOrFail(1); 
+                $settings->social_media = $request->input('socialArray');
+                $settings->mobile = $request->input('mobile');
+                $settings->email = $request->input('email');
+                $settings->address = $request->input('address');
+                $settings->meta_title = $request->input('metaTitle');
+                $settings->meta_keyword = $request->input('metaKey');
+                $settings->meta_description = $request->input('metaDesc');
+                $settings->short_description = $request->input('desc');
+                $settings->credits = $request->input('creadits'); 
+                if ($request->hasFile('headerLogo')) {
+                    $file = $request->file('headerLogo');
+                    $extension = $request->file('headerLogo')->extension();
+                    $fileName = 'header_logo'.'.'.$extension;
+                    $file->move(public_path('images/site'), $fileName);
+                    $settings->header_logo = $fileName;
+                }
+                if ($request->hasFile('footerLogo')) {
+                    $file = $request->file('footerLogo');
+                    $extension = $request->file('footerLogo')->extension();
+                    $fileName = 'footer_logo'.'.'.$extension;
+                    $file->move(public_path('images/site'), $fileName);
+                    $settings->footer_logo = $fileName;
+                }
+                if ($request->hasFile('favicon')) {
+                    $file = $request->file('favicon');
+                    $extension = $request->file('favicon')->extension();
+                    $fileName = 'favicon'.'.'.$extension;
+                    $file->move(public_path('images/site'), $fileName);
+                    $settings->favicon = $fileName;
+                }
+                // dd($product);
+                // Save the product
+                $settings->save();
 
-            return response()->json(['message' => 'Form submitted successfully','status' => true]);
+                return response()->json(['message' => 'Form submitted successfully','status' => true]);
+            }else{
+                $settings = new Settings; 
+                $settings->social_media = $request->input('socialArray');
+                $settings->mobile = $request->input('mobile');
+                $settings->email = $request->input('email');
+                $settings->address = $request->input('address');
+                $settings->meta_title = $request->input('metaTitle');
+                $settings->meta_keyword = $request->input('metaKey');
+                $settings->meta_description = $request->input('metaDesc');
+                $settings->short_description = $request->input('desc');
+                $settings->credits = $request->input('creadits'); 
+                if ($request->hasFile('headerLogo')) {
+                    $file = $request->file('headerLogo');
+                    $extension = $request->file('headerLogo')->extension();
+                    $fileName = 'header_logo'.'.'.$extension;
+                    $file->move(public_path('images/site'), $fileName);
+                    $settings->header_logo = $fileName;
+                }
+                if ($request->hasFile('footerLogo')) {
+                    $file = $request->file('footerLogo');
+                    $extension = $request->file('footerLogo')->extension();
+                    $fileName = 'footer_logo'.'.'.$extension;
+                    $file->move(public_path('images/site'), $fileName);
+                    $settings->footer_logo = $fileName;
+                }
+                if ($request->hasFile('favicon')) {
+                    $file = $request->file('favicon');
+                    $extension = $request->file('favicon')->extension();
+                    $fileName = 'favicon'.'.'.$extension;
+                    $file->move(public_path('images/site'), $fileName);
+                    $settings->favicon = $fileName;
+                }
+                // dd($product);
+                // Save the product
+                $settings->save();
+
+                return response()->json(['message' => 'Form submitted successfully','status' => true]);
+            }
 
         }catch (\Exception $e) {
             // An exception occurred while sending the mail

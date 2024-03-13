@@ -52,124 +52,50 @@
 
     <section id="featured-products" class="product-store padding-large">
       <div class="container">
+
         <div class="section-header d-flex flex-wrap align-items-center justify-content-between">
           <h2 class="section-title">Featured Products</h2>            
           <div class="btn-wrap">
             <a href="shop.html" class="d-flex align-items-center">View all products <i class="icon icon icon-arrow-io"></i></a>
           </div>            
         </div>
-        <div class="swiper product-swiper overflow-hidden">
+        <div class="swiper product-swiper overflow-hidden">          
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="product-item">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/product-item1.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
+            @foreach($products as $product)
+            @if($product->is_featured && $product->is_active)
+              <div class="swiper-slide">
+                <div class="product-item">
+                  <div class="image-holder">
+                    <img src="{{asset('images/products/' . $product->featured_img)}}" alt="Books" class="product-image">
+                  </div>
+                  <div class="cart-concern">
+                    <div class="cart-button d-flex justify-content-between align-items-center">
+                      <button type="button" onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
+                      </button>
+                      <a href="" class="view-btn tooltip
+                          d-flex">
+                        <i class="icon icon-screen-full"></i>
+                        <span class="tooltip-text">Quick view</span>
+                      </a>
+                      <!-- <button type="button" class="wishlist-btn">
+                        <i class="icon icon-heart"></i>
+                      </button> -->
+                    </div>
+                  </div>
+                  <div class="product-detail">
+                    <h3 class="product-title">
+                      <a href="single-product.html">{{$product->name}}</a>
+                    </h3>
+                    <span class="item-price text-primary"><strike><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$product->mrp}}</strike></span>
+                    <span class="item-price text-primary"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$product->selling}}/-</span>
                   </div>
                 </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Full sleeve cover shirt</a>
-                  </h3>
-                  <span class="item-price text-primary">$40.00</span>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="product-item">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/product-item2.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Volunteer Half blue</a>
-                  </h3>
-                  <span class="item-price text-primary">$38.00</span>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="product-item">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/product-item3.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Double yellow shirt</a>
-                  </h3>
-                  <span class="item-price text-primary">$44.00</span>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="product-item">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/product-item4.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Long belly grey pant</a>
-                  </h3>
-                  <span class="item-price text-primary">$33.00</span>
-                </div>
-              </div>
-            </div>
+              </div> 
+            @endif
+            @endforeach
+
           </div>
-        </div>
+        </div> 
         <div class="swiper-pagination"></div>
       </div>
     </section>
@@ -249,950 +175,86 @@
         <div class="section-header">
           <h2 class="section-title">Best selling products</h2>
         </div>
-        <ul class="tabs list-unstyled">
-          <li data-tab-target="#all" class="active tab">All</li>
-          <li data-tab-target="#shoes" class="tab">Shoes</li>
-          <li data-tab-target="#tshirts" class="tab">Tshirts</li>
-          <li data-tab-target="#pants" class="tab">Pants</li>
-          <li data-tab-target="#hoodie" class="tab">Hoodie</li>
-          <li data-tab-target="#outer" class="tab">Outer</li>
-          <li data-tab-target="#jackets" class="tab">Jackets</li>
-          <li data-tab-target="#accessories" class="tab">Accessories</li>
-        </ul>
+        @if(count($categories) > 0)
+          <ul class="tabs list-unstyled">
+            <li data-tab-target="#all" class="active tab">All</li>
+            @foreach($categories as $category)
+              <li data-tab-target="#{{$category->slug}}" class="tab">{{$category->name}}</li>
+            @endforeach
+          </ul>        
+        @endif
+        @if(count($products) > 0)
         <div class="tab-content">
           <div id="all" data-tab-content class="active">
             <div class="row d-flex flex-wrap">
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products1.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
+              @foreach($products as $product)
+                <div class="product-item col-lg-3 col-md-6 col-sm-6">
+                  <div class="image-holder">
+                    <img src="{{asset('images/products/' . $product->featured_img)}}" alt="Books" class="product-image">
+                  </div>
+                  <div class="cart-concern">
+                    <div class="cart-button d-flex justify-content-between align-items-center">
+                      <button type="button"  onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
+                      </button>
+                      <a href="" class="view-btn tooltip
+                          d-flex">
+                        <i class="icon icon-screen-full"></i>
+                        <span class="tooltip-text">Quick view</span>
+                      </a>
+                      <!-- <button type="button" class="wishlist-btn">
+                        <i class="icon icon-heart"></i>
+                      </button> -->
+                    </div>
+                  </div>
+                  <div class="product-detail">
+                    <h3 class="product-title">
+                      <a href="{{$product->slug}}">{{$product->name}}</a>
+                    </h3>
+                    <span class="item-price text-primary"><strike><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$product->mrp}}</strike></span>
+                    <span class="item-price text-primary"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$product->selling}}/-</span>
                   </div>
                 </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Half sleeve T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products2.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Stylish Grey T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$35.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products3.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Silk White Shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$35.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products4.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Grunge Hoodie</a>
-                  </h3>
-                  <div class="item-price text-primary">$30.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products5.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Full sleeve Jeans jacket</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products6.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Grey Check Coat</a>
-                  </h3>
-                  <div class="item-price text-primary">$30.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products7.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Long Sleeve T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products8.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Half Sleeve T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$35.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products13.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Orange white Nike</a>
-                  </h3>
-                  <div class="item-price text-primary">$55.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products14.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Running Shoe</a>
-                  </h3>
-                  <div class="item-price text-primary">$65.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products15.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Tennis Shoe</a>
-                  </h3>
-                  <div class="item-price text-primary">$80.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products16.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Nike Brand Shoe</a>
-                  </h3>
-                  <div class="item-price text-primary">$65.00</div>
-                </div>
-              </div>
+              @endforeach
+              
             </div>
           </div>
-          <div id="shoes" data-tab-content>
-            <div class="row d-flex flex-wrap">
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products13.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
+
+          @foreach($products as $product)
+            <div id="{{$product->category_slug}}" data-tab-content>
+              <div class="row d-flex flex-wrap">
+                <div class="product-item col-lg-3 col-md-6 col-sm-6">
+                  <div class="image-holder">
+                    <img src="{{asset('images/products/' . $product->featured_img)}}" alt="Books" class="product-image">
                   </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Orange white Nike</a>
-                  </h3>
-                  <div class="item-price text-primary">$55.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products14.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
+                  <div class="cart-concern">
+                    <div class="cart-button d-flex justify-content-between align-items-center">
+                      <button type="button"  onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
+                      </button>
+                      <a href="" class="view-btn tooltip
+                          d-flex">
+                        <i class="icon icon-screen-full"></i>
+                        <span class="tooltip-text">Quick view</span>
+                      </a>
+                      <!-- <button type="button" class="wishlist-btn">
+                        <i class="icon icon-heart"></i>
+                      </button> -->
+                    </div>
                   </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Running Shoe</a>
-                  </h3>
-                  <div class="item-price text-primary">$65.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products15.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
+                  <div class="product-detail">
+                    <h3 class="product-title">
+                      <a href="{{$product->slug}}">{{$product->name}}</a>
+                    </h3>
+                    <span class="item-price text-primary"><strike><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$product->mrp}}</strike></span>
+                    <span class="item-price text-primary"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$product->selling}}/-</span>
+                  
                   </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Tennis Shoe</a>
-                  </h3>
-                  <div class="item-price text-primary">$80.00</div>
-                </div>
+                </div> 
               </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products16.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Nike Brand Shoe</a>
-                  </h3>
-                  <div class="item-price text-primary">$65.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="tshirts" data-tab-content>
-            <div class="row d-flex flex-wrap">
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products3.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Silk White Shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$35.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products8.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">White Half T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$30.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products5.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Ghee Half T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products7.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Long Sleeve T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="pants" data-tab-content>
-            <div class="row d-flex flex-wrap">
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products1.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Half sleeve T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products4.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Grunge Hoodie</a>
-                  </h3>
-                  <div class="item-price text-primary">$30.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products7.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Long Sleeve T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products2.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Stylish Grey Pant</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="hoodie" data-tab-content>
-            <div class="row d-flex flex-wrap">
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products17.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">White Hoodie</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products4.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Navy Blue Hoodie</a>
-                  </h3>
-                  <div class="item-price text-primary">$45.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products18.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Dark Green Hoodie</a>
-                  </h3>
-                  <div class="item-price text-primary">$35.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="outer" data-tab-content>
-            <div class="row d-flex flex-wrap">
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products3.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Silk White Shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$ 35.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products4.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Grunge Hoodie</a>
-                  </h3>
-                  <div class="item-price text-primary">$ 30.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products6.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Grey Check Coat</a>
-                  </h3>
-                  <div class="item-price text-primary">$ 30.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products7.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Long Sleeve T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">$ 40.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="jackets" data-tab-content>
-            <div class="row d-flex flex-wrap">
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products5.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Full Sleeve Jeans Jacket</a>
-                  </h3>
-                  <div class="item-price text-primary">$40.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products2.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Stylish Grey Coat</a>
-                  </h3>
-                  <div class="item-price text-primary">$35.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products6.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Grey Check Coat</a>
-                  </h3>
-                  <div class="item-price text-primary">$35.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="accessories" data-tab-content>
-            <div class="row d-flex flex-wrap">
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products19.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Stylish Women Bag</a>
-                  </h3>
-                  <div class="item-price text-primary">$35.00</div>
-                </div>
-              </div>
-              <div class="product-item col-lg-3 col-md-6 col-sm-6">
-                <div class="image-holder">
-                  <img src="{{asset('assets/frontend/images/selling-products20.jpg')}}" alt="Books" class="product-image">
-                </div>
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Stylish Gadgets</a>
-                  </h3>
-                  <div class="item-price text-primary">$30.00</div>
-                </div>
-              </div>
-            </div>
-          </div>
+            </div>          
+          @endforeach
         </div>
+        @endif
+
       </div>
     </section>
 
@@ -1249,146 +311,31 @@
         <div class="swiper product-swiper flash-sales overflow-hidden">
 
           <div class="swiper-wrapper">
+
+          @foreach($products as $product)
+            @if($product->is_flash_sale && $product->is_active)
             <div class="swiper-slide">
               <div class="product-item">
-                <img src="{{asset('assets/frontend/images/selling-products9.jpg')}}" alt="Books" class="product-image">
+                    <img src="{{asset('images/products/' . $product->featured_img)}}" alt="Books" class="product-image">
                 <div class="cart-concern">
                   <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
+                    <button type="button"  onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
+                    </button>                  
                   </div>
                 </div>
-                <div class="discount">10% Off</div>
+                <div class="discount">{{number_format(($product->selling / $product->mrp) * 100, 2) }}% Off</div>
                 <div class="product-detail">
                   <h3 class="product-title">
-                    <a href="single-product.html">Full sleeve cover shirt</a>
+                      <a href="{{$product->slug}}">{{$product->name}}</a>
                   </h3>
                   <div class="item-price text-primary">
-                    <del class="prev-price">$50.00</del>$40.00
+                    <del class="prev-price"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$product->mrp}}</del><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$product->selling}}
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="product-item">
-                <img src="{{asset('assets/frontend/images/selling-products10.jpg')}}" alt="Books" class="product-image">
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="discount">10% Off</div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Long Sleeve T-shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">
-                    <del class="prev-price">$50.00</del>$40.00
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="product-item">
-                <img src="{{asset('assets/frontend/images/selling-products11.jpg')}}" alt="Books" class="product-image">
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="discount">10% Off</div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Grey Check Coat</a>
-                  </h3>
-                  <div class="item-price text-primary">
-                    <del class="prev-price">$55.00</del>$45.00
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="product-item">
-                <img src="{{asset('assets/frontend/images/selling-products12.jpg')}}" alt="Books" class="product-image">
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="discount">10% Off</div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Silk White Shirt</a>
-                  </h3>
-                  <div class="item-price text-primary">
-                    <del class="prev-price">$45.00</del>$35.00
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="product-item">
-                <img src="{{asset('assets/frontend/images/selling-products8.jpg')}}" alt="Books" class="product-image">
-                <div class="cart-concern">
-                  <div class="cart-button d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn-wrap cart-link d-flex align-items-center">add to cart <i class="icon icon-arrow-io"></i>
-                    </button>
-                    <button type="button" class="view-btn tooltip
-                        d-flex">
-                      <i class="icon icon-screen-full"></i>
-                      <span class="tooltip-text">Quick view</span>
-                    </button>
-                    <button type="button" class="wishlist-btn">
-                      <i class="icon icon-heart"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="discount">10% Off</div>
-                <div class="product-detail">
-                  <h3 class="product-title">
-                    <a href="single-product.html">Blue Jeans pant</a>
-                  </h3>
-                  <div class="item-price text-primary">
-                    <del class="prev-price">$45.00</del>$35.00
-                  </div>
-                </div>
-              </div>
-            </div>
+            </div> 
+            @endif
+          @endforeach
           </div>
           <div class="swiper-pagination"></div>
 
@@ -1599,5 +546,5 @@
       </div>
       <hr>
     </section>
- 
+
 @endsection

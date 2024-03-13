@@ -46,58 +46,58 @@
                     <div class="form-group">
                         <label for="pageTitle">Header Logo</label>  
                         <input type="file" class="form-control" id="headerLogo" name="headerLogo" value="" placeholder="Enter Page Title ...">
-                        <img id="headerLogoPreview" src="{{ $settings->header_logo !== 'default_logo.png' ? asset('images/site/' . $settings->header_logo) : asset('images/site/no-img.png') }}" alt="Image Preview" style="    display: block;        width: 100px;height: 100px; auto;margin-top: 10px;">
+                        <img id="headerLogoPreview" src="{{ $settings ? $settings->header_logo !== 'default_logo.png' ? asset('images/site/' . $settings->header_logo) : asset('images/site/no-img.png') : '' }}" alt="Image Preview" style="    display: block;        width: 100px;height: 100px; auto;margin-top: 10px;">
                     </div>
                     
                     <div class="form-group">
                         <label for="pageTitle">Footer Logo</label>
                         <input type="file" class="form-control" id="footerLogo" name="footerLogo" value="" placeholder="Enter Page Title ...">
-                        <img id="footerLogoPreview" src="{{ $settings->footer_logo !== 'default_footer_logo.png' ? asset('images/site/' . $settings->footer_logo) : asset('images/site/no-img.png') }}" alt="Image Preview" style="    display: block;        width: 100px;height: 100px; auto;margin-top: 10px;">
+                        <img id="footerLogoPreview" src="{{ $settings ? $settings->footer_logo !== 'default_footer_logo.png' ? asset('images/site/' . $settings->footer_logo) : asset('images/site/no-img.png') : '' }}" alt="Image Preview" style="    display: block;        width: 100px;height: 100px; auto;margin-top: 10px;">
                     </div>
                     <div class="form-group">
                         <label for="pageTitle">Favicon</label>
                         <input type="file" class="form-control" id="favicon" name="favicon" value="" placeholder="Enter Page Title ...">
-                        <img id="faviconPreview" src="{{ $settings->favicon !== 'default_favicon.png' ? asset('images/site/' . $settings->favicon) : asset('images/site/no-img.png') }}" alt="Image Preview" style="    display: block;        width: 100px;height: 100px; auto;margin-top: 10px;">
+                        <img id="faviconPreview" src="{{ $settings ? $settings->favicon !== 'default_favicon.png' ? asset('images/site/' . $settings->favicon) : asset('images/site/no-img.png') : '' }}" alt="Image Preview" style="    display: block;        width: 100px;height: 100px; auto;margin-top: 10px;">
                     </div>
                     
                     <div class="form-group">
                         <label for="pageDesctiption">Mobile</label>
                         <div style="width: 50%;">
-                            <input style="width:100%;" type="number" class="form-control" value="{{$settings->mobile}}" id="mobile" name="mobile" value="" placeholder="Enter Mobile ...">
+                            <input style="width:100%;" type="number" class="form-control" value="{{$settings ? $settings->mobile : ''}}" id="mobile" name="mobile" value="" placeholder="Enter Mobile ...">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="pageDesctiption">Email</label>
                         <div style="width: 50%;">
-                            <input style="width:100%;" type="email" class="form-control" value="{{$settings->email}}" id="email" name="email" value="" placeholder="Enter Email ...">
+                            <input style="width:100%;" type="email" class="form-control" value="{{$settings ?  $settings->email : ''}} " id="email" name="email" value="" placeholder="Enter Email ...">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="pageDesctiption">Address</label>
-                        <textarea class="form-control" id="address" name="address"> {{$settings->address}}</textarea>
+                        <textarea class="form-control" id="address" name="address"> {{$settings ? $settings->address : ''}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="pageDesctiption">Meta Title</label>
-                        <input type="text" class="form-control" id="metaTitle" value="{{$settings->meta_title}}" name="metaTitle" value="" placeholder="Enter Meta Title ...">
+                        <input type="text" class="form-control" id="metaTitle" value="{{$settings ?  $settings->meta_title : ''}} " name="metaTitle" value="" placeholder="Enter Meta Title ...">
                     </div>
                     <div class="form-group">
                         <label for="pageDesctiption">Meta Keyword</label>
                         <div style="width: 50%;">
                             <p style="color:red">For multiple keyword please add comma (,) and proceed</p>
-                            <input style="width:100%;" type="text" class="form-control" value="{{$settings->meta_keyword}}" id="metaKey" name="metaKey" value="" placeholder="Enter Meta Keys ... eg. key1,key2...">
+                            <input style="width:100%;" type="text" class="form-control" value="{{$settings ? $settings->meta_keyword : ''}} " id="metaKey" name="metaKey" value="" placeholder="Enter Meta Keys ... eg. key1,key2...">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="pageDesctiption">Short Desctiption</label>
-                        <textarea class="form-control" id="desc" name="desc">{{$settings->short_description}}</textarea>
+                        <textarea class="form-control" id="desc" name="desc">{{$settings ? $settings->short_description : ''}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="pageDesctiption">Meta Description</label>
-                        <textarea class="form-control" id="metaDesc" name="metaDesc">{{$settings->meta_description}}</textarea>
+                        <textarea class="form-control" id="metaDesc" name="metaDesc">{{$settings ? $settings->meta_description : ''}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="pageDesctiption">Credits</label>
-                        <input type="text" class="form-control" id="creadits" value="{{$settings->credits}}" name="creadits" value="" placeholder="Enter Credits ...">
+                        <input type="text" class="form-control" id="creadits" value="{{$settings ? $settings->credits : ''}}" name="creadits" value="" placeholder="Enter Credits ...">
                     </div>
                     <div class="form-group">
                         <label for="pageDesctiption">Social Media (<span id="totalSocial">1</span>)</label>
@@ -117,51 +117,78 @@
     var socialCount = 0;
     $(document).ready(function(){
         var socials = @json($settings);
-        socials =JSON.parse(socials.social_media)
-        console.log(Object.keys(socials).length,"socialssocialssocialssocials");
-        $("#totalSocial").html(Object.keys(socials).length);
         var socialContainer = document.getElementById('social');
-        for (var index = 0; index < Object.keys(socials).length; index++) {
-            var platform = Object.keys(socials)[index];
-            var url = socials[platform];
+        if(socials){
+            socials =JSON.parse(socials.social_media)
+            console.log(Object.keys(socials).length,"socialssocialssocialssocials");
+            $("#totalSocial").html(Object.keys(socials).length);
+            for (var index = 0; index < Object.keys(socials).length; index++) {
+                var platform = Object.keys(socials)[index];
+                var url = socials[platform];
+                var newSocialInput = document.createElement('div');
+                newSocialInput.id = "media";
+                newSocialInput.innerHTML = `
+                    <select class="form-control" style="width: 15%; line-height: 20px;" id="social_${index}">
+                    <option value="Facebook" ${platform == 'Facebook' ? 'selected' : ''}>Facebook</option>
+                    <option value="Youtube" ${platform == 'Youtube' ? 'selected' : ''}>Youtube</option>
+                    <option value="Instagram" ${platform == 'Instagram' ? 'selected' : ''}>Instagram</option>
+                    <option value="Whatsapp" ${platform == 'Whatsapp' ? 'selected' : ''}>Whatsapp</option>
+                    <option value="Snapchat" ${platform == 'Snapchat' ? 'selected' : ''}>Snapchat</option>
+                    <option value="Twitter" ${platform == 'Twitter' ? 'selected' : ''}>Twitter</option>
+                    </select>
+                    <input type="text" class="form-control" id="url_${index}" value="${url}" placeholder="Enter Url ...">
+                `;
+                if (index === 0) {
+                    // Add the "+" button only for the first social media input
+                    var addBtn = document.createElement('a');
+                    addBtn.id = "addSocialBtn";
+                    addBtn.classList.add('btn', 'btn-sm', 'btn-primary');
+                    addBtn.href = 'javascript:void(0);';
+                    addBtn.style = "font-size: 30px; border-radius: 5px; padding: 2px 10px 1px 10px;";
+                    addBtn.innerHTML = '+';
+                    newSocialInput.appendChild(addBtn);
+                } else if (index === Object.keys(socials).length - 1) {
+                    // Add remove button only for the last social media input
+                    var removeBtn = document.createElement('a');
+                    removeBtn.classList.add('btn', 'btn-sm', 'btn-danger', 'remove-btn');
+                    removeBtn.id = "removeSocialBtn";
+                    removeBtn.innerHTML = 'x';
+                    removeBtn.href = 'javascript:void(0);';
+                    removeBtn.onclick = function() {
+                        removeSocial(this);
+                    };
+                    newSocialInput.appendChild(removeBtn);
+                }
+                // Append the new social media input to the container
+                socialContainer.appendChild(newSocialInput);
+                socialCount++;
+                console.log(socialCount,"socialCountsocialCountsocialCountsocialCountsocialCount")
+            }
+        }else{
             var newSocialInput = document.createElement('div');
             newSocialInput.id = "media";
             newSocialInput.innerHTML = `
-                <select class="form-control" style="width: 15%; line-height: 20px;" id="social_${index}">
-                <option value="Facebook" ${platform == 'Facebook' ? 'selected' : ''}>Facebook</option>
-                <option value="Youtube" ${platform == 'Youtube' ? 'selected' : ''}>Youtube</option>
-                <option value="Instagram" ${platform == 'Instagram' ? 'selected' : ''}>Instagram</option>
-                <option value="Whatsapp" ${platform == 'Whatsapp' ? 'selected' : ''}>Whatsapp</option>
-                <option value="Snapchat" ${platform == 'Snapchat' ? 'selected' : ''}>Snapchat</option>
-                <option value="Twitter" ${platform == 'Twitter' ? 'selected' : ''}>Twitter</option>
+                <select class="form-control" style="width: 15%; line-height: 20px;" id="social_0">
+                <option value="Facebook" >Facebook</option>
+                <option value="Youtube"  >Youtube</option>
+                <option value="Instagram"  >Instagram</option>
+                <option value="Whatsapp"  >Whatsapp</option>
+                <option value="Snapchat"  >Snapchat</option>
+                <option value="Twitter"  >Twitter</option>
                 </select>
-                <input type="text" class="form-control" id="url_${index}" value="${url}" placeholder="Enter Url ...">
+                <input type="text" class="form-control" id="url_0" value="" placeholder="Enter Url ...">
             `;
-            if (index === 0) {
-                // Add the "+" button only for the first social media input
-                var addBtn = document.createElement('a');
-                addBtn.id = "addSocialBtn";
-                addBtn.classList.add('btn', 'btn-sm', 'btn-primary');
-                addBtn.href = 'javascript:void(0);';
-                addBtn.style = "font-size: 30px; border-radius: 5px; padding: 2px 10px 1px 10px;";
-                addBtn.innerHTML = '+';
-                newSocialInput.appendChild(addBtn);
-            } else if (index === Object.keys(socials).length - 1) {
-                // Add remove button only for the last social media input
-                var removeBtn = document.createElement('a');
-                removeBtn.classList.add('btn', 'btn-sm', 'btn-danger', 'remove-btn');
-                removeBtn.id = "removeSocialBtn";
-                removeBtn.innerHTML = 'x';
-                removeBtn.href = 'javascript:void(0);';
-                removeBtn.onclick = function() {
-                    removeSocial(this);
-                };
-                newSocialInput.appendChild(removeBtn);
-            }
-            // Append the new social media input to the container
+
+            var addBtn = document.createElement('a');
+            addBtn.id = "addSocialBtn";
+            addBtn.classList.add('btn', 'btn-sm', 'btn-primary');
+            addBtn.href = 'javascript:void(0);';
+            addBtn.style = "font-size: 30px; border-radius: 5px; padding: 2px 10px 1px 10px;";
+            addBtn.innerHTML = '+';
+            newSocialInput.appendChild(addBtn);
+
             socialContainer.appendChild(newSocialInput);
-            socialCount++;
-            console.log(socialCount,"socialCountsocialCountsocialCountsocialCountsocialCount")
+                socialCount++;
         }
 
         $('#updateSettingsForm').submit(function (e) { 
