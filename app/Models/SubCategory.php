@@ -13,7 +13,7 @@ class SubCategory extends Model
     
     protected $table = 'sub_category'; 
 
-    protected $fillable = ['title','category_id','created_by','status'];
+    protected $fillable = ['title','slug','category_id','created_by','status'];
 
     protected $dates = ['deleted_at']; 
 

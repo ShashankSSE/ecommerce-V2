@@ -115,6 +115,58 @@
                                 </select>
                             </div>       
                             <div class="form-group">
+                                <label for="productColor">Select Color</label>
+                                <select class="form-control js-example-basic-single" name="productColor" id="productColor" >
+                                    <option >Select Color</option>
+                                    @if(count($attributes) > 0)
+                                        @foreach($attributes as $color)
+                                            @if($color->label == 'color') 
+                                                <option value="{{ $color->name }}" {{ $color->name === $product->color ? 'selected' : '' }}>{{ $color->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>  
+                            <div class="form-group">
+                                <label for="productWeight">Select Weight</label>
+                                <select class="form-control js-example-basic-single" name="productWeight" id="productWeight" >
+                                    <option selected disabled>Select Weight</option>
+                                    @if(count($attributes) > 0)
+                                        @foreach($attributes as $weight)
+                                            @if($weight->label == 'weight')
+                                                <option value="{{$weight->name}}"  {{ $weight->name === $product->weight ? 'selected' : '' }}>{{$weight->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>     
+                            <div class="form-group">
+                                <label for="productSize">Select Size</label>
+                                <select class="form-control js-example-basic-single" name="productSize" id="productSize" >
+                                    <option selected disabled>Select Size</option>
+                                    @if(count($attributes) > 0)
+                                        @foreach($attributes as $size)
+                                            @if($size->label == 'size')
+                                                <option value="{{$size->name}}"  {{ $size->name === $product->size ? 'selected' : '' }}>{{$size->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>        
+                            <div class="form-group">
+                                <label for="productUnit">Select Unit</label>
+                                <select class="form-control js-example-basic-single" name="productUnit" id="productUnit" >
+                                    <option selected disabled>Select Unit</option>
+                                    @if(count($attributes) > 0)
+                                        @foreach($attributes as $unit)
+                                            @if($unit->label == 'unit')
+                                                <option value="{{$unit->name}}"  {{ $unit->name === $product->unit ? 'selected' : '' }}>{{$unit->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>     
+                            <div class="form-group">
                                 <label for="productMrp">Mrp</label>
                                 <input type="number" class="form-control" id="productMrp" name="productMrp" value="{{$product->mrp}}" placeholder="Enter Mrp..." required>
                             </div>   
@@ -256,6 +308,10 @@ $(document).ready(function(){
             option.selected = true;
             getSubCategory(category.id);
         }
+        selectElement.onchange = function() {
+            var selectedOption = this.options[this.selectedIndex];
+            getSubCategory(selectedOption.value);
+        };
         selectElement.appendChild(option);
     });
     console.log(products.category,'categorycategorycategorycategory');
@@ -291,7 +347,9 @@ $(document).ready(function(){
                     var weightSelling = $(`#weightSelling_${i}`).val();
                     var weightMrp = $(`#weightMrp_${i}`).val();
                     var weightAttribute = $(`#weightAttributeUnit_${i}`).val(); 
-                    weightArray.push({ weight: weightAttribute, selling: weightSelling, mrp: weightMrp });
+                    var image = document.getElementById(`weightImage_${i}`);
+                    var weightImage = image.files[0];
+                    weightArray.push({ weight: weightAttribute, selling: weightSelling, mrp: weightMrp, image: weightImage ? weightImage : null});
                 }
                 formData.append('weightArray',JSON.stringify(weightArray));
             }
@@ -390,37 +448,37 @@ $(document).ready(function(){
       }
   });
 
-  function getSubCategory(id) {
-    $.ajax({
-        url: '{{route("sub-category.get", ":id") }}'.replace(':id', id),
-        type: 'GET',
-        // contentType: false,
-        // processData: false,
-        success: function(response) {
-            console.log(response); // You can replace this with any other action
-            if (response.status) {
-                // $("#success").html(response.message);                                
-                console.log(response.subCategory,"responseresponseresponseresponse");
-                var subcategories = response.subCategory;
-                var selectSubElement = document.getElementById('subCategoryName');
-                selectSubElement.innerHTML = '';
-                subcategories.forEach(function(subcategory) {
-                    var option = document.createElement('option');
-                    option.value = subcategory.id; // Assuming 'id' is the property name for category ID
-                    option.textContent = subcategory.title; // Assuming 'name' is the property name for category name
-                    if (products.sub_category == subcategory.id) {
-                        option.selected = true;
-                    }
-                    selectSubElement.appendChild(option);
-                });
-            } else {
-                alert("Something went wrong!");
-            }
-        },
-        error: function(error) {
-            console.log(error);
-        },
-    });
+    function getSubCategory(id) { 
+        $.ajax({
+            url: '{{route("sub-category.get", ":id") }}'.replace(':id', id),
+            type: 'GET',
+            // contentType: false,
+            // processData: false,
+            success: function(response) {
+                console.log(response); // You can replace this with any other action
+                if (response.status) {
+                    // $("#success").html(response.message);                                
+                    console.log(response.subCategory,"responseresponseresponseresponse");
+                    var subcategories = response.subCategory;
+                    var selectSubElement = document.getElementById('subCategoryName');
+                    selectSubElement.innerHTML = '';
+                    subcategories.forEach(function(subcategory) {
+                        var option = document.createElement('option');
+                        option.value = subcategory.id; // Assuming 'id' is the property name for category ID
+                        option.textContent = subcategory.title; // Assuming 'name' is the property name for category name
+                        if (products.sub_category == subcategory.id) {
+                            option.selected = true;
+                        }
+                        selectSubElement.appendChild(option);
+                    });
+                } else {
+                    alert("Something went wrong!");
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            },
+        });
     }
 });
 

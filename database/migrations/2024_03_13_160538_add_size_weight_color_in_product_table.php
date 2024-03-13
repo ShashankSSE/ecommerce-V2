@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('size')->after('selling')->nullable();
             $table->string('weight')->after('size')->nullable();
             $table->string('color')->after('weight')->nullable();
+            $table->string('unit')->after('color')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->dropColumn('size');
             $table->dropColumn('weight');
             $table->dropColumn('color');
+            $table->dropColumn('unit');
         });
     }
 };
