@@ -21,10 +21,12 @@
                         <label for="password">Change Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Enter user Password ..." >
                     </div>
+                    @if(!$user->is_admin)
                     <div class="form-group">
                         <label for="is_admin">Is Admin?</label>
                         <input type="checkbox" id="is_admin" {{$user->is_admin ? "checked" : ''}} name="is_admin">
                     </div>
+                    @endif
                     <div style="color:red; padding-bottom:10px;" id="error"></div>
                     <button type="submit" class="btn btn-primary me-2">Submit</button>
                 </form>

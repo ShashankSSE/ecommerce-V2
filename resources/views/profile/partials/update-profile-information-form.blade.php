@@ -79,6 +79,9 @@
                         <p>{{$user->name}}</p>
                         <p>{{$user->email}}</p>
                     </div>
+                    @if($user->is_admin)
+                        <a href="{{route('dashboard')}}" class="btn btn-primary">Dashboard</a>
+                    @endif
                 </div>
             </div>
         </div>
