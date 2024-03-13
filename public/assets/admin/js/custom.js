@@ -72,7 +72,14 @@ function addMoreSizeButton(attributes){
   `;
   cardContainer.appendChild(sellingFormGroup);
 
-   
+  var imageFormGroup = document.createElement('div');
+  imageFormGroup.classList.add('form-group');
+  imageFormGroup.innerHTML = `
+      <label for="selling">Image</label>
+      <input type="file" class="form-control" id="sizeImage_${sizeDivCount}" name="sizeImage_${sizeDivCount}" placeholder="">
+      <img src="" id="sizePreviewImage_${sizeDivCount}" style="width:100px;">
+  `;
+  cardContainer.appendChild(imageFormGroup);
 
   
   var closeButton = document.createElement('div');
@@ -146,7 +153,14 @@ function addMoreWeightButton(attributes){
   `;
   cardContainer.appendChild(sellingFormGroup);
 
- 
+  var imageFormGroup = document.createElement('div');
+  imageFormGroup.classList.add('form-group');
+  imageFormGroup.innerHTML = `
+      <label for="selling">Image</label>
+      <input type="file" class="form-control" id="weightImage_${weightDivCount}" name="weightImage_${weightDivCount}" placeholder="">
+      <img src="" id="weightPreviewImage_${weightDivCount}" style="width:100px;">
+  `;
+  cardContainer.appendChild(imageFormGroup);
 
   var closeButton = document.createElement('div');
   closeButton.classList.add('closeAttribute');
@@ -305,6 +319,15 @@ sellingFormGroup.innerHTML = `
 `;
 cardContainer.appendChild(sellingFormGroup);
  
+var imageFormGroup = document.createElement('div');
+imageFormGroup.classList.add('form-group');
+imageFormGroup.innerHTML = `
+    <label for="selling">Image</label>
+    <input type="file" class="form-control" id="unitImage_${unitDivCount}" name="unitImage_${unitDivCount}" placeholder="">
+    <img src="" id="unitPreviewImage_${unitDivCount}" style="width:100px;">
+`;
+cardContainer.appendChild(imageFormGroup);
+
 var closeButton = document.createElement('div');
 closeButton.classList.add('closeAttribute');
 closeButton.id = 'unitCloseAttribute_' + unitDivCount;

@@ -212,7 +212,10 @@ $(document).ready(function(){
                 var sizeSelling = $(`#selling_${i}`).val();
                 var sizeMrp = $(`#mrp_${i}`).val();
                 var sizeAttribute = $(`#attributeUnit_${i}`).val(); 
-                sizeArray.push({ size: sizeAttribute, selling: sizeSelling, mrp: sizeMrp });
+                var image = document.getElementById(`sizeImage_${i}`);
+                var sizeImage = image.files[0];
+                sizeArray.push({ size: sizeAttribute, selling: sizeSelling, mrp: sizeMrp, image: sizeImage ? sizeImage : null});
+                
             }
             formData.append('sizeArray',JSON.stringify(sizeArray));
         }
@@ -222,7 +225,9 @@ $(document).ready(function(){
                 var weightSelling = $(`#weightSelling_${i}`).val();
                 var weightMrp = $(`#weightMrp_${i}`).val();
                 var weightAttribute = $(`#weightAttributeUnit_${i}`).val(); 
-                weightArray.push({ weight: weightAttribute, selling: weightSelling, mrp: weightMrp });
+                var image = document.getElementById(`weightImage_${i}`);
+                var weightImage = image.files[0];
+                weightArray.push({ weight: weightAttribute, selling: weightSelling, mrp: weightMrp, image: weightImage ? weightImage : null});
             }
             formData.append('weightArray',JSON.stringify(weightArray));
         }
@@ -232,7 +237,9 @@ $(document).ready(function(){
                 var colorSelling = $(`#colorSelling_${i}`).val();
                 var colorMrp = $(`#colorMrp_${i}`).val();
                 var colorAttribute = $(`#colorAttributeUnit_${i}`).val(); 
-                colorArray.push({ color: colorAttribute, selling: colorSelling, mrp: colorMrp });
+                var image = document.getElementById(`colorImage_${i}`);
+                var colorImage = image.files[0];
+                colorArray.push({ color: colorAttribute, selling: colorSelling, mrp: colorMrp, image: colorImage ? colorImage : null});
             }
             formData.append('colorArray',JSON.stringify(colorArray));
         }
@@ -242,7 +249,9 @@ $(document).ready(function(){
                 var unitSelling = $(`#unitSelling_${i}`).val();
                 var unitMrp = $(`#unitMrp_${i}`).val();
                 var unitAttribute = $(`#unitAttributeUnit_${i}`).val(); 
-                unitArray.push({ unit: unitAttribute, selling: unitSelling, mrp: unitMrp });
+                var image = document.getElementById(`unitImage_${i}`);
+                var unitImage = image.files[0];
+                unitArray.push({ unit: unitAttribute, selling: unitSelling, mrp: unitMrp, image: unitImage ? unitImage : null});
             }
             formData.append('unitArray',JSON.stringify(unitArray));
         }
@@ -251,7 +260,7 @@ $(document).ready(function(){
         var featuredImageInput = document.getElementById('featured_image');
         var featuredImageFile = featuredImageInput.files[0];
         formData.append('featured_image', featuredImageFile);
-
+        console.log(sizeArray,weightArray,unitArray,colorArray,"sdfasdfsdfasdsa");
         formData.append('_token', csrfToken);
         $("#error").hide();
         $.ajax({
