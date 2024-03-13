@@ -1,5 +1,5 @@
 @extends('components.app')
-@section('title', '99mentor | Contact Us')
+@section('title', 'Patakah | Contact Us')
 @section('meta_description', '')
 @section('meta_keywords','')
 @section('content')
@@ -50,7 +50,7 @@
                         </div>
                         <div class="d-flex info_single align-items-center">
                             <i class="fas fa-envelope-open-text"></i>
-                            <span>business@99mentor.com</span>
+                            <span>business@Patakah.com</span>
                         </div>
                         <div class="d-flex info_single align-items-center">
                             <i class="fas fa-map-marked-alt"></i>

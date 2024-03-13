@@ -1,5 +1,5 @@
 @extends('components.app')
-@section('title', '99mentor | About Us')
+@section('title', 'Patakah | About Us')
 @section('meta_description', '')
 @section('meta_keywords','')
 @section('content')
@@ -12,9 +12,9 @@
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="section-title position-relative mb-4 pb-2">
                             <h6 class="position-relative text-primary ps-4">About Us</h6>
-                            <h2 class="mt-2">Empowering Growth Through Innovation: <span style="color:#fc861b;">Unveiling the Journey 99Mentor</span></h2>
+                            <h2 class="mt-2">Empowering Growth Through Innovation: <span style="color:#fc861b;">Unveiling the Journey Patakah</span></h2>
                         </div>
-                        <p class="mb-4">99Mentor, a leading India- based startup with over a decade of experience in software development and AI-based programs. At 99Mentor, we are committed to delivering innovative and customized solutions that cater to the unique needs of businesses across different industries. With our team of experts and our commitment to excellence, we help businesses optimize operations, increase efficiency, and generate valuable insights.</p>
+                        <p class="mb-4">Patakah, a leading India- based startup with over a decade of experience in software development and AI-based programs. At Patakah, we are committed to delivering innovative and customized solutions that cater to the unique needs of businesses across different industries. With our team of experts and our commitment to excellence, we help businesses optimize operations, increase efficiency, and generate valuable insights.</p>
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Solution with lifetime validity</h6>
@@ -30,7 +30,7 @@
                             <!-- <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-facebook-f"></i></a>
                             <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-primary btn-square me-3" href=""><i class="fab fa-instagram"></i></a>-->
-                            <a class="btn btn-outline-primary btn-square" href="https://www.linkedin.com/company/99mentorr/"><i class="fab fa-linkedin-in"></i></a> 
+                            <a class="btn btn-outline-primary btn-square" href="https://www.linkedin.com/company/Patakahr/"><i class="fab fa-linkedin-in"></i></a> 
                         </div>
                     </div>
                     <div class="col-lg-6">

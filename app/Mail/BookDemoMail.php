@@ -28,7 +28,7 @@ class BookDemoMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Product Demo | 99mentor.com',
+            subject: 'Product Demo | Patakah.com',
         );
     }
 
@@ -45,7 +45,7 @@ class BookDemoMail extends Mailable
     public function build()
     {
         return $this->from(config('mail.from.address')) // Set the sender email address
-                    ->subject('Demo | 99mentor.com') // Set the email subject
+                    ->subject('Demo | Patakah.com') // Set the email subject
                     ->view('components.items.book-demo-mail', ['data' => $this->data]); // Create a view for the email content
     }
 

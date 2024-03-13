@@ -1,5 +1,5 @@
 @extends('components.app')
-@section('title', '99mentor | Services')
+@section('title', 'Patakah | Services')
 @section('meta_description', '')
 @section('meta_keywords','')
 @section('content')
@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-5 text">                                
-                                <p>With our LMS, educational institutes can improve student engagement, enhance learning outcomes, and optimize their operations. Join the future of education with 99Mentor.</p>
+                                <p>With our LMS, educational institutes can improve student engagement, enhance learning outcomes, and optimize their operations. Join the future of education with Patakah.</p>
                             </div>
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                                     <div class="accordion-item">
                                         <input type="checkbox" id="accordion18">
                                         <label for="accordion18" class="accordion-item-title"><span class="icon"></span>Product Development and Scalability</label>
-                                        <div class="accordion-item-desc">99Mentor play a crucial role in product development. We guide the development team, ensuring the creation of robust, scalable, and innovative products that meet your business needs and market demands.</div>
+                                        <div class="accordion-item-desc">Patakah play a crucial role in product development. We guide the development team, ensuring the creation of robust, scalable, and innovative products that meet your business needs and market demands.</div>
                                     </div>
                                 
                                     <div class="accordion-item">
