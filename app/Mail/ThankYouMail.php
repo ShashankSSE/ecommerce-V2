@@ -30,7 +30,7 @@ class ThankYouMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Thank you | 99mentor',
+            subject: 'Thank you | Patakah',
         );
     }
 
@@ -48,7 +48,7 @@ class ThankYouMail extends Mailable
     // public function build()
     // {
     //     return $this->from(config('mail.from.address')) // Set the sender email address
-    //                 ->subject('Thank you | 99mentor') // Set the email subject
+    //                 ->subject('Thank you | Patakah') // Set the email subject
     //                 ->view('components.items.thank-you-email', ['data' => $this->data]); // Create a view for the email content
     // }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>@yield('title', 'succu')</title>
+    <title>@yield('title', 'Patakah')</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -147,7 +147,7 @@
                     @if($settings->header_logo)
                       <img src="{{asset('images/site/' . $settings->header_logo)}}" alt="logo">
                     @else
-                      <h2>Succu</h2>
+                      <h2>Patakah</h2>
                     @endif
                   </a>
                 </div>
@@ -207,7 +207,7 @@
           <div class="row d-flex flex-wrap justify-content-between">
             <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="footer-menu">
-                <h5 class="widget-title">Succu</h5>
+                <h5 class="widget-title">Patakah</h5>
                 <ul class="menu-list list-unstyled">
                   <li class="menu-item">
                     <a href="">About us</a>

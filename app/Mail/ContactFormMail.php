@@ -27,7 +27,7 @@ class ContactFormMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Contact Form | 99mentor.com',
+            subject: 'Contact Form | Patakah.com',
         );
     }
 
@@ -44,7 +44,7 @@ class ContactFormMail extends Mailable
     public function build()
     {
         return $this->from(config('mail.from.address')) // Set the sender email address
-                    ->subject('Contact Form Submission | 99mentor.com') // Set the email subject
+                    ->subject('Contact Form Submission | Patakah.com') // Set the email subject
                     ->view('components.items.contact-form-email', ['data' => $this->data]); // Create a view for the email content
     }
 
