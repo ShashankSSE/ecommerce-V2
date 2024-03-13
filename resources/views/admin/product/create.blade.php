@@ -39,7 +39,7 @@
                             <textarea class="form-control" rows="4" style="    height: 75px;" id="desc" name="desc" ></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="attributeUnit">Add Attribute</label>
+                            <label for="attributeUnit">Add Product Varient</label>
                             <div class="attributeDiv">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item" role="presentation">
@@ -104,6 +104,58 @@
                                 <label for="categoryname">Product Sub Category</label>
                                 <select class="form-control js-example-basic-single" name="subCategoryName" id="subCategoryName" required>
                                     <option selected disabled>Select Sub Category</option>
+                                </select>
+                            </div>    
+                            <div class="form-group">
+                                <label for="productColor">Select Color</label>
+                                <select class="form-control js-example-basic-single" name="productColor" id="productColor" >
+                                    <option selected disabled>Select Color</option>
+                                    @if(count($attributes) > 0)
+                                        @foreach($attributes as $color)
+                                            @if($color->label == 'color')
+                                                <option value="{{$color->name}}">{{$color->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>  
+                            <div class="form-group">
+                                <label for="productWeight">Select Weight</label>
+                                <select class="form-control js-example-basic-single" name="productWeight" id="productWeight" >
+                                    <option selected disabled>Select Weight</option>
+                                    @if(count($attributes) > 0)
+                                        @foreach($attributes as $weight)
+                                            @if($weight->label == 'weight')
+                                                <option value="{{$weight->name}}">{{$weight->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>     
+                            <div class="form-group">
+                                <label for="productSize">Select Size</label>
+                                <select class="form-control js-example-basic-single" name="productSize" id="productSize" >
+                                    <option selected disabled>Select Size</option>
+                                    @if(count($attributes) > 0)
+                                        @foreach($attributes as $size)
+                                            @if($size->label == 'size')
+                                                <option value="{{$size->name}}">{{$size->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>        
+                            <div class="form-group">
+                                <label for="productUnit">Select Unit</label>
+                                <select class="form-control js-example-basic-single" name="productUnit" id="productUnit" >
+                                    <option selected disabled>Select Unit</option>
+                                    @if(count($attributes) > 0)
+                                        @foreach($attributes as $unit)
+                                            @if($unit->label == 'unit')
+                                                <option value="{{$unit->name}}">{{$unit->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>         
                             <div class="form-group">
@@ -324,6 +376,7 @@ $(document).ready(function(){
     
 
     function getSubCategory(id) {
+        alert(id);
         $.ajax({
             url: '{{route("sub-category.get", ":id") }}'.replace(':id', id),
             type: 'GET',

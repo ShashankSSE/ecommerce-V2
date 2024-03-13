@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function create(Request $request)
     {
         $attributes = Attribute::where('status', 'active')->get();
-        $categories = Category::get();
+        $categories = Category::where('status','=','active')->get();
         return view('admin.product.create',compact('categories','attributes'));
     }
     public function store(Request $request)
@@ -91,6 +91,10 @@ class ProductController extends Controller
             $product->short_Desc = $request->input('shortDesc');
             $product->mrp = $request->input('productMrp');
             $product->selling = $request->input('productSelling');
+            $product->size = $request->input('productSize');
+            $product->weight = $request->input('productWeight');
+            $product->color = $request->input('productColor');
+            $product->unit = $request->input('productUnit');
             $product->desc = $request->input('desc');
             $product->category = $request->input('categoryName');
             $product->sub_category = $request->input('subCategoryName');
@@ -139,34 +143,92 @@ class ProductController extends Controller
 
     public function update(Request $request){
         $product = Product::findOrFail($request->productId);        
+
+                
         $jsonColorArray = json_decode($request->input('colorArray'));
-        if($jsonColorArray){
-            foreach($jsonColorArray as $key=>$item){
-                if ($request->file('colorImage_'.($key+1))) {
-                    $file = $request->file('colorImage_'.($key+1));
-                    $fileName = time() . '_' . $file->getClientOriginalName();
-                    $file->move(public_path('images/products'), $fileName);
-                    $item->image = asset('images/products') .'/'. $fileName;
-                }elseif($item->image == null){
-                    $item->image = json_decode($product->colorArray)[$key]->image;
+        if ($jsonColorArray) {
+            foreach ($jsonColorArray as $key => $item) {
+                if (isset($item->image)) {
+                    // Handle file upload if a new image is provided
+                    if ($request->file('colorArray' . ($key + 1))) {
+                        $file = $request->file('colorArray' . ($key + 1));
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->move(public_path('images/products'), $fileName);
+                        $item->image = asset('images/products') . '/' . $fileName;
+                    }
+                } elseif ($item->image === null) {
+                    // If no new image provided, retain the existing image URL
+                    $existingImage = json_decode($product->colorArray)[$key]->image;
+                    if ($existingImage) {
+                        $item->image = $existingImage;
+                    }
                 }
             }
         }
 
         $jsonSizeArray = json_decode($request->input('sizeArray'));
-        if($jsonSizeArray){
-            foreach($jsonSizeArray as $key=>$item){
-                if ($request->file('sizeArray'.($key+1))) {
-                    $file = $request->file('sizeArray'.($key+1));
-                    $fileName = time() . '_' . $file->getClientOriginalName();
-                    $file->move(public_path('images/products'), $fileName);
-                    $item->image = asset('images/products') .'/'. $fileName;
-                }elseif($item->image == null){
-                    $item->image = json_decode($product->colorArray)[$key]->image;
+        if ($jsonSizeArray) {
+            foreach ($jsonSizeArray as $key => $item) {
+                if (isset($item->image)) {
+                    // Handle file upload if a new image is provided
+                    if ($request->file('sizeImage_' . ($key + 1))) {
+                        $file = $request->file('sizeImage_' . ($key + 1));
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->move(public_path('images/products'), $fileName);
+                        $item->image = asset('images/products') . '/' . $fileName;
+                    }
+                } elseif ($item->image === null) {
+                    // If no new image provided, retain the existing image URL 
+                    $existingImage = json_decode($product->sizeArray)[$key]->image;
+                    if ($existingImage) {
+                        $item->image = $existingImage;
+                    }
+                }
+            }
+        }
+        // dd(json_encode($jsonSizeArray));
+        
+        $jsonWeightArray = json_decode($request->input('weightArray'));
+        if ($jsonWeightArray) {
+            foreach ($jsonWeightArray as $key => $item) {
+                if (isset($item->image)) {
+                    // Handle file upload if a new image is provided
+                    if ($request->file('weightImage_' . ($key + 1))) {
+                        $file = $request->file('weightImage_' . ($key + 1));
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->move(public_path('images/products'), $fileName);
+                        $item->image = asset('images/products') . '/' . $fileName;
+                    }
+                } elseif ($item->image === null) {
+                    // If no new image provided, retain the existing image URL
+                    $existingImage = json_decode($product->weightArray)[$key]->image;
+                    if ($existingImage) {
+                        $item->image = $existingImage;
+                    }
                 }
             }
         }
         
+        $jsonUnitArray = json_decode($request->input('unitArray'));
+        if ($jsonUnitArray) {
+            foreach ($jsonUnitArray as $key => $item) {
+                if (isset($item->image)) {
+                    // Handle file upload if a new image is provided
+                    if ($request->file('unitArray' . ($key + 1))) {
+                        $file = $request->file('unitArray' . ($key + 1));
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->move(public_path('images/products'), $fileName);
+                        $item->image = asset('images/products') . '/' . $fileName;
+                    }
+                } elseif ($item->image === null) {
+                    // If no new image provided, retain the existing image URL
+                    $existingImage = json_decode($product->unitArray)[$key]->image;
+                    if ($existingImage) {
+                        $item->image = $existingImage;
+                    }
+                }
+            }
+        }
         try {
             // Set attributes 
             $product->name = $request->input('productName');
@@ -174,6 +236,10 @@ class ProductController extends Controller
             $product->short_Desc = $request->input('shortDesc');
             $product->mrp = $request->input('productMrp');
             $product->selling = $request->input('productSelling');
+            $product->size = $request->input('productSize');
+            $product->weight = $request->input('productWeight');
+            $product->color = $request->input('productColor');
+            $product->unit = $request->input('productUnit');
             $product->desc = $request->input('desc');
             $product->category = $request->input('categoryName');
             $product->sub_category = $request->input('subCategoryName');
@@ -182,10 +248,10 @@ class ProductController extends Controller
             $product->is_featured = $request->has('is_featured');
             $product->is_flash_sale = $request->has('is_flash_sale');
             $product->is_active = $request->has('is_active');
-            $product->sizeArray = $request->input('sizeArray');
+            $product->sizeArray = json_encode($jsonSizeArray);
             $product->colorArray = json_encode($jsonColorArray);
-            $product->unitArray = $request->input('unitArray');
-            $product->weightArray = $request->input('weightArray');
+            $product->unitArray = json_encode($jsonUnitArray);
+            $product->weightArray = json_encode($jsonWeightArray);
             $product->created_by = Auth::user()->name;
             
             // Handle file upload (featured image)
