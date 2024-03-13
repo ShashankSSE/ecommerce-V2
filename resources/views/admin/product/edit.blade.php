@@ -188,6 +188,8 @@ $(document).ready(function(){
             mrp.val(sizeArray[i-1].mrp);
             var selling = $(`#selling_${i}`);
             selling.val(sizeArray[i-1].selling);
+            var image = $(`#sizePreviewImage_${i}`);
+            image.attr('src', sizeArray[i - 1].image);
 
         }        
     }
@@ -203,6 +205,8 @@ $(document).ready(function(){
             mrp.val(weightArray[i-1].mrp);
             var selling = $(`#weightSelling_${i}`);
             selling.val(weightArray[i-1].selling);
+            var image = $(`#weightPreviewImage_${i}`);
+            image.attr('src', weightArray[i - 1].image);
         }        
     }
 
@@ -232,6 +236,8 @@ $(document).ready(function(){
             mrp.val(unitArray[i-1].mrp);
             var selling = $(`#unitSelling_${i}`);
             selling.val(unitArray[i-1].selling);
+            var image = $(`#unitPreviewImage_${i}`);
+            image.attr('src', unitArray[i - 1].image);
 
         }        
     }
@@ -273,7 +279,9 @@ $(document).ready(function(){
                     var sizeSelling = $(`#selling_${i}`).val();
                     var sizeMrp = $(`#mrp_${i}`).val();
                     var sizeAttribute = $(`#attributeUnit_${i}`).val(); 
-                    sizeArray.push({ size: sizeAttribute, selling: sizeSelling, mrp: sizeMrp });
+                    var image = document.getElementById(`sizeImage_${i}`);
+                    var sizeImage = image.files[0];
+                    sizeArray.push({ size: sizeAttribute, selling: sizeSelling, mrp: sizeMrp, image: sizeImage ? sizeImage : null});
                 }
                 formData.append('sizeArray',JSON.stringify(sizeArray));
             }

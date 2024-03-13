@@ -42,12 +42,47 @@ class ProductController extends Controller
                 $slug = $proposedSlug;
             }
             $jsonColorArray = json_decode($request->input('colorArray'));
-            foreach($jsonColorArray as $key=>$item){
-                if ($request->file('colorImage_'.($key+1))) {
-                    $file = $request->file('colorImage_'.($key+1));
-                    $fileName = time() . '_' . $file->getClientOriginalName();
-                    $file->move(public_path('images/products'), $fileName);
-                    $item->image = asset('images/products') .'/'. $fileName;
+            if($jsonColorArray){
+                foreach($jsonColorArray as $key=>$item){
+                    if ($request->file('colorImage_'.($key+1))) {
+                        $file = $request->file('colorImage_'.($key+1));
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->move(public_path('images/products'), $fileName);
+                        $item->image = asset('images/products') .'/'. $fileName;
+                    }
+                }
+            }
+            $jsonSizeArray = json_decode($request->input('sizeArray'));
+            if($jsonSizeArray){
+                foreach($jsonSizeArray as $key=>$item){
+                    if ($request->file('sizeImage_'.($key+1))) {
+                        $file = $request->file('sizeImage_'.($key+1));
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->move(public_path('images/products'), $fileName);
+                        $item->image = asset('images/products') .'/'. $fileName;
+                    }
+                }
+            }
+            $jsonWeightArray = json_decode($request->input('weightArray'));
+            if($jsonWeightArray){
+                foreach($jsonWeightArray as $key=>$item){
+                    if ($request->file('weightImage_'.($key+1))) {
+                        $file = $request->file('weightImage_'.($key+1));
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->move(public_path('images/products'), $fileName);
+                        $item->image = asset('images/products') .'/'. $fileName;
+                    }
+                }
+            }
+            $jsonUnitArray = json_decode($request->input('unitArray'));
+            if($jsonUnitArray){
+                foreach($jsonUnitArray as $key=>$item){
+                    if ($request->file('unitImage_'.($key+1))) {
+                        $file = $request->file('unitImage_'.($key+1));
+                        $fileName = time() . '_' . $file->getClientOriginalName();
+                        $file->move(public_path('images/products'), $fileName);
+                        $item->image = asset('images/products') .'/'. $fileName;
+                    }
                 }
             }
             // Set attributes
@@ -64,10 +99,10 @@ class ProductController extends Controller
             $product->is_featured = $request->has('is_featured');
             $product->is_flash_sale = $request->has('is_flash_sale');
             $product->is_active = $request->has('is_active');
-            $product->sizeArray = $request->input('sizeArray');
+            $product->sizeArray = json_encode($jsonSizeArray);
             $product->colorArray = json_encode($jsonColorArray);
-            $product->unitArray = $request->input('unitArray');
-            $product->weightArray = $request->input('weightArray');
+            $product->unitArray = json_encode($jsonUnitArray);
+            $product->weightArray = json_encode($jsonWeightArray);
             $product->created_by = Auth::user()->name;
             
             // Handle file upload (featured image)
@@ -109,6 +144,20 @@ class ProductController extends Controller
             foreach($jsonColorArray as $key=>$item){
                 if ($request->file('colorImage_'.($key+1))) {
                     $file = $request->file('colorImage_'.($key+1));
+                    $fileName = time() . '_' . $file->getClientOriginalName();
+                    $file->move(public_path('images/products'), $fileName);
+                    $item->image = asset('images/products') .'/'. $fileName;
+                }elseif($item->image == null){
+                    $item->image = json_decode($product->colorArray)[$key]->image;
+                }
+            }
+        }
+
+        $jsonSizeArray = json_decode($request->input('sizeArray'));
+        if($jsonSizeArray){
+            foreach($jsonSizeArray as $key=>$item){
+                if ($request->file('sizeArray'.($key+1))) {
+                    $file = $request->file('sizeArray'.($key+1));
                     $fileName = time() . '_' . $file->getClientOriginalName();
                     $file->move(public_path('images/products'), $fileName);
                     $item->image = asset('images/products') .'/'. $fileName;
