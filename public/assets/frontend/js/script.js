@@ -228,3 +228,48 @@
   });
 })(jQuery);
 
+// Get the current URL
+const currentUrl = window.location.href;
+const searchParams = new URLSearchParams(currentUrl);
+const hasQueryString = true;
+ 
+if(hasQueryString){
+  const parts = currentUrl.split("?");
+  var key = parts[1].split('=')[1];
+    // Get all elements with the class 'post-content' 
+      // Loop through each post content element
+    // Get the element with the class 'post-content-attribute'
+    const postContentAttribute = document.querySelector('.post-content-attribute');
+
+    // Get all child elements of the post content attribute element
+    const children = postContentAttribute.children;
+
+    // Loop through each child element
+    for (let i = 0; i < children.length; i++) {
+        const child = children[i];
+        // Remove the 'attribute-btn-inActive' class from the current child element
+        child.classList.add('attribute-btn-inActive');
+    }
+      document.getElementById(`attribute_${key}`).classList.remove('attribute-btn-inActive');
+      document.getElementById('selected_size').innerHTML = key;
+}
+
+// Get the input element
+var inputElement = document.getElementById('productQty');
+
+// Add input event listener to the input field
+inputElement.addEventListener('input', function(event) {
+    var inputValue = parseInt(event.target.value);
+    
+    // Check if the input value is less than 1
+    if (inputValue < 1) {
+        event.target.value = 1;
+    }
+    
+    // Check if the input value is greater than 5
+    if (inputValue > 5) {
+        event.target.value = 5;
+    }
+});
+
+

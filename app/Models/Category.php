@@ -23,4 +23,17 @@ class Category extends Model
     {
         return $this->hasMany(SubCategory::class, 'category_id');
     }
+
+    public static function getCategory($categoryId)
+    {
+        $category = Category::find($categoryId);
+        if ($category) {
+            return [ 
+                'name' => $category->name,
+            ];
+        } else {
+            return null; // Category not found
+        }
+    }
+
 }

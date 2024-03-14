@@ -330,15 +330,28 @@
     </div>
     <script>
       function addToCart(id){
+        var mrp = $('#mrp').text(); // Assuming the price is in a text format
+        var price = $('#price').text(); // Assuming the price is in a text format 
+        var size = $('#selected_size').text();
+        var image = $('#imageUrl').attr('src'); 
         $.ajax({
             url: "{{route('cart.addToCart', ['id' => ':id'])}}".replace(':id', id),
             type: 'GET', // HTTP method
+            data: {
+                price: price,
+                mrp: mrp ,
+                size: size ,
+                image: image , 
+            },
             success: function(response) {
                 // Handle the success response
                 Swal.fire({
                       icon: 'success',
                       title: 'Congratulations...',
                       text: 'You have successfully added the product to your cart.'
+                  }).then(() => {
+                      // Redirect to the login page if necessary
+                      window.location.href = "{{ route('index') }}";
                   });
             },
             error: function(xhr, status, error) {
