@@ -40,6 +40,10 @@ Route::prefix('store/sub-category')->group(function () {
 Route::prefix('cart')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');    
     Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.addToCart');    
+    Route::get('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');    
+});
+Route::prefix('store/product')->group(function () {
+    Route::get('/{slug}', [HomeController::class, 'singleProduct'])->name('frontend.singleProduct.index');    
 });
 // Route::get('/dashboard', function () {
 //     if(auth()->user()->is_admin){

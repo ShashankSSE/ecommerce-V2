@@ -41,7 +41,7 @@
 .store-item .image-store {
     width: 100%;
     height: 170px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
 }
 
@@ -112,44 +112,38 @@
                         <div class="col-lg-8 col-md-7">
                             <div class="card">
                                 <h4><span>Cart (</span><span>{{count($cartItems)}}</span><span> items)</span> </h4>
-                                @foreach($cartItems as $item)
+                                @foreach($cartItems as $item)                                
                                     <div class="mt-2 store-item bottom-line pb-3">
                                         <div class="row">
                                             <div class="col-lg-3">
                                                 <img class="image-store"
-                                                    src="https://images.unsplash.com/photo-1617171594202-100a53bdfe04?crop=entropy&amp;cs=srgb&amp;fm=jpg&amp;ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTA4NjE0MjN8&amp;ixlib=rb-4.0.3&amp;q=85"
+                                                    src="{{$item->image}}"
                                                     alt="Blue Hoodie">
-                                            </div>
+                                            </div> 
                                             <div class="col-lg-9">
                                                 <div class="mt-3 mt-lg-0 d-flex align-items-center justify-content-between">
-                                                    <h4>Blue Hoodie</h4>
+                                                    <h4>{{$item->product->name}}</h4>
                                                     <div>
                                                         <div class="btn-quantity-container d-flex align-items-center justify-content-center" style="gap:.5rem;">
-                                                            <button type="button" class="btn-quantity btn btn-default">−</button>
+                                                            <button type="button" class="btn-quantity btn btn-default decrement" data-price="{{$item->price}}">−</button>
                                                             <span class="p-quantiry">1</span>
-                                                            <button type="button" class="btn-quantity btn btn-default">+</button>
+                                                            <button type="button" class="btn-quantity btn btn-default increment" data-price="{{$item->price}}">+</button>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> 
                                                 <div class="list-store d-flex align-items-center justify-content-between">
-                                                    <p>Hodie-B</p>
-                                                    <p class="p-note"></span></p>
-                                                </div>
-                                                <div class="list-store d-flex align-items-center justify-content-between">
-                                                    <p><span>Color : </span><span>Blue</span></p>
-                                                </div>
-                                                <div class="list-store d-flex align-items-center justify-content-between">
-                                                    <p><span>Size : </span><span>M</span></p>
+                                                    <p><span>Size : </span><span>{{$item->size}}</span></p>
                                                 </div>
                                                 <div class="list-store d-flex align-items-center justify-content-between">
                                                     <div class="d-flex gap-2">
-                                                        <button type="button" class="btn-list btn btn-xs btn-default">
+                                                        <a href="{{route('cart.removeFromCart', ['id' => $item->id])}}" class="btn-list btn btn-xs btn-default">
                                                             <i class="fa fa-trash"></i>
                                                             <span> Remove Item</span>
-                                                        </button> 
+                                                        </a> 
                                                     </div>
                                                     <div class="d-flex">
-                                                        <h5>$17.99</h5>
+                                                        <h5><strike style="    display: flex;color: #ccc;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#ccc" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg>{{$item->mrp}}</strike></h5>
+                                                        <h5 style="    display: flex;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#000" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg><span id="price">{{$item->price}}</span>/-</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,22 +162,26 @@
                                             <div class="row">
                                                 <div class="">
                                                     <div class="list-store d-flex align-items-center justify-content-between">
-                                                        <p>Temporary amount</p>
-                                                        <p>$0.00</p>
+                                                        <p >Temporary amount</p>
+                                                        <div class="d-flex align-items-center">
+                                                            <span style="margin-top:-10px;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20"  viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#ccc" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg></span>
+                                                            <p id="temporaryAmount">$0.00</p>
+                                                        </div>
                                                     </div>
                                                     <div class="list-store d-flex align-items-center justify-content-between">
-                                                        <p>Shipping</p>
-                                                        <p>Gratis</p>
+                                                        <p>Delivery Fee</p>
+                                                        <p></p>
                                                     </div>
                                                     <div class="bottom-line"></div>
                                                 </div>
                                             </div>
                                             <div class="mt-2 row">
                                                 <div class="col-6">
-                                                    <p class="p-total-label">The total amount of (Including VAT)</p>
+                                                    <p class="p-total-label">The total amount of (Including GST 18%)</p>
                                                 </div>
-                                                <div class="col-6">
-                                                    <p class="p-total">$0.00</p>
+                                                <div class="col-6 d-flex align-items-center justify-content-end">
+                                                <span style="margin-top:-10px;"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 224 448"><title></title><g id="icomoon-ignore"></g><path fill="#ccc" d="M224.5 117.5v25.5c0 4.5-3.5 8-8 8h-42c-7.75 48-44.5 79.25-101.25 86 37.25 39.75 77 87.75 114.75 134 2 2.25 2.5 5.75 1 8.5-1.25 2.75-4 4.5-7.25 4.5h-48.75c-2.5 0-4.75-1-6.25-3-40.25-48.25-77.25-92.5-124.5-142.75-1.5-1.5-2.25-3.5-2.25-5.5v-31.75c0-4.25 3.5-8 8-8h28c44 0 71.5-14.75 78.75-42h-106.75c-4.5 0-8-3.5-8-8v-25.5c0-4.5 3.5-8 8-8h103.25c-9.5-18.75-32-28.25-67-28.25h-36.25c-4.5 0-8-3.75-8-8v-33.25c0-4.5 3.5-8 8-8h208c4.5 0 8 3.5 8 8v25.5c0 4.5-3.5 8-8 8h-58.25c8 10.25 13.25 22.25 16 36h42.75c4.5 0 8 3.5 8 8z"></path></svg></span>
+                                                    <p class="p-total"></p>
                                                 </div>
                                             </div>
                                             <div class="mt-1 row">
@@ -196,14 +194,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="" >
+                                <!-- <div class="" >
                                     <div class="card" >
                                         <div class="d-flex align-items-center justify-content-between" >
                                             <p >Add a discount code (optional)</p>
                                             <p ><i class="fa fa-chevron-down"></i></p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -232,5 +230,42 @@
     </div>
  
 </div>
+<script>
+    $(document).ready(function(){
+        let sum = 0;
+        document.querySelectorAll("#price").forEach(function(element){
+            sum = sum + parseFloat(element.textContent);
+        });
+        $("#temporaryAmount").text(sum);
+        var withGst = sum * (18/100);
+        var totalWithGst = withGst + sum;
+        $(".p-total").text(totalWithGst);
+        document.querySelectorAll('.btn-quantity').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var quantityElement = this.parentElement.querySelector('.p-quantiry');
+                var quantity = parseInt(quantityElement.innerText);
+        
+                if (this.classList.contains('increment') && quantity < 5) {
+                    quantityElement.innerText = (quantity + 1).toString();
+                    var price = parseInt($(this).data('price'));
+                    sum = sum + price;
+                    $("#temporaryAmount").text(sum);
+                    var withGst = sum * (18/100);
+                    var totalWithGst = withGst + sum;
+                    console.log(withGst);
+                    $(".p-total").text(totalWithGst);
+                } else if (this.classList.contains('decrement') && quantity > 1) {
+                    quantityElement.innerText = (quantity - 1).toString();
+                    var price = parseInt($(this).data('price'));
+                    sum = sum - price;
+                    $("#temporaryAmount").text(sum);
+                    var withGst = sum * (18/100);
+                    var totalWithGst = withGst + sum;
+                    $(".p-total").text(totalWithGst);
+                }
+            });
+        });
 
+    });
+</script>
 @endsection

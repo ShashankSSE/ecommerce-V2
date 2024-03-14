@@ -1091,7 +1091,7 @@ h2.product-title{
   padding-bottom: 4em;
 }
 .padding-large {
-  padding-top: 7em;
+  /* padding-top: 7em; */
   padding-bottom: 7em;
 }
 .padding-xlarge {
@@ -2722,6 +2722,23 @@ a.blog-categories:hover{
 }
 .main-content .feature-image{
     margin-bottom: 20px;
+    margin-top: 20px;
+}
+.post-content-attribute  input[type='number'] {
+    margin: 0!important;
+    text-align: center!important;
+}
+.attribute-btn,.attribute-text{
+  margin:0px!important;
+} 
+.attribute-btn-inActive{
+  border-color: black!important;
+  background: white!important;
+  color: black!important;
+}
+.g-10{
+  gap: 10px;
+  margin-top: 15px;
 }
 .main-content .post-tags li{
     margin-right: 10px;

@@ -6,15 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\SubCategory;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Cart;
 
 class HomeController extends Controller
 {
     public function index(){ 
-        $products = Product::join('categories', 'products.category', '=', 'categories.id')
-                    ->join('sub_category', 'products.sub_category', '=', 'sub_category.id')
-                    ->select('products.id','products.name','products.slug','products.mrp','products.selling','categories.name as category','categories.slug as category_slug','products.featured_img','products.is_featured','products.is_flash_sale','products.is_active','products.created_at','products.created_by','sub_category.title as subcategory')
-                    ->get();
-
+        $products = Product::leftJoin('cart', function($join) {
+            $join->on('products.id', '=', 'cart.product_id');
+        })
+        ->join('categories', 'products.category', '=', 'categories.id')
+        ->join('sub_category', 'products.sub_category', '=', 'sub_category.id')
+        ->select('products.id', 'products.name', 'products.slug', 'products.mrp', 'products.selling', 'categories.name as category', 'categories.slug as category_slug', 'products.featured_img', 'products.is_featured', 'products.is_flash_sale', 'products.is_active', 'products.created_at', 'products.created_by', 'sub_category.title as subcategory', 'cart.id as cartId')
+        ->get();
+        
         return view('pages.index',compact('products'));
     }
 
@@ -65,5 +69,39 @@ class HomeController extends Controller
         return view('pages.sub-category',compact('products','slug'));
     }
 
+    public function singleProduct(Request $request,$slug){
+        $product = Product::join('categories', 'products.category', '=', 'categories.id')
+                ->join('sub_category', 'products.sub_category', '=', 'sub_category.id')
+                ->select('products.id', 'products.name', 'products.slug', 'products.mrp', 'products.selling', 'products.featured_img','products.size','products.weight','products.color','products.unit','products.sizeArray','products.weightArray','products.unitArray', 'products.colorArray', 'products.meta_title', 'products.meta_desc','products.short_Desc','products.desc', 'products.is_featured', 'products.is_flash_sale', 'products.is_active', 'products.created_at', 'products.created_by', 'sub_category.title as subcategory','categories.name as category', 'categories.slug as category_slug', )
+                ->where('products.slug', '=', $slug)
+                ->where('products.is_active', '=', 1)
+                ->first();
+        $is_availabe_in_cart = 0;
+        if(auth()->user()){
+            $is_availabe_in_cart = Cart::where('user_id','=',auth()->user()->id)->where('size',$request->size ? $request->size : $product->size)->exists();
+        }
+        
+        if($is_availabe_in_cart){
+            $is_availabe_in_cart = 1;
+        }
+        if(isset($request->size)){
+            $sizeVarient = json_decode($product->sizeArray);
+            if(count($sizeVarient) > 0){
+                foreach($sizeVarient as $productSize){
+                    if($productSize->size == $request->size){
+                        // $product->size = $productSize->size;
+                        $product->mrp = $productSize->mrp;
+                        $product->selling = $productSize->selling;
+                        if($productSize->image){
+                            $product->featured_img = basename($productSize->image);
+                        }                        
+                    }
+                }
+            }
+        }
+        return view('pages.single-product',compact('product','is_availabe_in_cart'));
+ 
+
+    }
 
 }
