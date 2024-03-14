@@ -70,10 +70,10 @@
                   </div>
                   <div class="cart-concern">
                     <div class="cart-button d-flex justify-content-between align-items-center">
-                      @if($product->cartId)
+                      @if(in_array($product->id, $cartItem))
                         <a href="{{route('cart.index')}}"  class="btn-wrap cart-link d-flex align-items-center">Go to cart <i class="icon icon-arrow-io"></i></a>
-                        @else
-                        <button type="button"  onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">Add to cart <i class="icon icon-arrow-io"></i></button>
+                          @else
+                          <button type="button"  onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">Add to cart <i class="icon icon-arrow-io"></i></button>
                       @endif
                       <a href="{{ route('frontend.singleProduct.index', ['slug' => $product->slug]) }}" class="view-btn tooltip d-flex">
                           
@@ -196,7 +196,7 @@
                     <img src="{{asset('images/products/' . $product->featured_img)}}" alt="Books" class="product-image">
                   </div>
                   <div class="cart-concern">
-                    <div class="cart-button d-flex justify-content-between align-items-center"> 
+                    <div class="cart-button d-flex justify-content-between align-items-center">  
                       @if(in_array($product->id, $cartItem))
                         <a href="{{route('cart.index')}}"  class="btn-wrap cart-link d-flex align-items-center">Go to cart <i class="icon icon-arrow-io"></i></a>
                           @else
