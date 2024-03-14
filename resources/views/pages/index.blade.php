@@ -197,11 +197,14 @@
                   </div>
                   <div class="cart-concern">
                     <div class="cart-button d-flex justify-content-between align-items-center"> 
-                      @if($product->cartId)
+                      @if(in_array($product->id, $cartItem))
                         <a href="{{route('cart.index')}}"  class="btn-wrap cart-link d-flex align-items-center">Go to cart <i class="icon icon-arrow-io"></i></a>
-                        @else
-                        <button type="button"  onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">Add to cart <i class="icon icon-arrow-io"></i></button>
+                          @else
+                          <button type="button"  onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">Add to cart <i class="icon icon-arrow-io"></i></button>
                       @endif
+                      {{--@if($product->cartId)
+                        
+                      @endif--}}
                       <a href="" class="view-btn tooltip
                           d-flex">
                         <i class="icon icon-screen-full"></i>

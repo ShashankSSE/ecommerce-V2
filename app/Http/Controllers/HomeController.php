@@ -11,15 +11,19 @@ use App\Models\Cart;
 class HomeController extends Controller
 {
     public function index(){ 
-        $products = Product::leftJoin('cart', function($join) {
-            $join->on('products.id', '=', 'cart.product_id');
-        })
-        ->join('categories', 'products.category', '=', 'categories.id')
-        ->join('sub_category', 'products.sub_category', '=', 'sub_category.id')
-        ->select('products.id', 'products.name', 'products.slug', 'products.mrp', 'products.selling', 'categories.name as category', 'categories.slug as category_slug', 'products.featured_img', 'products.is_featured', 'products.is_flash_sale', 'products.is_active', 'products.created_at', 'products.created_by', 'sub_category.title as subcategory', 'cart.id as cartId')
-        ->get();
-        
-        return view('pages.index',compact('products'));
+        $products = Product::join('categories', 'products.category', '=', 'categories.id')
+            ->join('sub_category', 'products.sub_category', '=', 'sub_category.id')
+            ->select('products.id', 'products.name', 'products.slug', 'products.mrp', 'products.selling', 'categories.name as category', 'categories.slug as category_slug', 'products.featured_img', 'products.is_featured', 'products.is_flash_sale', 'products.is_active', 'products.created_at', 'products.created_by', 'sub_category.title as subcategory') 
+            ->get(); 
+            $cart = Cart::all()->toArray();
+            $cartItem = [];
+            if(count($cart) > 0){                
+                foreach ($cart as $item) {
+                    array_push($cartItem, $item['product_id']);
+                }
+            }
+            
+        return view('pages.index',compact('products','cartItem'));
     }
 
     public function category($slug){
@@ -100,8 +104,8 @@ class HomeController extends Controller
             }
         }
         return view('pages.single-product',compact('product','is_availabe_in_cart'));
- 
-
     }
+
+    
 
 }
