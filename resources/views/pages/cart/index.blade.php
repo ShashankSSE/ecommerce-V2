@@ -194,7 +194,7 @@
                                                         </div> 
                                                         <div class="form-group">
                                                             <label for="city">City</label>
-                                                            <input  style="width:100%;     font-size: 14px;" type="text" class="form-control" value="{{$userInfo->city}}" name="city" id="city" required>
+                                                            <input  style="width:100%;     font-size: 14px;" type="text" class="form-control" value="{{$userInfo ? $userInfo->city : ''}}" name="city" id="city" required>
                                                         </div> 
                                                     </div>
                                                     <div class="col-sm-6"> 
@@ -204,7 +204,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="state">State</label>
-                                                            <input  style="width:100%;     font-size: 14px;" type="text" class="form-control" value="{{$userInfo->state}}" name="state" id="state" required>
+                                                            <input  style="width:100%;     font-size: 14px;" type="text" class="form-control" value="{{$userInfo ? $userInfo->state : ''}}" name="state" id="state" required>
                                                         </div> 
                                                     </div>
                                                 </div>
@@ -212,11 +212,11 @@
                                                     <div class="col-sm-12">
                                                         <div class="form-group">
                                                             <label for="pin">Pin</label>
-                                                            <input  style="width:100%;     font-size: 14px;" type="number" class="form-control" value="{{$userInfo->pin}}" name="pin" id="pin" required oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
+                                                            <input  style="width:100%;     font-size: 14px;" type="number" class="form-control" value="{{$userInfo ? $userInfo->pin : ''}}" name="pin" id="pin" required oninput="javascript: if (this.value.length > 6) this.value = this.value.slice(0, 6);">
                                                         </div> 
                                                         <div class="form-group">
                                                             <label for="address">Address</label>
-                                                            <textarea  style="width:100%;     font-size: 14px;" type="text" class="form-control" name="address" id="address" required>{{$userInfo->address}}</textarea>
+                                                            <textarea  style="width:100%;     font-size: 14px;" type="text" class="form-control" name="address" id="address" required>{{$userInfo ? $userInfo->address : ''}}</textarea>
                                                         </div> 
                                                     </div>
                                                 </div>
