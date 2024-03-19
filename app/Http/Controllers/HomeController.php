@@ -15,7 +15,7 @@ class HomeController extends Controller
             ->join('sub_category', 'products.sub_category', '=', 'sub_category.id')
             ->select('products.id', 'products.name', 'products.slug', 'products.mrp', 'products.selling', 'categories.name as category', 'categories.slug as category_slug', 'products.featured_img', 'products.is_featured', 'products.is_flash_sale', 'products.is_active', 'products.created_at', 'products.created_by', 'sub_category.title as subcategory') 
             ->get(); 
-            $cart = Cart::all()->toArray();
+            $cart = Cart::where('is_purchased','=',0)->get()->toArray();
             $cartItem = [];
             if(count($cart) > 0){                
                 foreach ($cart as $item) {

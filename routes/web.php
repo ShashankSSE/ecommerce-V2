@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ShipRocketController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 
@@ -42,6 +43,11 @@ Route::prefix('cart')->group(function () {
     Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('cart.addToCart');    
     Route::get('/remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.removeFromCart');    
 });
+Route::prefix('order')->group(function () {
+    Route::post('/', [OrderController::class, 'index'])->name('order.index');     
+    Route::get('/payment', [OrderController::class, 'paymentStatus'])->name('payment.success');     
+});
+
 Route::prefix('store/product')->group(function () {
     Route::get('/{slug}', [HomeController::class, 'singleProduct'])->name('frontend.singleProduct.index');    
 });
