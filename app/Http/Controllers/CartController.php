@@ -7,19 +7,25 @@ use App\Models\Settings;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\User;
+use App\Models\UserInformation;
 use Illuminate\Validation\Rule;
 
 class CartController extends Controller
 {
     public function index(Request $request){
         $cartItems = null;
+        $userInfo = null;
+        $user = null;
         if(auth()->user()){
             $cartItems = Cart::with('product')->where('user_id', auth()->user()->id)
                         ->where('is_purchased', '=',0)
                         ->get();
+            $user = User::where('id','=',auth()->user()->id)->first();
+            $userInfo = UserInformation::where('user_id','=',auth()->user()->id)->first();
         }
         
-        return view('pages.cart.index',compact('cartItems'));
+        return view('pages.cart.index',compact('cartItems','user','userInfo'));
     }
     
     public function addToCart(Request $request,$id){   
