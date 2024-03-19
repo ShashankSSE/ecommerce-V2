@@ -89,7 +89,7 @@
             </a>
             <div class="collapse" id="orders">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="">Orders</a></li> 
+                <li class="nav-item"><a class="nav-link" href="{{route('admin.orders')}}">Orders</a></li> 
               </ul>
             </div>
           </li>

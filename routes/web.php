@@ -146,6 +146,17 @@ Route::middleware(['auth'])->prefix('user-management')->group(function () {
     Route::get('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
+Route::middleware(['auth'])->prefix('order-management')->group(function () {
+    Route::get('/orders', [OrderController::class, 'orders'])->name('admin.orders');
+    Route::get('/orders/order-items/{order_id}', [OrderController::class, 'getOrderItems'])->name('admin.orderItems');
+    // Route::get('/create-user', [UserController::class, 'create'])->name('user.create');
+    // Route::post('/store-user', [UserController::class, 'store'])->name('user.store');
+    // Route::get('/edit-user/{id}', [UserController::class, 'edit'])->name('user.edit');
+    // Route::post('/update-user', [UserController::class, 'update'])->name('user.update');
+    // Route::get('/update-user-status/{id}', [UserController::class, 'status'])->name('user.status.update');
+    // Route::get('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/shiprocket-authentication', [ShipRocketController::class, 'index'])->name('shiprocked.index');
     
