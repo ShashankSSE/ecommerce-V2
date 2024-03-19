@@ -13,9 +13,7 @@ use App\Models\Cart;
 
 class OrderController extends Controller
 {
-    public function index(Request $request){
-        // dd(); 
-
+    public function index(Request $request){ 
         $settings = Settings::findOrFail(1);
         $length = 10;
         $randomString = Str::random($length);
@@ -97,6 +95,8 @@ class OrderController extends Controller
 
         $paymentStatus = $api->payment->fetch($request->get('payment_id'));
         $paymentSuccess = 0;
+        $order = Orders::where('unique_id','=',$request->get('order_id'))->first();
+
         if($paymentStatus->status == "captured"){
             $paymentSuccess = 1;
             if ($cart->isNotEmpty()) {
@@ -105,7 +105,30 @@ class OrderController extends Controller
                     $item->save(); // Save each item individually
                 }
             }
+        } 
+
+        $orderStatus = $api->order->fetch($request->get('order_id'));
+        $order_status = $orderStatus->status == 'paid' ? 'Paid' : ($orderStatus->status == 'created' ? 'Cancelled' : 'Failed');
+        
+        if($order){
+            $order->transaction_id = $request->get('payment_id');
+            $order->payment_status = $order_status;
+            $order->save();
         }
         return view('pages.cart.payment-status',compact('paymentStatus','paymentSuccess'));            
+    }
+
+    public function orders(Request $request){
+        $orders = Orders::latest()->get();
+        return view('admin.orders.index', compact('orders'));        
+    }
+
+    public function getOrderItems(Request $request, $order_id){
+        $orderId = Orders::where('unique_id','=',$order_id)->select('id')->first();
+        if($orderId->id){
+            $orderItems = OrderItems::where('order_id','=',$orderId->id)->get();
+
+            return response()->json(['orderItem' => $orderItems,'status' => true]);
+        }
     }
 }
