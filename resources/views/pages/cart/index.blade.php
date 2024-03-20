@@ -389,7 +389,11 @@
                             // e.preventDefault();
                         // }
                     }else{
-                        alert("Something went wrong!");
+                        Swal.fire({
+                            title: "Failed!",
+                            text: response.message,
+                            icon: "error"
+                        });
                     }
                 },
                 error: function (error) {

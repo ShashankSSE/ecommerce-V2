@@ -10,6 +10,7 @@ use App\Models\Settings;
 use App\Models\Orders;
 use App\Models\OrderItems;
 use App\Models\Cart;
+use App\Models\PaymentGatewayModel;
 
 class OrderController extends Controller
 {
@@ -19,6 +20,10 @@ class OrderController extends Controller
         $randomString = Str::random($length);
         $recieptString = Str::random($length);
 
+        $paymentGateway = PaymentGatewayModel::where('is_active','=', 1)->first();
+        if(!$paymentGateway){
+            return response()->json(['status'=> false, 'message' => 'There is a technical issue, kindly try after some time.']);
+        }
         $api_key = 'rzp_test_yrUhuJdTvCIkZ5';
         $api_secret = 'OneqyQ6JIUZPksc1QUyiKDMS';
         $razorApi = new Api($api_key, $api_secret);
