@@ -27,6 +27,9 @@ function addMoreSizeButton(attributes){
       return attribute.label === 'size';
   });
   
+  var colorAttributes = attributes.filter(function(attribute) {
+    return attribute.label === 'color';
+  });
 
   if(sizeDivCount > 1){
     for(var i=1; i<sizeDivCount; i++){
@@ -71,6 +74,18 @@ function addMoreSizeButton(attributes){
       <input type="number" class="form-control" id="selling_${sizeDivCount}" name="selling_${sizeDivCount}" placeholder="" required>
   `;
   cardContainer.appendChild(sellingFormGroup);
+
+
+  var colorFormGroup = document.createElement('div');
+  colorFormGroup.classList.add('form-group');
+  colorFormGroup.innerHTML = `
+      <label for="selling">Add Color</label>
+      <select class="form-control js-example-basic-multiple"  multiple="multiple" name="selling_Color_${sizeDivCount}[]" id="selling_Color_${sizeDivCount}" required>` +
+        colorAttributes.map(function(attribute) {
+            return `<option value="${attribute.name}">${attribute.name}</option>`;
+        }).join('') +
+    `</select>`;
+  cardContainer.appendChild(colorFormGroup);
 
   var imageFormGroup = document.createElement('div');
   imageFormGroup.classList.add('form-group');
@@ -365,3 +380,4 @@ function validateSlug(input) {
   // Remove trailing hyphens, spaces, and special characters
   input.value = input.value.replace(/[^\w-]+$/, '');
 }
+

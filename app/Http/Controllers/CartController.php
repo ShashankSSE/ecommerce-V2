@@ -29,6 +29,11 @@ class CartController extends Controller
     }
     
     public function addToCart(Request $request,$id){   
+        
+        $attribute = [
+            'size' => $request->size,
+            'color' => $request->color,
+        ];
         if(auth()->user()){
             // $cartItem = Cart::where('user_id', auth()->user()->id)
             // ->where('product_id', $id)
@@ -43,7 +48,7 @@ class CartController extends Controller
             $cart->product_id = intval($id);
             $cart->mrp = $request->mrp ? floatval($request->mrp) : $product->mrp;
             $cart->price = $request->price ? floatval($request->price) : $product->selling;
-            $cart->size = $request->size ? $request->size : $product->size;
+            $cart->size = json_encode($attribute);
             $cart->image = $request->image ? $request->image : asset('images/products/'.$product->featured_img); 
             // dd($cart);
             $cart->save();

@@ -22,6 +22,9 @@
 .select2{
     width: 100%!important;
 }
+.select2-selection__choice{
+    background: #e1e1e1!important;
+}
 </style>
 <div class="row"> 
     <form class="forms-sample" id="updateProductForm" enctype="multipart/form-data">  
@@ -53,13 +56,13 @@
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#size" aria-selected="true" role="tab">Size (<span id="totalSize">0</span>)</a>
                                     </li> 
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item d-none" role="presentation">
                                         <a class="nav-link " data-bs-toggle="tab" href="#weight" aria-selected="true" role="tab" >Weight (<span id="totalWeight">0</span>)</a>
                                     </li> 
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item d-none" role="presentation">
                                         <a class="nav-link " data-bs-toggle="tab" href="#colour" aria-selected="true" role="tab">Colour (<span id="totalColor">0</span>)</a>
                                     </li> 
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item d-none" role="presentation">
                                         <a class="nav-link " data-bs-toggle="tab" href="#unit" aria-selected="true" role="tab">Unit (<span id="totalUnit">0</span>)</a>
                                     </li> 
                                 </ul>
@@ -116,18 +119,23 @@
                             </div>       
                             <div class="form-group">
                                 <label for="productColor">Select Color</label>
-                                <select class="form-control js-example-basic-single" name="productColor" id="productColor" >
-                                    <option >Select Color</option>
+                                <select class="form-control js-example-basic-multiple" name="productColor[]" multiple="multiple" id="productColor">
+                                    <option>Select Color</option>
                                     @if(count($attributes) > 0)
                                         @foreach($attributes as $color)
-                                            @if($color->label == 'color') 
-                                                <option value="{{ $color->name }}" {{ $color->name === $product->color ? 'selected' : '' }}>{{ $color->name }}</option>
+                                            @if($color->label == 'color')
+                                                @php
+                                                    $selectedColors = json_decode($product->color);
+                                                @endphp
+                                                <option value="{{ $color->name }}" {{ in_array($color->name, $selectedColors) ? 'selected' : '' }}>
+                                                    {{ $color->name }}
+                                                </option>
                                             @endif
                                         @endforeach
                                     @endif
                                 </select>
                             </div>  
-                            <div class="form-group">
+                            <div class="form-group d-none">
                                 <label for="productWeight">Select Weight</label>
                                 <select class="form-control js-example-basic-single" name="productWeight" id="productWeight" >
                                     <option selected disabled>Select Weight</option>
@@ -153,7 +161,7 @@
                                     @endif
                                 </select>
                             </div>        
-                            <div class="form-group">
+                            <div class="form-group d-none">
                                 <label for="productUnit">Select Unit</label>
                                 <select class="form-control js-example-basic-single" name="productUnit" id="productUnit" >
                                     <option selected disabled>Select Unit</option>
@@ -221,6 +229,7 @@
 
 var attributes;
 $(document).ready(function(){
+
     var products = {!! json_encode($product) !!};
 
     var sizeArray = JSON.parse(products.sizeArray);
@@ -236,6 +245,11 @@ $(document).ready(function(){
             var attributeUnit = $(`#attributeUnit_${i}`);
             var selectedOptionValue = sizeArray[i-1].size; // Assuming 'attributeUnit' is the property in your sizeArray object
             attributeUnit.val(selectedOptionValue);
+
+            var attributeColorUnit = $(`#selling_Color_${i}`);
+            var colorSelectedOptionValue = sizeArray[i-1].color; // Assuming 'attributeUnit' is the property in your sizeArray object
+            attributeColorUnit.val(colorSelectedOptionValue);
+
             var mrp = $(`#mrp_${i}`);
             mrp.val(sizeArray[i-1].mrp);
             var selling = $(`#selling_${i}`);
@@ -294,6 +308,7 @@ $(document).ready(function(){
         }        
     }
 
+    $('.js-example-basic-multiple').select2();
     var selectElement = document.getElementById('categoryName');
 
     // Clear existing options
@@ -335,9 +350,10 @@ $(document).ready(function(){
                     var sizeSelling = $(`#selling_${i}`).val();
                     var sizeMrp = $(`#mrp_${i}`).val();
                     var sizeAttribute = $(`#attributeUnit_${i}`).val(); 
+                    var colorAttribute = $(`#selling_Color_${i}`).val(); 
                     var image = document.getElementById(`sizeImage_${i}`);
                     var sizeImage = image.files[0];
-                    sizeArray.push({ size: sizeAttribute, selling: sizeSelling, mrp: sizeMrp, image: sizeImage ? sizeImage : null});
+                    sizeArray.push({ size: sizeAttribute, color: colorAttribute, selling: sizeSelling, mrp: sizeMrp, image: sizeImage ? sizeImage : null});
                 }
                 formData.append('sizeArray',JSON.stringify(sizeArray));
             }

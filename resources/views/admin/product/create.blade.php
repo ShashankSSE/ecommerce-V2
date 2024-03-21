@@ -19,6 +19,9 @@
     max-height: 600px;
     overflow-y: scroll;
 }
+.select2-selection__choice{
+    background: #e1e1e1!important;
+}
 </style>
 <div class="row"> 
     <form class="forms-sample" id="productForm" enctype="multipart/form-data">  
@@ -45,13 +48,13 @@
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#size" aria-selected="true" role="tab">Size (<span id="totalSize">0</span>)</a>
                                     </li> 
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item d-none" role="presentation">
                                         <a class="nav-link " data-bs-toggle="tab" href="#weight" aria-selected="true" role="tab" >Weight (<span id="totalWeight">0</span>)</a>
                                     </li> 
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item d-none" role="presentation">
                                         <a class="nav-link " data-bs-toggle="tab" href="#colour" aria-selected="true" role="tab">Colour (<span id="totalColor">0</span>)</a>
                                     </li> 
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item d-none" role="presentation">
                                         <a class="nav-link " data-bs-toggle="tab" href="#unit" aria-selected="true" role="tab">Unit (<span id="totalUnit">0</span>)</a>
                                     </li> 
                                 </ul>
@@ -108,8 +111,8 @@
                             </div>    
                             <div class="form-group">
                                 <label for="productColor">Select Color</label>
-                                <select class="form-control js-example-basic-single" name="productColor" id="productColor" >
-                                    <option selected disabled>Select Color</option>
+                                <select class="form-control js-example-basic-multiple"  name="productColor[]" multiple="multiple"  id="productColor" >
+                                    
                                     @if(count($attributes) > 0)
                                         @foreach($attributes as $color)
                                             @if($color->label == 'color')
@@ -119,7 +122,7 @@
                                     @endif
                                 </select>
                             </div>  
-                            <div class="form-group">
+                            <div class="form-group d-none">
                                 <label for="productWeight">Select Weight</label>
                                 <select class="form-control js-example-basic-single" name="productWeight" id="productWeight" >
                                     <option selected disabled>Select Weight</option>
@@ -145,7 +148,7 @@
                                     @endif
                                 </select>
                             </div>        
-                            <div class="form-group">
+                            <div class="form-group d-none">
                                 <label for="productUnit">Select Unit</label>
                                 <select class="form-control js-example-basic-single" name="productUnit" id="productUnit" >
                                     <option selected disabled>Select Unit</option>
@@ -264,9 +267,11 @@ $(document).ready(function(){
                 var sizeSelling = $(`#selling_${i}`).val();
                 var sizeMrp = $(`#mrp_${i}`).val();
                 var sizeAttribute = $(`#attributeUnit_${i}`).val(); 
+                var colorAttribute = $(`#selling_Color_${i}`).val(); 
+                console.log(colorAttribute,"colorAttributecolorAttributecolorAttribute");
                 var image = document.getElementById(`sizeImage_${i}`);
                 var sizeImage = image.files[0];
-                sizeArray.push({ size: sizeAttribute, selling: sizeSelling, mrp: sizeMrp, image: sizeImage ? sizeImage : null});
+                sizeArray.push({ size: sizeAttribute,color: colorAttribute, selling: sizeSelling, mrp: sizeMrp, image: sizeImage ? sizeImage : null});
                 
             }
             formData.append('sizeArray',JSON.stringify(sizeArray));
@@ -349,6 +354,7 @@ $(document).ready(function(){
 
     document.getElementById('addMoreSizeButton').addEventListener('click', function() {
         addMoreSizeButton(attributes);
+        $('.js-example-basic-multiple').select2();
     });
     document.getElementById('addMoreWeightButton').addEventListener('click', function() {
         addMoreWeightButton(attributes);
@@ -374,7 +380,6 @@ $(document).ready(function(){
         }
     });
     
-
     function getSubCategory(id) {
         alert(id);
         $.ajax({
@@ -405,6 +410,8 @@ $(document).ready(function(){
             },
         });
     }
+    $('.js-example-basic-multiple').select2();
+
 });
 
 </script>

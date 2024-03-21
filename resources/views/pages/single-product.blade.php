@@ -128,15 +128,40 @@
                 @if($product->sizeArray)
                     @foreach(json_decode($product->sizeArray) as $size)
                         <a href="?size={{$size->size}}" id="attribute_{{$size->size}}" class="btn attribute-btn attribute-btn-inActive">{{$size->size}}</a>     
-                    @endforeach
+                    @endforeach 
+
                 @endif 
             </div>
-            <!-- <div class="post-content-attribute d-flex align-items-center g-10">
-                <p class="attribute-text"><strong>Qty:</strong></p>  
-                <input  id="productQty"  type="number" min="1" max="5" value="1">
-            </div> -->
+            <div class="post-content-attribute d-flex align-items-center g-10">
+                    <p class="attribute-text"><strong>Color:</strong></p> 
+                    <div id="colorBtns">
+                        
+                      @if(request()->has('size'))
+                        @if($product->sizeArray)
+                            @foreach(json_decode($product->sizeArray) as $color) 
+                              @if(count($color->color) > 0)
+                                  @foreach($color->color as $index=>$item)
+                                    <a href="javascript:void(0)" id="attribute_color{{$index}}" onclick="selectColor('{{$item}}', this)" class="btn attribute-btn attribute-btn-inActive">{{$item}}</a>     
+                                  @endforeach
+                              @endif
+                            @endforeach
+                        @endif 
+                      @else
+                            
+                        @if(count(json_decode($product->color)) > 0)
+                            @foreach(json_decode($product->color) as $index=>$item)
+                              <a href="javascript:void(0)" id="attribute_color{{$index}}" onclick="selectColor('{{$item}}', this)" class="btn attribute-btn attribute-btn-inActive">{{$item}}</a>     
+                            @endforeach
+                        @endif
+                      
+                          
+                      @endif
+                    </div>
+            
+            </div> 
 
             <p id="selected_size" style="opacity:0;">{{$product->size}}</p>
+            <p id="selected_color" style="opacity:0;"></p>
               <hr>
             <div class="post-content "> 
                 <h3>Short Description:</h3>
@@ -181,5 +206,19 @@
     </div>
  
 </div>
+<script>
+  function selectColor(color, element) {
+    $("#selected_color").html(color); 
+    if (element && element.classList) {
+              // Get all <a> tags inside the colorBtns div
+        const colorButtons = document.querySelectorAll('#colorBtns a');
 
+        // Loop through each <a> tag and remove the attribute-btn-inActive class
+        colorButtons.forEach(button => {
+            button.classList.add('attribute-btn-inActive');
+        });
+        element.classList.remove('attribute-btn-inActive');
+    }
+}
+</script>
 @endsection

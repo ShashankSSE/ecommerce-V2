@@ -333,7 +333,15 @@
         var mrp = $('#mrp').text(); // Assuming the price is in a text format
         var price = $('#price').text(); // Assuming the price is in a text format 
         var size = $('#selected_size').text();
+        var color = $('#selected_color').text();
         var image = $('#imageUrl').attr('src'); 
+        if(color == ''){
+          Swal.fire({
+              icon: 'error',
+              title: 'Information...',
+              text: 'You have select the color.'
+          });
+        }
         $.ajax({
             url: "{{route('cart.addToCart', ['id' => ':id'])}}".replace(':id', id),
             type: 'GET', // HTTP method
@@ -341,6 +349,7 @@
                 price: price,
                 mrp: mrp ,
                 size: size ,
+                color: color ,
                 image: image , 
             },
             success: function(response) {
