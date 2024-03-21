@@ -16,9 +16,9 @@
                         <select class="form-control" name="attributeName" id="attributeName">
                             <option selected disabled>Select Attribute</option>
                             <option value="size">Size</option>
-                            <option value="weight">Weight</option>
+                            <!-- <option value="weight">Weight</option> -->
                             <option value="color">Color</option>
-                            <option value="unit">Unit</option>
+                            <!-- <option value="unit">Unit</option> -->
                         </select>
                     </div>
                     <div class="form-group">

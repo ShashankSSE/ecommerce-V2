@@ -132,8 +132,10 @@
                                                         </div>
                                                     </div>
                                                 </div> 
-                                                <div class="list-store d-flex align-items-center justify-content-between">
-                                                    <p><span>Size : </span><span id="product_size">{{$item->size}}</span></p>
+                                                <div class="list-store ">
+                                                    
+                                                    <p><span>Size : </span><span id="product_size">{{json_decode($item->size)->size}}</span></p>
+                                                    <p><span>Color : </span><span id="product_color">{{json_decode($item->size)->color}}</span></p>
                                                 </div>
                                                 <div class="list-store d-flex align-items-center justify-content-between">
                                                     <div class="d-flex gap-2">
@@ -423,7 +425,7 @@
 
             // Get product color
             // const productSize = cartItem.querySelector('#product_color').innerText.trim();
-            const productColor = "Red";
+            const productColor = cartItem.querySelector('#product_color').innerText.trim();
 
             // Get product price
             const productPrice = cartItem.querySelector('#price').innerText.trim();

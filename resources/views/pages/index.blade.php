@@ -70,11 +70,12 @@
                   </div>
                   <div class="cart-concern">
                     <div class="cart-button d-flex justify-content-between align-items-center">
-                      @if(in_array($product->id, $cartItem) && auth()->user())
+                      <!-- @if(in_array($product->id, $cartItem) && auth()->user())
                         <a href="{{route('cart.index')}}"  class="btn-wrap cart-link d-flex align-items-center">Go to cart <i class="icon icon-arrow-io"></i></a>
                           @else
                           <button type="button"  onclick="addToCart({{$product->id}})" class="btn-wrap cart-link d-flex align-items-center">Add to cart <i class="icon icon-arrow-io"></i></button>
-                      @endif
+                      @endif -->
+                      <a href="{{route('frontend.singleProduct.index', ['slug' => $product->slug]) }}"  class="btn-wrap cart-link d-flex align-items-center">View product <i class="icon icon-arrow-io"></i></a>
                       <a href="{{ route('frontend.singleProduct.index', ['slug' => $product->slug]) }}" class="view-btn tooltip d-flex">
                           
                         <i class="icon icon-screen-full"></i>

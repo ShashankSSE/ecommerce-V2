@@ -13,9 +13,9 @@
                         <select class="form-control" name="attributeName" id="attributeName">
                             <option selected disabled>Select Attribute</option>
                             <option value="size" {{$attribute->label == 'size' ? 'selected' : ''}}>Size</option>
-                            <option value="weight" {{$attribute->label == 'weight' ? 'selected' : ''}}>Weight</option>
+                            <!-- <option value="weight" {{$attribute->label == 'weight' ? 'selected' : ''}}>Weight</option> -->
                             <option value="color" {{$attribute->label == 'color' ? 'selected' : ''}}>Color</option>
-                            <option value="unit" {{$attribute->label == 'unit' ? 'selected' : ''}}>Unit</option>
+                            <!-- <option value="unit" {{$attribute->label == 'unit' ? 'selected' : ''}}>Unit</option> -->
                         </select>
                     </div>
                     <div class="form-group">

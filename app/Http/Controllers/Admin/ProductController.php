@@ -93,7 +93,7 @@ class ProductController extends Controller
             $product->selling = $request->input('productSelling');
             $product->size = $request->input('productSize');
             $product->weight = $request->input('productWeight');
-            $product->color = $request->input('productColor');
+            $product->color = json_encode($request->input('productColor'));
             $product->unit = $request->input('productUnit');
             $product->desc = $request->input('desc');
             $product->category = $request->input('categoryName');
