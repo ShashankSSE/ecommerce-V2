@@ -63,6 +63,7 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"><a class="nav-link" href="{{route('page.index')}}">Pages</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('faq.index')}}">Faq's</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('home-page.index')}}">Home Page Settings</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('settings.index')}}">General Settings</a></li>
               </ul>
             </div>

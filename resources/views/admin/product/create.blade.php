@@ -381,7 +381,6 @@ $(document).ready(function(){
     });
     
     function getSubCategory(id) {
-        alert(id);
         $.ajax({
             url: '{{route("sub-category.get", ":id") }}'.replace(':id', id),
             type: 'GET',
