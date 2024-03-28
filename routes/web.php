@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ShipRocketController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ApiSettingsController;
+use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 
@@ -132,6 +133,12 @@ Route::middleware(['auth'])->prefix('site-management')->group(function () {
     Route::post('/update-faq', [FaqController::class, 'update'])->name('faq.update');
     Route::get('/update-faq-status/{id}', [FaqController::class, 'status'])->name('faq.status.update');
     Route::get('/delete-faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
+
+
+    Route::get('/home-page', [HomePageController::class, 'index'])->name('home-page.index');
+    Route::post('/home-page/banner/store', [HomePageController::class, 'bannerStore'])->name('home-page.banner.store');
+    Route::get('/home-page/banner/edit/{id}', [HomePageController::class, 'bannerEdit'])->name('home-page.banner.edit');
+    
 
 
 });

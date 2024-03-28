@@ -36,6 +36,18 @@
       li form {
         margin-bottom: 0rem!important;
       }
+      #cartNo{
+        background: #ff000075;
+        color: black;
+        font-weight: 600;
+        border-radius: 50%;
+        width: 25px;
+        display: flex;
+        height: 25px;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+      }
     </style>
   </head>
   <body>
@@ -87,7 +99,7 @@
             <div class="row d-flex align-items-center">
               <div class="col-md-4 header-contact">
                 @if($settings->mobile)
-                  <p>Let's talk! <strong>+57 444 11 00 35</strong>
+                  <p>Let's talk! <strong>+91 {{$settings->mobile}}</strong>
                 @endif
                 </p>
               </div>
@@ -119,8 +131,11 @@
                       @endif
                   </li>
                   <li>
-                    <a href="{{route('cart.index')}}">
+                    <a href="{{route('cart.index')}}" style="display: flex;gap: 5px;align-items: center;">
                       <i class="icon icon-shopping-cart"></i>
+                      @if(auth()->user())
+                        <span id="cartNo">{{$totalProductInCart}}</span>
+                      @endif
                     </a>
                   </li>
                   <li>
@@ -314,7 +329,9 @@
       <div class="container">
         <div class="d-flex align-items-center flex-wrap justify-content-between">
           <div class="copyright">
-            <p>Freebies by <a href="https://templatesjungle.com/">Templates Jungle</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+            @if($settings->credits)
+              <p>{!!$settings->credits!!}</a>
+            @endif
             </p>
           </div>
           <div class="payment-method">

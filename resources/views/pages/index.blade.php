@@ -333,7 +333,8 @@
                     </button>                  
                   </div>
                 </div>
-                <div class="discount">{{number_format(($product->selling / $product->mrp) * 100, 2) }}% Off</div>
+                
+                <div class="discount">{{number_format((($product->mrp - $product->selling)/$product->mrp) * 100, 2) }}% Off</div>
                 <div class="product-detail">
                   <h3 class="product-title">
                       <a href="{{$product->slug}}">{{$product->name}}</a>
