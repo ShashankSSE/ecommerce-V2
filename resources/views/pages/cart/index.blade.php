@@ -123,6 +123,7 @@
                                             <div class="col-lg-9">
                                                 <div class="mt-3 mt-lg-0 d-flex align-items-center justify-content-between">
                                                     <h4 id="product_name">{{$item->product->name}}</h4>
+                                                    <h4 id="product_id" style="opacity: 0;">{{$item->product->id}}</h4>
                                                     <h4 id="cart_id" style="opacity:0;">{{$item->id}}</h4>
                                                     <div>
                                                         <div class="btn-quantity-container d-flex align-items-center justify-content-center" style="gap:.5rem;">
@@ -322,6 +323,7 @@
             // Append each product object to the FormData object
             cartItems.forEach(function(product, index) {
                 formData.append('cartItems[' + index + '][cartId]', product.cartId);
+                formData.append('cartItems[' + index + '][productId]', product.productId);
                 formData.append('cartItems[' + index + '][name]', product.name);
                 formData.append('cartItems[' + index + '][img]', product.img);
                 formData.append('cartItems[' + index + '][qty]', product.qty);
@@ -411,6 +413,7 @@
         const products = [];
         cartItems.forEach(cartItem => {
             // Get product name
+            const productId = cartItem.querySelector('#product_id').innerText.trim();
             const productName = cartItem.querySelector('#product_name').innerText.trim();
             const cartId = cartItem.querySelector('#cart_id').innerText.trim();
             
@@ -433,6 +436,7 @@
             // Construct product object
             const product = {
                 cartId: cartId,
+                productId:productId,
                 name: productName,
                 img: productImg,
                 qty: productQty,

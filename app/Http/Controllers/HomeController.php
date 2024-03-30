@@ -82,7 +82,7 @@ class HomeController extends Controller
                 ->first();
         $is_availabe_in_cart = 0;
         if(auth()->user()){
-            $is_availabe_in_cart = Cart::where('user_id','=',auth()->user()->id)->where('size',$request->size ? $request->size : $product->size)->where('is_purchased','=',0)->exists();
+            $is_availabe_in_cart = Cart::where('user_id','=',auth()->user()->id)->where('product_id',$product->id)->where('is_purchased','=',0)->exists();
         }
         
         if($is_availabe_in_cart){

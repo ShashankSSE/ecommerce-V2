@@ -66,6 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/my-orders', [ProfileController::class, 'myOrders'])->name('user.orders');
+
 });
 
 Route::middleware(['auth'])->prefix('category')->group(function () {
@@ -138,7 +140,9 @@ Route::middleware(['auth'])->prefix('site-management')->group(function () {
     Route::get('/home-page', [HomePageController::class, 'index'])->name('home-page.index');
     Route::post('/home-page/banner/store', [HomePageController::class, 'bannerStore'])->name('home-page.banner.store');
     Route::get('/home-page/banner/edit/{id}', [HomePageController::class, 'bannerEdit'])->name('home-page.banner.edit');
-    
+    Route::post('/home-page/banner/update', [HomePageController::class, 'bannerUpdate'])->name('home-page.banner.update');
+    Route::get('/home-page-banner-status/{id}', [HomePageController::class, 'status'])->name('home-page.banner.status.update');
+    Route::get('/home-page/banner/{id}', [HomePageController::class, 'destroy'])->name('home-page.banner.destroy');
 
 
 });

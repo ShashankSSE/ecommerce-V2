@@ -85,12 +85,53 @@
                 <a href="#">
                   <div class="card-view">
                     <p class="statistics-title">Total Revenue (inr)</p>
-                    <h3 class="rate-percentage">0</h3>                  
+                    <h3 class="rate-percentage">{{$revenue}}</h3>                  
                   </div> 
                 </a>
               </div>
             </div>
           </div> 
+          <div class="row">
+            <div class="col-sm-4">
+              <div>
+                <center><h2>Total Orders</h2></center>
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+            <div class="col-sm-4">
+            <div class="card card-rounded">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                              <h4 class="card-title card-title-dash">Best Selling Products</h4>
+                            </div>
+                          </div><hr>
+                          @if(count($bestSellingProducts) > 0)
+                          @foreach($bestSellingProducts as $key=>$item) 
+                            <div class="mt-3">
+                              <div class="wrapper d-flex align-items-center justify-content-between py-2 border-bottom">
+                                <div class="d-flex">
+                                  <div class="wrapper ms-3 px-3">
+                                    <p class="ms-1 mb-1 fw-bold">{{$key+1}}</p> 
+                                  </div>
+                                  <img class="img-sm rounded-10" src="{{asset('images/products/' . $item['product']->featured_img)}}" alt="profile">
+                                  <div class="wrapper ms-3">
+                                    <p class="ms-1 mb-1 fw-bold">{{$item['product']->name}}</p>
+                                    <small class="text-muted mb-0">{{$item['product']->selling}} ({{$item['count']}})</small>
+                                  </div> 
+                                </div> 
+                              </div> 
+                            </div>
+                          @endforeach
+                          @endif
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
           {{--<div class="row">
             <div class="col-lg-8 d-flex flex-column">
               <div class="row flex-grow">
@@ -749,4 +790,41 @@
     </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+  var paidOrders = "{{$paidOrders}}";
+  var cancledOrders = "{{$cancledOrders}}";
+  var failedOrders = "{{$failedOrders}}";
+  var totalOrders = "{{$totalOrders}}";
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Paid Orders', 'Cancled Orders', 'Failed Orders'],
+      datasets: [{
+        label: 'Total Orders ' + totalOrders,
+        data: [paidOrders, cancledOrders, failedOrders],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)', 
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)', 
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 @endsection

@@ -50,7 +50,7 @@ class OrderController extends Controller
 
 
         $makeOrder = new Orders();
-        
+        $makeOrder->user_id = auth()->user()->id;
         $makeOrder->unique_Id = $razorpayOrder->id;
         $makeOrder->price = $razorpayOrder->amount;
         $makeOrder->name = $request->name;
@@ -77,6 +77,7 @@ class OrderController extends Controller
                 $orderItems = new OrderItems();
                 
                 $orderItems->order_id = $orderId->id;
+                $orderItems->product_id = $item["productId"];
                 $orderItems->product_name = $item["name"];
                 $orderItems->image = $item["img"];
                 $orderItems->price = $item["price"];

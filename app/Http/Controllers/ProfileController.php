@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\UserInformation;
+use App\Models\Orders;
 
 class ProfileController extends Controller
 {
@@ -28,9 +29,10 @@ class ProfileController extends Controller
         // Extract the first letter of the last name
         $lastNameInitial = strtoupper(substr($nameParts[count($nameParts) - 1], 0, 1));
         $nameTag = $firstNameInitial . $lastNameInitial;
+        
         return view('profile.edit', [
             'nameTag' => $nameTag,
-            'user' => $request->user(),
+            'user' => $request->user(), 
         ]);
     }
 
@@ -90,5 +92,13 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function myOrders(Request $request){
+
+        $orders = Orders::where('user_id','=',auth()->user()->id)->with('orderItems')->orderBy('created_at', 'desc')->get();
+        return view('profile.orders', [ 
+            'orders' => $orders, 
+        ]);
     }
 }
