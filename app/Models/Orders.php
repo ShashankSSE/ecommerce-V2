@@ -27,4 +27,9 @@ class Orders extends Model
         'reference_no',
         'transaction_id',
     ];
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItems::class, 'order_id');
+    }
 }

@@ -127,7 +127,7 @@
                                                 @php
                                                     $selectedColors = json_decode($product->color);
                                                 @endphp
-                                                <option value="{{ $color->name }}" {{ in_array($color->name, $selectedColors) ? 'selected' : '' }}>
+                                                <option value="{{ $color->name }}" {{ $selectedColors ? in_array($color->name, $selectedColors) ? 'selected' : '' : ''}}>
                                                     {{ $color->name }}
                                                 </option>
                                             @endif

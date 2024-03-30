@@ -138,7 +138,7 @@
                       @endif
                     </a>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href="wishlist.html">
                       <i class="icon icon-heart"></i>
                     </a>
@@ -147,7 +147,7 @@
                     <a href="#" class="search-button">
                       <i class="icon icon-search"></i>
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
@@ -347,17 +347,20 @@
     </div>
     <script>
       function addToCart(id){
+
         var mrp = $('#mrp').text(); // Assuming the price is in a text format
         var price = $('#price').text(); // Assuming the price is in a text format 
         var size = $('#selected_size').text();
         var color = $('#selected_color').text();
+        console.log(color);
         var image = $('#imageUrl').attr('src'); 
         if(color == ''){
           Swal.fire({
               icon: 'error',
               title: 'Information...',
-              text: 'You have select the color.'
+              text: 'You have not selected the color.'
           });
+          return false;
         }
         $.ajax({
             url: "{{route('cart.addToCart', ['id' => ':id'])}}".replace(':id', id),

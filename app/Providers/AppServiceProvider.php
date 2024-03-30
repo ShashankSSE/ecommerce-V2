@@ -7,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 use App\Models\Settings;
 use App\Models\Category;
 use App\Models\Cart;
+use App\Models\Banner;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,10 +32,12 @@ class AppServiceProvider extends ServiceProvider
         $categories = Category::with('subcategories')->where('status','=','active')->get();
         $cart = Cart::where('is_purchased','=',0)->get();
         $totalProductInCart = count($cart);
+        $banners = Banner::where('status','=',1)->orderBy('sequence','asc')->get(); 
         View::share([
             'settings' => $settings,
             'categories' => $categories,
-            'totalProductInCart' => $totalProductInCart
+            'totalProductInCart' => $totalProductInCart,
+            'banners' => $banners,
         ]);
     }
 }

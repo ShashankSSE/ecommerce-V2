@@ -125,7 +125,7 @@
                     <p class="attribute-text"><strong>Size:</strong></p> 
                     <a href="{{ route('frontend.singleProduct.index', ['slug' => $product->slug]) }}" class="btn attribute-btn ">{{$product->size}}</a>              
                 @endif
-                @if($product->sizeArray)
+                @if($product->sizeArray != "null") 
                     @foreach(json_decode($product->sizeArray) as $size)
                         <a href="?size={{$size->size}}" id="attribute_{{$size->size}}" class="btn attribute-btn attribute-btn-inActive">{{$size->size}}</a>     
                     @endforeach 
@@ -147,11 +147,12 @@
                             @endforeach
                         @endif 
                       @else
-                            
-                        @if(count(json_decode($product->color)) > 0)
-                            @foreach(json_decode($product->color) as $index=>$item)
-                              <a href="javascript:void(0)" id="attribute_color{{$index}}" onclick="selectColor('{{$item}}', this)" class="btn attribute-btn attribute-btn-inActive">{{$item}}</a>     
-                            @endforeach
+                        @if(json_decode($product->color))
+                          @if(count(json_decode($product->color)) > 0)
+                              @foreach(json_decode($product->color) as $index=>$item)
+                                <a href="javascript:void(0)" id="attribute_color{{$index}}" onclick="selectColor('{{$item}}', this)" class="btn attribute-btn attribute-btn-inActive">{{$item}}</a>     
+                              @endforeach
+                          @endif
                         @endif
                       
                           
@@ -171,7 +172,7 @@
             <div class="post-content "> 
                 <h3>Detailed Description:</h3>
                 <p>{!! $product->desc !!}</p>
-            </div>
+            </div> 
             <div class="post-tags">
                 <div class="block-tag">
                   <ul class="list-unstyled d-flex">
