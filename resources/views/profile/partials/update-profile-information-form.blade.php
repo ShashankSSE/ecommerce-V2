@@ -82,6 +82,7 @@
                     @if($user->is_admin)
                         <a href="{{route('dashboard')}}" class="btn btn-primary">Dashboard</a>
                     @endif
+                        <a href="{{route('user.orders')}}" class="btn btn-primary">My Orders</a>
                 </div>
             </div>
         </div>
