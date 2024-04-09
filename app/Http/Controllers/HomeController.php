@@ -7,6 +7,8 @@ use App\Models\SubCategory;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Cart;
+use App\Models\Faqs;
+use App\Models\Pages;
 
 class HomeController extends Controller
 {
@@ -106,6 +108,19 @@ class HomeController extends Controller
         return view('pages.single-product',compact('product','is_availabe_in_cart'));
     }
 
-    
+    public function faqs(Request $request){
+        $faqs = Faqs::where('is_active','=',1)->get();
+        return view('pages.faq',compact('faqs'));
+    }
+
+    public function pages(Request $request,$slug){
+        $page = Pages::where('slug','=',$slug)->where('is_active','=',1)->first();
+        if($page){
+            return view('pages.page',compact('page'));
+        }else{
+            return view('pages.invalid');
+        }
+
+    }
 
 }

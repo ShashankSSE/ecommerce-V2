@@ -238,23 +238,18 @@
                 <h5 class="widget-title">Customer Service</h5>
                 <ul class="menu-list list-unstyled">
                   <li class="menu-item">
-                    <a href="">FAQ</a>
+                    <a href="/faq">FAQ</a>
                   </li>
                   <li class="menu-item">
                     <a href="">Contact</a>
                   </li>
-                  <li class="menu-item">
-                    <a href="#">Privacy Policy</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Returns & Refunds</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Cookie Guidelines</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Delivery Information</a>
-                  </li>
+                  @if($footerLinks)
+                    @foreach($footerLinks as $link)
+                      <li class="menu-item">
+                        <a href="/pages/{{$link->slug}}">{{$link->title}}</a>
+                      </li> 
+                    @endforeach
+                  @endif
                 </ul>
               </div>
             </div>

@@ -53,6 +53,14 @@ Route::prefix('order')->group(function () {
 Route::prefix('store/product')->group(function () {
     Route::get('/{slug}', [HomeController::class, 'singleProduct'])->name('frontend.singleProduct.index');    
 });
+
+
+Route::prefix('pages')->group(function () {
+    Route::get('/{slug}', [HomeController::class, 'pages'])->name('frontend.pages.index');    
+});
+
+Route::get('/faq', [HomeController::class, 'faqs'])->name('frontend.faq.index');    
+
 // Route::get('/dashboard', function () {
 //     if(auth()->user()->is_admin){
 //         return view('admin.dashboard');
@@ -173,25 +181,5 @@ Route::middleware(['auth'])->prefix('api-settings')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/shiprocket-authentication', [ShipRocketController::class, 'index'])->name('shiprocked.index');
     
-});
-
-Route::get('/product-and-services', function () { 
-    return view('pages.services');
-});
-Route::get('/about', function () { 
-    return view('pages.about');
-});
-Route::get('/contact', function () { 
-    return view('pages.contact');
-});
-Route::get('/privacy-policy', function () { 
-    return view('pages.privacy-policy');
-});
-Route::get('/terms-and-condition', function () { 
-    return view('pages.terms-and-condition');
-});
-Route::post('/submit-form', [ContactFormController::class, 'submitForm']);
-Route::post('/book-demo', [ContactFormController::class, 'bookDemo']);
-Route::post('/get-broucher', [ContactFormController::class, 'getBroucher']);
-    
+}); 
 require __DIR__.'/auth.php';
