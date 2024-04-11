@@ -23,10 +23,12 @@
                       <div class="col-md-6">
                         <h2 class="banner-title">{{$banner->title}}</h2>
                         <p>{{$banner->text}}</p>
+                        @if($banner->url)
                         <div class="btn-wrap">
                           <a href="{{$banner->url}}" class="btn btn-light btn-medium d-flex align-items-center" tabindex="0">Shop it now <i class="icon icon-arrow-io"></i>
                           </a>
                         </div>
+                        @endif
                       </div>
                     </div>
                   </div>

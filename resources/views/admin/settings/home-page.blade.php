@@ -37,19 +37,19 @@
                     <form id="bannerForm"  style="display:block;" enctype="multipart/form-data">  
                         <div class="form-group">
                             <lable class="form-label">Banner Title</label>
-                            <input type="text" class="form-control" id="bannerTitle"   placeholder="Add banner title.." required>
+                            <input type="text" class="form-control" id="bannerTitle"   placeholder="Add banner title.." >
                         </div>
                         <div class="form-group">
                             <lable class="form-label">Banner text</label>
-                            <input type="text" class="form-control" id="bannerText"   placeholder="Add banner text.." required>
+                            <input type="text" class="form-control" id="bannerText"   placeholder="Add banner text.." >
                         </div>
                         <div class="form-group">
                             <lable class="form-label">Banner sequence</label>
-                            <input type="number" class="form-control" id="bannerSequence"   placeholder="Add banner sequencing.." required>
+                            <input type="number" class="form-control" id="bannerSequence"   placeholder="Add banner sequencing.." >
                         </div>
                         <div class="form-group">
                             <lable class="form-label">Button Url</label>
-                            <input type="text" class="form-control" id="buttonUrl"   placeholder="Add button url.." required>
+                            <input type="text" class="form-control" id="buttonUrl"   placeholder="Add button url.." >
                         </div>
                         <div class="form-group">
                             <lable class="form-label">Banner Image</label>
@@ -69,24 +69,24 @@
                     <form id="bannerFormUpdate" enctype="multipart/form-data" style="display:none;">  
                         <div class="form-group">
                             <lable class="form-label">Banner Title</label>
-                            <input type="text" class="form-control" id="bannerTitleUpdate"   placeholder="Add banner title.." required>
+                            <input type="text" class="form-control" id="bannerTitleUpdate"   placeholder="Add banner title.." >
                             <input type="hidden" class="form-control" id="bannerIdUpdate">
                         </div>
                         <div class="form-group">
                             <lable class="form-label">Banner text</label>
-                            <input type="text" class="form-control" id="bannerTextUpdate"   placeholder="Add banner text.." required>
+                            <input type="text" class="form-control" id="bannerTextUpdate"   placeholder="Add banner text.." >
                         </div>
                         <div class="form-group">
                             <lable class="form-label">Banner sequence</label>
-                            <input type="number" class="form-control" id="bannerSequenceUpdate"   placeholder="Add banner sequencing.." required>
+                            <input type="number" class="form-control" id="bannerSequenceUpdate"   placeholder="Add banner sequencing.." >
                         </div>
                         <div class="form-group">
                             <lable class="form-label">Button Url</label>
-                            <input type="text" class="form-control" id="buttonUrlUpdate"   placeholder="Add button url.." required>
+                            <input type="text" class="form-control" id="buttonUrlUpdate"   placeholder="Add button url.." >
                         </div>
                         <div class="form-group">
                             <lable class="form-label">Banner Image</label>
-                            <input type="file" class="form-control" id="bannerImageUpdate"   accept="image/*" >
+                            <input type="file" class="form-control" id="bannerImageUpdate"   accept="image/*" required>
                             <small id="imageHelp" class="form-text text-muted">Image size should be 1920 x 950 px.</small>
                         </div>
                         <div class="form-group d-flex " style="justify-content: space-around;"> 
