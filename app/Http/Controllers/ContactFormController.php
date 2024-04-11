@@ -30,7 +30,7 @@ class ContactFormController extends Controller
             'Date' => $formattedDateTime,
         );
         try {
-            Mail::to('business@Patakah.com')->send(new ContactFormMail($data));
+            Mail::to('business@Patakha.com')->send(new ContactFormMail($data));
 
             return response()->json(['message' => 'Form submitted successfully. Thank you for connecting with us, we will get in touch with you sortly.','status' => true]);
 
@@ -67,7 +67,7 @@ class ContactFormController extends Controller
             'Date' => $formattedDateTime,
         );
         try {
-            Mail::to('business@Patakah.com')->send(new BookDemoMail($data));
+            Mail::to('business@Patakha.com')->send(new BookDemoMail($data));
             Mail::to($email)->send(new ThankYouMail($data));
 
             return response()->json(['message' => 'Form submitted successfully','status' => true]);
@@ -92,7 +92,7 @@ class ContactFormController extends Controller
         $requirement = $request->broucher_requirement; 
         $currentDateTime = now();
         $modifiedDateTime = $currentDateTime->addHours(5)->addMinutes(30);
-        $broucher_url = asset('assets/img/broucher-Patakah.pdf'); 
+        $broucher_url = asset('assets/img/broucher-Patakha.pdf'); 
         // Format the modified date and time
         $formattedDateTime = $modifiedDateTime->format('d-m-Y h:i:s A');
         $data = array(
@@ -104,7 +104,7 @@ class ContactFormController extends Controller
             'Date' => $formattedDateTime,
         );
         try {
-            Mail::to('business@Patakah.com')->send(new BookDemoMail($data));
+            Mail::to('business@Patakha.com')->send(new BookDemoMail($data));
             Mail::to($email)->send(new ThankYouMail($data));
 
             return response()->json(['message' => 'Form submitted successfully','broucher_url' => $broucher_url ,'status' => true]);

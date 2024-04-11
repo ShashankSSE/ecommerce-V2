@@ -119,7 +119,7 @@
         <tr>
           <td style="width: 500px; vertical-align: top; padding-left: 30px; padding-right: 15px; padding-top: 0; padding-bottom: 30px; text-align: center;" width="252">
 
-            <p style="font-size: 15px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #919293;">Thank you for showing your interest in <strong>Patakah’s </strong> product & services. Our expert will coordinate with you within 24 hours for the detailed information.<br>Want more information about Patakah?<br>Check out our  portal <a href="http://127.0.0.1:8000/" target="_blank">Patakah</a>.</p>
+            <p style="font-size: 15px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #919293;">Thank you for showing your interest in <strong>Patakha’s </strong> product & services. Our expert will coordinate with you within 24 hours for the detailed information.<br>Want more information about Patakha?<br>Check out our  portal <a href="http://127.0.0.1:8000/" target="_blank">Patakha</a>.</p>
 
           </td> 
         </tr>
@@ -143,7 +143,7 @@
 
             <p style="margin-bottom: 0; font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
               <a target="_blank" style="text-decoration: underline; color: #ffffff;" href="https://fullsphere.co.uk">
-                www.Patakah.com
+                www.Patakha.com
               </a>
             </p>
 
