@@ -1,5 +1,5 @@
 @extends('components.app')
-@section('title', 'Patakah | About Us')
+@section('title', 'Patakha | About Us')
 @section('meta_description', '')
 @section('meta_keywords','')
 @section('content')
@@ -48,9 +48,9 @@
                         <li>"GDPR” means the EU General Data Protection Regulation.</li>
                         <li>"Personal Data” means any information relating to an identified or identifiable natural person.</li>
                         <li>"Policy” means this Data Privacy and Protection Policy.</li>
-                        <li>"Service” refers to a service that Patakah provides, for a fee or gratis. You are using our Service when you actively sign up or sign in to get access to any Service provided by us.</li>
-                        <li>"we”, “us”, “our”, and “Patakah” refer to Patakah.</li>
-                        <li>"Website” refers to Patakah website. You are using our “website” when you are visiting our website</li>
+                        <li>"Service” refers to a service that Patakha provides, for a fee or gratis. You are using our Service when you actively sign up or sign in to get access to any Service provided by us.</li>
+                        <li>"we”, “us”, “our”, and “Patakha” refer to Patakha.</li>
+                        <li>"Website” refers to Patakha website. You are using our “website” when you are visiting our website</li>
                         <li>"you” refers to you, as a user or subscriber of the services provided by us.</li>
                     </ol>
                 </div>
@@ -140,7 +140,7 @@
                     <ol class="liLists py-2 noPoints">
                         <li>This Section summarises the rights that you have under data protection law. Please note that some of the rights available to you are convoluted and may not be represented in detail in this Policy. We advise you to peruse the relevant laws for a complete understanding of your rights. Your principal rights concerning your Personal Data under GDPR are as below:</li>
                         <li><strong>Right to access:</strong> You have the right to confirmation as to whether or not we process your personal data and, where we do, access to the personal data, together with certain additional information. That additional information includes details of the purposes of the processing, the categories of personal data concerned and the recipients of the personal data.</li>
-                        <li>Subject to the condition that the rights and freedoms of others are not affected, we will supply to you a copy of your personal data. The first copy will be provided free of charge, but additional copies may be subject to a reasonable fee. You can request your personal data with us, by emailing us on support@Patakah.com</li>
+                        <li>Subject to the condition that the rights and freedoms of others are not affected, we will supply to you a copy of your personal data. The first copy will be provided free of charge, but additional copies may be subject to a reasonable fee. You can request your personal data with us, by emailing us on support@Patakha.com</li>
                         <li><strong>Right to rectification:</strong>Right to rectification: You have the right to have any inaccurate personal data about you rectified and, taking into account the purposes of the processing, to have any incomplete personal data about you completed.</li>
                         <li><strong>Right to erasure:</strong> In certain circumstances you have the right to the erasure of your personal data without undue delay. Those circumstances include: the personal data provided to us is no longer necessary in relation to the purposes for which it was collected or otherwise processed; you withdraw consent to consent-based processing; you object to the processing under certain rules of applicable data protection law; the processing is for direct marketing purposes; and the personal data have been unlawfully processed.</li>
                         <li>However, there are exclusions of the right to erasure. The general exclusions include where processing is necessary: for exercising the right of freedom of expression and information; for compliance with a legal obligation; or for the establishment, exercise or defence of legal claims</li>
@@ -151,7 +151,7 @@
                         <li><strong>Right to data portability: </strong>To the extent that the legal basis for our processing of your personal data is: (a) consent; or (b) that the processing is necessary for the performance of a contract to which you are party or in order to take steps at your request prior to entering into a contract, and such processing is carried out by automated means, you have the right to receive your personal data from us in a structured, commonly used and machine-readable format. However, this right does not apply where it would adversely affect the rights and freedoms of others.</li>
                         <li><strong>Right to complain to a supervisory authority: </strong>If you consider that our processing of your personal information infringes data protection laws, you have a legal right to lodge a complaint with a supervisory authority responsible for data protection. You may do so in the EU member state of your habitual residence, your place of work or the place of the alleged infringement.</li>
                         <li><strong>Right to withdraw consent:</strong> To the extent that the legal basis for our processing of your personal information is consent, you have the right to withdraw that consent at any time. Withdrawal will not affect the lawfulness of processing before the withdrawal.</li>
-                        <li>You may exercise any of your rights in relation to your personal data by a written notice to us on support@Patakah.com. In order for us to comply with your request, your notice must clearly state the right that you wish to exercise and identify your information in respect of which you wish to exercise such right. Please note that as a security measure, we may require you to verify your identity before accepting any request concerning your Personal Data.</li>
+                        <li>You may exercise any of your rights in relation to your personal data by a written notice to us on support@Patakha.com. In order for us to comply with your request, your notice must clearly state the right that you wish to exercise and identify your information in respect of which you wish to exercise such right. Please note that as a security measure, we may require you to verify your identity before accepting any request concerning your Personal Data.</li>
                         <li>You may exercise any of your above rights by contacting us with your specific requirement. Our contact information is provided at the end of this document. Do note that when we receive a request concerning your data with us, we may require you to provide a clear copy of a valid government issued ID document in order to verify your identity. To know more about our process of verification of your identity, please contact us on the details provided in this document.</li>
                     </ol> 
                 </div>
@@ -202,15 +202,15 @@
                 <div class="title"><h4> Contact Us</h4></div> 
                 <div class="content">
                     <ol class="liLists py-2 noPoints">
-                        <li>Patakah is a Product of JSPARK offered to our clients in Customized Mode.</li>
+                        <li>Patakha is a Product of JSPARK offered to our clients in Customized Mode.</li>
                         <li>Our registered office address is: B-79, First Floor, Sector-63, Noida-201301</li>
                         <li>You can contact us:</li>
                     </ol> 
                     <ol class="liLists py-2">
                         <li>by post: at our registered office address provided above;</li>
-                        <li>by email: on support@Patakah.com;</li>
+                        <li>by email: on support@Patakha.com;</li>
                         <li>by telephone: on the contact number published on our Website from time to time;</li>
-                        <li>by Website: by using our website contact form by <a href="http://Patakah.com/contact">Click Here</a></li>
+                        <li>by Website: by using our website contact form by <a href="http://Patakha.com/contact">Click Here</a></li>
                         <li>Date Created: JAN 01, 2024</li>
                         <li>Last Updated: JAN 01, 2024</li>
                     </ol> 

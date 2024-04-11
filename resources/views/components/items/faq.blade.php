@@ -37,7 +37,7 @@
                                     </button>
                                     </h2>
                                     <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body"> Yes, Patakah allow 100% customization to align with your organization's branding and business need for achieving the goal of organization.</div>
+                                        <div class="accordion-body"> Yes, Patakha allow 100% customization to align with your organization's branding and business need for achieving the goal of organization.</div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
@@ -133,7 +133,7 @@
                                     </button>
                                     </h2>
                                     <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExamplenew">
-                                        <div class="accordion-body">  Patakah provides typically technical support through various channels, ensuring prompt assistance when needed.</div>
+                                        <div class="accordion-body">  Patakha provides typically technical support through various channels, ensuring prompt assistance when needed.</div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
@@ -164,7 +164,7 @@
                                         </button>
                                         </h2>
                                         <div id="flush-collapseFifteen" class="accordion-collapse collapse" aria-labelledby="flush-headingFifteen" data-bs-parent="#accordionFlushExamplenew">
-                                            <div class="accordion-body"> Absolutely, you can opt server as per your need, Patakah will host to your server. </div>
+                                            <div class="accordion-body"> Absolutely, you can opt server as per your need, Patakha will host to your server. </div>
                                         </div>
                                     </div>
                                     <div class="accordion-item">

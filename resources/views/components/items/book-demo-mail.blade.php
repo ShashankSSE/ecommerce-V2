@@ -157,7 +157,7 @@
 
             <p style="margin-bottom: 0; font-size: 13px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #ffffff;">
               <a target="_blank" style="text-decoration: underline; color: #ffffff;" href="https://fullsphere.co.uk">
-                www.Patakah.com
+                www.Patakha.com
               </a>
             </p>
 

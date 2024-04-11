@@ -1,5 +1,5 @@
 @extends('components.app')
-@section('title', 'Patakah')
+@section('title', 'Patakha')
 @section('meta_description', '')
 @section('meta_keywords','')
 @section('content')
