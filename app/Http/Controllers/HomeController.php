@@ -123,4 +123,11 @@ class HomeController extends Controller
 
     }
 
+    public function aboutUs(){
+        return view('pages.about');
+    }
+    public function contactUs(){
+        return view('pages.contact');
+    }
+    
 }

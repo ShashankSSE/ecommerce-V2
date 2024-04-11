@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ShipRocketController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ApiSettingsController;
 use App\Http\Controllers\Admin\HomePageController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 
@@ -60,7 +61,9 @@ Route::prefix('pages')->group(function () {
 });
 
 Route::get('/faq', [HomeController::class, 'faqs'])->name('frontend.faq.index');    
-
+Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('frontend.about.index');    
+Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('frontend.contact.index');    
+Route::post('/submit-contact-us', [ContactUsController::class,'submitContactUs'])->name('frontend.contact.submit');    
 // Route::get('/dashboard', function () {
 //     if(auth()->user()->is_admin){
 //         return view('admin.dashboard');
@@ -164,6 +167,9 @@ Route::middleware(['auth'])->prefix('user-management')->group(function () {
     Route::post('/update-user', [UserController::class, 'update'])->name('user.update');
     Route::get('/update-user-status/{id}', [UserController::class, 'status'])->name('user.status.update');
     Route::get('/delete-user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+    Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.index');
+    Route::get('/contact-us/{id}', [ContactUsController::class, 'show'])->name('contact.show');
 });
 
 Route::middleware(['auth'])->prefix('order-management')->group(function () {

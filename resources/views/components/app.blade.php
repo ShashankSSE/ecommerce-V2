@@ -201,8 +201,8 @@
 
                         </ul>
                       </li>
-                      <li><a href="contact.html" class="item-anchor" data-effect="Contact">Contact</a></li>
-                      <li><a href="contact.html" class="item-anchor" data-effect="Contact">Contact</a></li>
+                      <li><a href="/about-us" class="item-anchor" data-effect="Contact">About Us</a></li>
+                      <li><a href="/contact-us" class="item-anchor" data-effect="Contact">Contact</a></li>
 
                     </ul>
                   </div>
@@ -226,11 +226,8 @@
                 <h5 class="widget-title">Patakha</h5>
                 <ul class="menu-list list-unstyled">
                   <li class="menu-item">
-                    <a href="">About us</a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="#">Conditions </a>
-                  </li>    
+                    <a href="/about-us">About us</a>
+                  </li>  
                 </ul>
               </div>
             </div>
@@ -242,7 +239,7 @@
                     <a href="/faq">FAQ</a>
                   </li>
                   <li class="menu-item">
-                    <a href="">Contact</a>
+                    <a href="/contact-us">Contact</a>
                   </li>
                   @if($footerLinks)
                     @foreach($footerLinks as $link)
