@@ -23,8 +23,8 @@
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <h5 class="text-white mb-4">Popular Link</h5>
-                        <a class="btn btn-link" href="/about">About Us</a>
-                        <a class="btn btn-link" href="/contact">Contact Us</a>
+                        <a class="btn btn-link" href="/about-us">About Us</a>
+                        <a class="btn btn-link" href="/contact-us">Contact Us</a>
                         <a class="btn btn-link" href="/privacy-policy">Privacy Policy</a>
                         <a class="btn btn-link" href="/terms-and-condition">Terms & Condition</a>
                         <!-- <a class="btn btn-link" href="">Career</a> -->
